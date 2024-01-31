@@ -1,26 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    tools:context=".LoginActivity">
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textLog"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Nombre de usuario" />
+        android:contextClickable="false"
+        android:text="@string/login"
+        android:textAlignment="gravity"
+        android:textAllCaps="true"
+        android:textColor="#2883C3"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.262" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        android:inputType="textPassword" />
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.362">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutDNI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/editTextTextLogDNI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/introdueix_dni"
+                android:importantForAccessibility="no"
+                android:inputType="number"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutContrasenya"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextTextLogContrasenya"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/introdueix_contra"
+                android:importantForAccessibility="no"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <Button
-        android:id="@+id/login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Iniciar sesión" />
+        android:id="@+id/btnLogin"
+        style="@style/button_style"
+        android:layout_width="225dp"
+        android:layout_height="40dp"
+        android:onClick="iniciSessio"
+        android:text="@string/login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.713" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

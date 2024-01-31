@@ -1,4 +1,5 @@
 package com.example.recuerdate;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -17,9 +18,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
-        loginButton = findViewById(R.id.login);
+        username = findViewById(R.id.editTextTextLogDNI);
+        password = findViewById(R.id.editTextTextLogContrasenya);
+        loginButton = findViewById(R.id.btnLogin);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,7 +31,8 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString("password", password.getText().toString());
                 editor.apply();
 
-                // Aquí puedes iniciar tu actividad principal
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

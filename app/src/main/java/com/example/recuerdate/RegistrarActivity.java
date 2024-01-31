@@ -2,6 +2,8 @@ package com.example.recuerdate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,16 +27,15 @@ public class RegistrarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registar);
 
-        //Inicialitzar components
         spinner1 = findViewById(R.id.spinner);
         boto1 = findViewById(R.id.button2);
 
-        final FrameLayout usuariLayout = (FrameLayout) LayoutInflater.from(this).inflate(R.layout.usuari_layout, null);
-        usuariLayout.setVisibility(View.GONE); // Hacerlo invisible inicialmente
+        final View usuariLayout = LayoutInflater.from(this).inflate(R.layout.usuari_layout, null);
+        usuariLayout.setVisibility(View.GONE);
         ((ViewGroup) findViewById(android.R.id.content)).addView(usuariLayout);
 
-        final FrameLayout tutorLayout = (FrameLayout) LayoutInflater.from(this).inflate(R.layout.tutor_layout, null);
-        tutorLayout.setVisibility(View.GONE); // Hacerlo invisible inicialmente
+        final View  tutorLayout =  LayoutInflater.from(this).inflate(R.layout.tutor_layout, null);
+        tutorLayout.setVisibility(View.GONE);
         ((ViewGroup) findViewById(android.R.id.content)).addView(tutorLayout);
 
         boto1.setOnClickListener(new View.OnClickListener() {
@@ -47,29 +48,41 @@ public class RegistrarActivity extends AppCompatActivity {
         situacions.add(new Situacio("Usuari"));
         situacions.add(new Situacio("Tutor"));
 
-        ArrayAdapter<Situacio> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,situacions);
+        ArrayAdapter<Situacio> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, situacions);
 
         spinner1.setAdapter(adapter);
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // Obtener la situación seleccionada
-                Situacio selectedSituacio = (Situacio) parentView.getItemAtPosition(position);
-
-                // Mostrar u ocultar layouts según la situación seleccionada
-                if (selectedSituacio.getSituacio().equals("Usuari")) {
-                    usuariLayout.setVisibility(View.VISIBLE); // Hacerlo visible
-                    tutorLayout.setVisibility(View.GONE); // Hacerlo invisible
-                } else if (selectedSituacio.getSituacio().equals("Tutor")) {
-                    tutorLayout.setVisibility(View.VISIBLE); // Hacerlo visible
-                    usuariLayout.setVisibility(View.GONE); // Hacerlo invisible
-                }
+                 Situacio selectedSituacio = (Situacio) parentView.getItemAtPosition(position);
+                 if (selectedSituacio.getSituacio().equals("Usuari")) {
+                    usuariLayout.setVisibility(View.VISIBLE);
+                     tutorLayout.setVisibility(View.GONE);
+                 } else if (selectedSituacio.getSituacio().equals("Tutor")) {
+                     tutorLayout.setVisibility(View.VISIBLE);
+                    usuariLayout.setVisibility(View.GONE);
+                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 Toast.makeText(RegistrarActivity.this, "Fes una Seleccio", Toast.LENGTH_SHORT).show();
             }
+        }
+        );
+        boto1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Aquí es donde debes guardar el valor 'registered' en las preferencias compartidas
+                SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("registered", true);
+                editor.apply();
+
+                Intent intent = new Intent(RegistrarActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
         });
+
     }
 }

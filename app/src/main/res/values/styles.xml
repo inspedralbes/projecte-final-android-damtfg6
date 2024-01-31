@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="button_style" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_bg_selector</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+
+</resources>
