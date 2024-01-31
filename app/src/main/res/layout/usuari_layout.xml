@@ -1,11 +1,112 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hola, desde usuari!"
-        android:layout_gravity="center"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="366dp"
+        android:layout_height="575dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="110dp"
+        tools:context=".Register">
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutNomReg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="spread">
+
+            <EditText
+                android:id="@+id/editTextTextRegNom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nom i Cognoms"
+                android:importantForAccessibility="no"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutDni"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNomReg"
+            app:layout_constraintWidth_default="spread">
+
+            <EditText
+                android:id="@+id/editTextTextDni"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Dni"
+                android:importantForAccessibility="no"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutTelefon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDni"
+            app:layout_constraintWidth_default="spread">
+
+            <EditText
+                android:id="@+id/editTextTextTelefon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Telefon"
+                android:importantForAccessibility="no"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutCorreu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutTelefon"
+            app:layout_constraintWidth_default="spread">
+
+            <EditText
+                android:id="@+id/editTextTextCorreu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Correu Electronic"
+                android:importantForAccessibility="no"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutContrasenya"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutCorreu"
+            app:layout_constraintWidth_default="spread">
+
+            <EditText
+                android:id="@+id/editTextTextContrasenya"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contrasenya"
+                android:importantForAccessibility="no"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
