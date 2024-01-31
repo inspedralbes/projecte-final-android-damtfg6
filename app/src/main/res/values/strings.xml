@@ -4,4 +4,5 @@
     <string name="introdueix_dni">Introdueix  el teu DNI</string>
     <string name="introdueix_contra">Introdueix la teva contrasenya</string>
     <string name="Register">Registrat</string>
+    <string name="value_required">Camp obligatori</string>
 </resources>

@@ -50,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
+        android:onClick="btnRegistrar"
         android:text="Registrar"
         android:textColor="#C9C9CA"
         android:background="@drawable/button_bg_selector"
