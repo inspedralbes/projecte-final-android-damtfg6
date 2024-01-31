@@ -6,9 +6,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -29,9 +31,14 @@ public class MainActivity extends AppCompatActivity {
         //Inicialitzar components
         spinner1 = findViewById(R.id.spinner);
         boto1 = findViewById(R.id.button2);
-        final RelativeLayout layoutUsuario = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.layout_usuari, null);
-        final LinearLayout layoutTutor = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.layout_tutor, null);
 
+        final FrameLayout usuariLayout = (FrameLayout) LayoutInflater.from(this).inflate(R.layout.usuari_layout, null);
+        usuariLayout.setVisibility(View.GONE); // Hacerlo invisible inicialmente
+        ((ViewGroup) findViewById(android.R.id.content)).addView(usuariLayout);
+
+        final FrameLayout tutorLayout = (FrameLayout) LayoutInflater.from(this).inflate(R.layout.tutor_layout, null);
+        tutorLayout.setVisibility(View.GONE); // Hacerlo invisible inicialmente
+        ((ViewGroup) findViewById(android.R.id.content)).addView(tutorLayout);
 
         boto1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
                 // Mostrar u ocultar layouts según la situación seleccionada
                 if (selectedSituacio.getSituacio().equals("Usuari")) {
-                    layoutUsuario.setVisibility(View.VISIBLE);
-                    layoutTutor.setVisibility(View.GONE);
+                    usuariLayout.setVisibility(View.VISIBLE); // Hacerlo visible
+                    tutorLayout.setVisibility(View.GONE); // Hacerlo invisible
                 } else if (selectedSituacio.getSituacio().equals("Tutor")) {
-                    layoutUsuario.setVisibility(View.GONE);
-                    layoutTutor.setVisibility(View.VISIBLE);
+                    tutorLayout.setVisibility(View.VISIBLE); // Hacerlo visible
+                    usuariLayout.setVisibility(View.GONE); // Hacerlo invisible
                 }
             }
 
