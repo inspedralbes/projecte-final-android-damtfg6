@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@drawable/baseline_person_24"
+        android:id="@+id/info"
+        android:title="Info"/>
+    <item
+        android:icon="@drawable/baseline_person_24"
+        android:id="@+id/recordatoris"
+        android:title="Recorda"/>
+    <item
+        android:icon="@drawable/baseline_chat_24"
+        android:id="@+id/chat"
+        android:title="Chat"/>
+    <item
+        android:icon="@drawable/baseline_chat_24"
+        android:id="@+id/jocs"
+        android:title="Jocs"/>
+    <item
+        android:icon="@drawable/baseline_my_location_24"
+        android:id="@+id/localitzacio"
+        android:title="Localitzat"/>
+</menu>

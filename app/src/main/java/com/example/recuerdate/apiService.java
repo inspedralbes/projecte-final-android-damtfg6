@@ -6,8 +6,11 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 
-public class apiService {
+public interface apiService {
 
     @POST("registrarUsuari")
     Call<Resposta> EnviarUsuario(@Body UsuariLocalitzat usuariTrobat);
+
+    @POST("registrarTutor")
+    Call<Resposta> EnviarTutor(@Body TutorTrobat tutorTrobat);
 }

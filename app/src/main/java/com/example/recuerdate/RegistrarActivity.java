@@ -29,6 +29,9 @@ public class RegistrarActivity extends AppCompatActivity {
     Spinner spinner1;
     Button boto1;
 
+    private apiService apiService;
+    private static final String URL = "http://192.168.1.80:3788/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,67 +81,117 @@ public class RegistrarActivity extends AppCompatActivity {
                                            }
         );
     }
+
     public void btnRegistrar(View view) {
         EditText nomCognoms1 = findViewById(R.id.nom);
         EditText dni1 = findViewById(R.id.dni);
         EditText telefon1 = findViewById(R.id.telefon);
         EditText correu1 = findViewById(R.id.correu);
         EditText contrasenyes = findViewById(R.id.contrasenya);
-        EditText IdentificadorUsuari = findViewById(R.id.identificador);
-
+        EditText id_usuari = findViewById(R.id.identificador);
 
         String nomCognoms = nomCognoms1.getText().toString().trim();
         String dni = dni1.getText().toString().trim();
-        String telefon = telefon1.getText().toString().trim();
+        String telefonInput = telefon1.getText().toString().trim();
         String correu = correu1.getText().toString().trim();
         String contrasenya = contrasenyes.getText().toString().trim();
-        String id_usuari = IdentificadorUsuari.getText().toString().trim();
+        String identificadorUsuari1 = id_usuari.getText().toString().trim();
 
-
-
-        if (nomCognoms.isEmpty() || dni.isEmpty() || telefon.isEmpty()) {
+        if (nomCognoms.isEmpty() || dni.isEmpty() || telefonInput.isEmpty() || correu.isEmpty() || contrasenya.isEmpty()) {
             if (nomCognoms.isEmpty()) {
                 nomCognoms1.setError(getString(R.string.value_required));
             }
             if (dni.isEmpty()) {
                 dni1.setError(getString(R.string.value_required));
             }
-            if (telefon.isEmpty()) {
+            if (correu.isEmpty()) {
+                correu1.setError(getString(R.string.value_required));
+            }
+            if (dni.isEmpty()) {
                 contrasenyes.setError(getString(R.string.value_required));
             }
+            if (telefonInput.isEmpty()) {
+                telefon1.setError(getString(R.string.value_required));
+            }
         } else {
+            int telefon = Integer.parseInt(telefonInput);
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            apiService = retrofit.create(apiService.class);
+            apiService apiService = retrofit.create(apiService.class);
 
-            UsuariLocalitzat usuariTrobat = new UsuariLocalitzat(nomUsuari, nomCogonoms, correu, passwd, rol);
+            // Check the selected item in the Spinner
+            Situacio selectedSituacio = (Situacio) spinner1.getSelectedItem();
 
-            Call<Resposta> call = apiService.EnviarUsuario(usuariTrobat);
+            if (selectedSituacio.getSituacio().equals("Usuari")) {
+                // Usuari registration API call
+                UsuariLocalitzat usuariTrobat = new UsuariLocalitzat(nomCognoms, dni, telefon, correu, contrasenya);
+                Call<Resposta> call = apiService.EnviarUsuario(usuariTrobat);
 
-            call.enqueue(new Callback<Resposta>() {
-                @Override
-                public void onResponse(Call<Resposta> call, Response<Resposta> response) {
-                    if (response.isSuccessful()) {
-                        Log.d("CONEXION", "CONEXION SERVIDOR CONECTADO");
-                        Resposta r = response.body();
-                        System.out.println(r.isAutoritzacio());
-                        if (r.isAutoritzacio()) {
-                            Intent intent = new Intent(Register.this, Login.class);
-                            intent.putExtra("user", nomUsuari);
-                            startActivity(intent);
+                call.enqueue(new Callback<Resposta>() {
+                    @Override
+                    public void onResponse(Call<Resposta> call, Response<Resposta> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("CONEXION", "CONEXION SERVIDOR CONECTADO");
+                            Resposta r = response.body();
+                            System.out.println(r.isAutoritzacio());
+                            if (r.isAutoritzacio()) {
+                                Intent intent = new Intent(RegistrarActivity.this, LoginActivity.class);
+                                intent.putExtra("user", nomCognoms);
+                                startActivity(intent);
+                            }
+                        } else {
+                            Log.e("ERROR", "Error");
                         }
-                    } else {
-                        Log.e("ERROR", "Gorda");
                     }
-                }
 
-                @Override
-                public void onFailure(Call<Resposta> call, Throwable t) {
-                    Log.d("error", "onFailure: "+t.getMessage());
+                    @Override
+                    public void onFailure(Call<Resposta> call, Throwable t) {
+                        Log.d("error", "onFailure: " + t.getMessage());
+                    }
+                });
+            } else if (selectedSituacio.getSituacio().equals("Tutor")) {
+
+                if (identificadorUsuari1.isEmpty()) {
+                    id_usuari.setError(getString(R.string.value_required));
+                } else {
+
+                    int identificadorUsuari = Integer.parseInt(identificadorUsuari1);
+                    // Tutor registration API call
+                    TutorTrobat tutorTrobat = new TutorTrobat(nomCognoms, dni, telefon, correu, contrasenya, identificadorUsuari);
+                    Call<Resposta> call = apiService.EnviarTutor(tutorTrobat);
+
+                    call.enqueue(new Callback<Resposta>() {
+                        @Override
+                        public void onResponse(Call<Resposta> call, Response<Resposta> response) {
+                            if (response.isSuccessful()) {
+                                Log.d("CONEXION", "CONEXION SERVIDOR CONECTADO");
+                                Resposta r = response.body();
+                                System.out.println(r.isAutoritzacio());
+                                if (r.isAutoritzacio()) {
+                                    Intent intent = new Intent(RegistrarActivity.this, LoginActivity.class);
+                                    intent.putExtra("user", nomCognoms);
+                                    startActivity(intent);
+                                }
+                            } else {
+                                Log.e("ERROR", "Error");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Resposta> call, Throwable t) {
+                            Log.d("error", "onFailure: " + t.getMessage());
+                        }
+                    });
                 }
-            });
+            }
         }
     }
+
+    public void botto(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }
+
