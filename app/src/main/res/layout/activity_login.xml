@@ -53,7 +53,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutContrasenya"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
 
             <EditText
                 android:id="@+id/editTextTextLogContrasenya"
