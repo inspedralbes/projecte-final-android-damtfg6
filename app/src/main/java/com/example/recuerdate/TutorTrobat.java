@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName;
 public class TutorTrobat {
     @SerializedName("id_usuari")
     private int id_usuari;
-    @SerializedName("nomCogonoms")
-    private String nomCogonoms;
+    @SerializedName("nomCognoms")
+    private String nomCognoms;
 
     @SerializedName("dni")
     private String dni;
@@ -18,8 +18,8 @@ public class TutorTrobat {
     @SerializedName("contrasenya")
     private String contrasenya;
 
-    @SerializedName("identificadorUsuari")
-    private int identificadorUsuari;
+    @SerializedName("usuari_identificador")
+    private int usuari_identificador;
 
 
 
@@ -28,12 +28,12 @@ public class TutorTrobat {
         this.contrasenya = contrasenya;
     }
 
-    public TutorTrobat(String nomCogonoms, String dni, int telefon, String correu, String contrasenya, int identificadorUsuari) {
-        this.nomCogonoms = nomCogonoms;
+    public TutorTrobat(String nomCognoms, String dni, int telefon, String correu, String contrasenya, int usuari_identificador) {
+        this.nomCognoms = nomCognoms;
         this.dni = dni;
         this.telefon = telefon;
         this.correu = correu;
         this.contrasenya = contrasenya;
-        this.identificadorUsuari = identificadorUsuari;
+        this.usuari_identificador = usuari_identificador;
     }
 }

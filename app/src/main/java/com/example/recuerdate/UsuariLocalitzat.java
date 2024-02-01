@@ -5,8 +5,9 @@ import com.google.gson.annotations.SerializedName;
 public class UsuariLocalitzat {
     @SerializedName("id_usuari")
     private int id_usuari;
-    @SerializedName("nomCogonoms")
-    private String nomCogonoms;
+
+    @SerializedName("nomCognoms")
+    private String nomCognoms;
 
     @SerializedName("dni")
     private String dni;
@@ -25,8 +26,8 @@ public class UsuariLocalitzat {
         this.contrasenya = contrasenya;
     }
 
-    public UsuariLocalitzat(String nomCogonoms, String dni, int telefon, String correu, String contrasenya) {
-        this.nomCogonoms = nomCogonoms;
+    public UsuariLocalitzat(String nomCognoms, String dni, int telefon, String correu, String contrasenya) {
+        this.nomCognoms = nomCognoms;
         this.dni = dni;
         this.telefon = telefon;
         this.correu = correu;
