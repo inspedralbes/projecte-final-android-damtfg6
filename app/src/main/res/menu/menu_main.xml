@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.mathrace.MainActivity">
+    <item android:title="Dades D'usuari">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/perfilmenu"
+                    android:title="Perfil"
+                    android:icon="@drawable/baseline_person_24"
+                    />
+                <item
+                    android:id="@+id/sesiomenu"
+                    android:title="Tancar Sessio"
+                    android:icon="@drawable/baseline_logout_24"/>
+            </group>
+        </menu>
+    </item>
+</menu>

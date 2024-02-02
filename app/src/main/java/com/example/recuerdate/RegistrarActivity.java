@@ -156,7 +156,7 @@ public class RegistrarActivity extends AppCompatActivity {
                             Log.d("error", "onFailure: "+ response.body());
                             System.out.println(r.isAutoritzacio());
                             if (r.isAutoritzacio()) {
-                                Intent intent = new Intent(RegistrarActivity.this, MainActivity.class);
+                                Intent intent = new Intent(RegistrarActivity.this, LoginActivity.class);
                                 intent.putExtra("Usuari", nomCognoms);
                                 startActivity(intent);
                             }
@@ -201,7 +201,7 @@ public class RegistrarActivity extends AppCompatActivity {
                 apiService = retrofit.create(apiService.class);
 
                 // Tutor registration API call
-                TutorTrobat tutorTrobat = new TutorTrobat(nomCognoms, dni, telefonTutor, correu, contrasenya, usuari_identificador);
+                TutorTrobat tutorTrobat = new TutorTrobat(nomCognomsTutor, dniTutor, telefonTutor, correuTutor, contrasenyaTutor, usuari_identificador);
                 Call<Resposta> call = apiService.EnviarTutor(tutorTrobat);
 
                 call.enqueue(new Callback<Resposta>() {
@@ -212,7 +212,7 @@ public class RegistrarActivity extends AppCompatActivity {
                             Resposta r = response.body();
                             System.out.println(r.isAutoritzacio());
                             if (r.isAutoritzacio()) {
-                                Intent intent = new Intent(RegistrarActivity.this, MainActivity.class);
+                                Intent intent = new Intent(RegistrarActivity.this, LoginActivity.class);
                                 intent.putExtra("user", nomCognoms);
                                 startActivity(intent);
                             }
