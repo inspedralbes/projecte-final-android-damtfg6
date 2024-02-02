@@ -7,8 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
+import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +34,24 @@ public class InfoFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         listaFamiliares = new ArrayList<>();
-        listaFamiliares.add(new Familiar("Familiar 1", R.drawable.ic_launcher_background));
-        listaFamiliares.add(new Familiar("Familiar 2", R.drawable.ic_launcher_background));
-        listaFamiliares.add(new Familiar("Familiar 3", R.drawable.ic_launcher_background));
-        listaFamiliares.add(new Familiar("Familiar 4", R.drawable.ic_launcher_background));
-        // Agrega más familiares aquí
 
         adapter = new MyAdapter(listaFamiliares);
         recyclerView.setAdapter(adapter);
 
+        FloatingActionButton fab = view.findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyDialogFragment dialog = new MyDialogFragment(InfoFragment.this);
+                dialog.show(getFragmentManager(), "MyDialogFragment");
+            }
+        });
+
         return view;
+    }
+
+    public void addFamiliar(Familiar familiar) {
+        listaFamiliares.add(familiar);
+        adapter.notifyItemInserted(listaFamiliares.size() - 1);
     }
 }

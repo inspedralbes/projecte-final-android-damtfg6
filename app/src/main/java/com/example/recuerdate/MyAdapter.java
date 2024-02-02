@@ -19,7 +19,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
         public TextView text;
-        public Button button1, button2;
+        public Button button1, button2, editButton;
 
         public MyViewHolder(View v) {
             super(v);
@@ -27,6 +27,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             text = v.findViewById(R.id.user_name);
             button1 = v.findViewById(R.id.button);
             button2 = v.findViewById(R.id.button6);
+            editButton = v.findViewById(R.id.edit_button);
+        }
+
+        public void bind(Familiar item) {
+            image.setImageResource(item.getImagen());
+            text.setText("");
         }
     }
 
@@ -36,18 +42,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.d("MyAdapter", "onCreateViewHolder llamado");
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.persona_layout, parent, false);
         return new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Log.d("MyAdapter", "onBindViewHolder llamado para la posición " + position);
         Familiar item = items.get(position);
-        holder.image.setImageResource(item.getImagen());
-        holder.text.setText(item.getNombre());
-        // Aquí puedes configurar los listeners para tus botones
+        holder.bind(item);
     }
 
     @Override
