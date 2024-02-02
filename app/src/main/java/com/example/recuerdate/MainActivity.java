@@ -84,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
+        // Asegúrate de que el InfoFragment esté abierto al inicio
+        replaceFragment(new InfoFragment());
     }
 
     private void showLogoutConfirmationDialog() {

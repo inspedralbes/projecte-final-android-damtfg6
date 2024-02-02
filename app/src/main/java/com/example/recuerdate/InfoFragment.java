@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InfoFragment extends Fragment {
+
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     private List<Familiar> listaFamiliares;
@@ -30,7 +33,7 @@ public class InfoFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler_view);
 
-        RecyclerView.LayoutManager layoutManager  = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
         listaFamiliares = new ArrayList<>();
@@ -38,8 +41,10 @@ public class InfoFragment extends Fragment {
         adapter = new MyAdapter(listaFamiliares);
         recyclerView.setAdapter(adapter);
 
-        FloatingActionButton fab = view.findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
+        LinearLayout customButtonLayout = view.findViewById(R.id.customButtonLayout);
+        Button customButton = view.findViewById(R.id.customButton);
+
+        customButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MyDialogFragment dialog = new MyDialogFragment(InfoFragment.this);

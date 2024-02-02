@@ -2,17 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="234dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="8dp"
-        android:text="ALBERT PANDY DE PLAYA"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+    android:layout_height="match_parent"
+    android:background="@color/cardview_shadow_start_color"
+    >
 
     <ImageView
         android:id="@+id/imageView2"
@@ -23,7 +15,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/telefono" />
+        android:src="@drawable/persona" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -31,23 +23,40 @@
         android:layout_height="298dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+    <LinearLayout
+        android:id="@+id/customButtonLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="233dp"
-        android:layout_marginBottom="59dp"
-        android:clickable="true"
-        android:contentDescription="@string/descripcion_boton"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_view"
+        android:layout_marginTop="192dp"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/customButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Afegir familiar"
+            android:drawableEnd="@android:drawable/ic_input_add"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+             />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/Nom_seccio"
@@ -58,6 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton" />
+        app:layout_constraintTop_toBottomOf="@+id/customButtonLayout"
+        app:layout_constraintVertical_bias="0.215" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
