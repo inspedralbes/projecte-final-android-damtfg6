@@ -193,7 +193,7 @@ public class RegistrarActivity extends AppCompatActivity {
                 }
             } else {
                 telefonTutor = Integer.parseInt(telefonInputTutor);
-                int identificadorUsuari = Integer.parseInt(identificadorUsuari1);
+                int usuari_identificador = Integer.parseInt(identificadorUsuari1);
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(URL)
                         .addConverterFactory(GsonConverterFactory.create())
@@ -201,7 +201,7 @@ public class RegistrarActivity extends AppCompatActivity {
                 apiService = retrofit.create(apiService.class);
 
                 // Tutor registration API call
-                TutorTrobat tutorTrobat = new TutorTrobat(nomCognoms, dni, telefonTutor, correu, contrasenya, identificadorUsuari);
+                TutorTrobat tutorTrobat = new TutorTrobat(nomCognoms, dni, telefonTutor, correu, contrasenya, usuari_identificador);
                 Call<Resposta> call = apiService.EnviarTutor(tutorTrobat);
 
                 call.enqueue(new Callback<Resposta>() {
@@ -212,7 +212,7 @@ public class RegistrarActivity extends AppCompatActivity {
                             Resposta r = response.body();
                             System.out.println(r.isAutoritzacio());
                             if (r.isAutoritzacio()) {
-                                Intent intent = new Intent(RegistrarActivity.this, LoginActivity.class);
+                                Intent intent = new Intent(RegistrarActivity.this, MainActivity.class);
                                 intent.putExtra("user", nomCognoms);
                                 startActivity(intent);
                             }

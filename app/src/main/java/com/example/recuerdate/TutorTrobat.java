@@ -3,8 +3,8 @@ package com.example.recuerdate;
 import com.google.gson.annotations.SerializedName;
 
 public class TutorTrobat {
-    @SerializedName("id_usuari")
-    private int id_usuari;
+    @SerializedName("familiar_id")
+    private int familiar_id;
     @SerializedName("nomCognoms")
     private String nomCognoms;
 
