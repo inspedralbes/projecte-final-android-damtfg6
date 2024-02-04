@@ -6,28 +6,32 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class LoginActivity extends AppCompatActivity {
 
-    EditText username, password;
-    Button loginButton;
+    private static final String URL = "http://192.168.1.80:3672/";
+    public static apiService apiService;
+    private String dni;
+    private String contrasenya;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        //username = findViewById(R.id.editTextTextLogDNI);
-        //password = findViewById(R.id.editTextTextLogContrasenya);
-        loginButton = findViewById(R.id.btnLogin);
     }
 
-    @Override
+    /*@Override
     protected void onStart() {
         super.onStart();
-
         checkSession();
     }
 
@@ -42,17 +46,74 @@ public class LoginActivity extends AppCompatActivity {
         else {
             //No fes res
         }
-    }
+    }*/
 
     public void iniciSessio(View view) {
 
-        //Pas 1
+        EditText dniuser = findViewById(R.id.editTextTextLogDNI);
+        EditText contrasenyaUser = findViewById(R.id.editTextTextLogContrasenya);
+
+        dni = dniuser.getText().toString();
+        contrasenya = contrasenyaUser.getText().toString();
+
+
+        if (dni.isEmpty() || contrasenya.isEmpty()) {
+            if (dni.isEmpty()) {
+                dniuser.setError(getString(R.string.value_required));
+            }
+            if (contrasenya.isEmpty()) {
+                contrasenyaUser.setError(getString(R.string.value_required));
+            }
+        }
+        else{
+            VerificarUsuari();
+        }
+        /*Pas 1
         SessionManagment sessionManagment = new SessionManagment(LoginActivity.this);
         //sessionManagment.saveSession(usuariTrobat);
 
         //Pas 2
-        moveToMainActivity();
+        moveToMainActivity();*/
+    }
 
+    private void VerificarUsuari() {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        apiService = retrofit.create(apiService.class);
+
+        UsuariLocalitzat datosLogin = new UsuariLocalitzat(dni,contrasenya);
+
+        Call<Resposta> call = apiService.EnviarUsuari(datosLogin);
+
+        call.enqueue(new Callback<Resposta>() {
+            @Override
+            public void onResponse(Call<Resposta> call, Response<Resposta> response) {
+                if (response.isSuccessful()) {
+                    Resposta r = response.body();
+                    if (r.isAutoritzacio()) {
+                        Log.d("Usuari", "Has ");
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "L'usuari no existeix", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Resposta> call, Throwable t) {
+                Log.d("Error", t.getMessage());
+            }
+        });
+    }
+
+    public void launchRegister(View view) {
+        Intent intent = new Intent(LoginActivity.this, RegistrarActivity.class);
+        startActivity(intent);
     }
 
     private void moveToMainActivity() {
