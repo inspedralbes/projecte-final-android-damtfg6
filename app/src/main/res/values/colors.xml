@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="toolbar">#76A15C</color>
 
+    <color name="primary">#01AED8</color>
+
 </resources>
