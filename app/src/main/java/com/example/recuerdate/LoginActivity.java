@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String URL = "http://192.168.205.57:3672/";
+    private static final String URL = "http://192.168.1.80:3672/";
     public static apiService apiService;
     private String dni;
     private String contrasenya;
@@ -62,8 +62,7 @@ public class LoginActivity extends AppCompatActivity {
             if (contrasenya.isEmpty()) {
                 contrasenyaUser.setError(getString(R.string.value_required));
             }
-        }
-        else{
+        } else {
             VerificarUsuari();
         }
         /*Pas 1
@@ -83,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
 
         apiService = retrofit.create(apiService.class);
 
-        UsuariLocalitzat datosLogin = new UsuariLocalitzat(dni,contrasenya);
+        UsuariLocalitzat datosLogin = new UsuariLocalitzat(dni, contrasenya);
 
         Call<RespostaLogin> call = apiService.EnviarUsuari(datosLogin);
 
@@ -100,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         // Verificar el rol y actuar en consecuencia
                         if ("tutor".equals(r.getRol())) {
-                            moveToMainActivity();
+                            moveToMainTutorActivity();
                         } else {
                             moveToMainActivity();
                         }
@@ -124,6 +123,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private void moveToMainActivity() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void moveToMainTutorActivity() {
+        Intent intent = new Intent(LoginActivity.this, MainActivityTutor.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

@@ -1,14 +1,5 @@
 package com.example.recuerdate;
 
-import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.icu.text.IDNA;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -17,22 +8,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.recuerdate.databinding.ActivityMainBinding;
-import com.google.android.material.navigation.NavigationView;
-
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-public class MainActivity extends AppCompatActivity {
+import com.example.recuerdate.databinding.ActivityMainBinding;
+import com.example.recuerdate.databinding.ActivityMainTutor2Binding;
+import com.google.android.material.navigation.NavigationView;
 
-    ActivityMainBinding binding;
+public class MainActivityTutor extends AppCompatActivity {
+
+    ActivityMainTutor2Binding binding;
     ActionBarDrawerToggle drawerToggle;
 
     NavigationView navigationView;
@@ -41,30 +28,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*SessionManagment sessionManagment = new SessionManagment(MainActivity.this);
-        String rol = sessionManagment.getRol();
-
-
-        final View usuariLayout = LayoutInflater.from(this).inflate(R.layout.activity_main, null);
-        final View tutorLayout = LayoutInflater.from(this).inflate(R.layout.activity_main_tutor2, null);
-
-        if (rol.equals("tutor")) {
-            usuariLayout.setVisibility(View.VISIBLE);
-            tutorLayout.setVisibility(View.GONE);
-        } else if (rol.equals("usauri")) {
-            tutorLayout.setVisibility(View.VISIBLE);
-            usuariLayout.setVisibility(View.GONE);
-        }*/
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainTutor2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(findViewById(R.id.toolbar));
 
         // Configuración del ActionBarDrawerToggle
-        drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close);
+        drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayoutTutor, R.string.open, R.string.close);
         navigationView = findViewById(R.id.nav_view);
-        binding.drawerLayout.addDrawerListener(drawerToggle);
+        binding.drawerLayoutTutor.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
         setSupportActionBar(findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -83,30 +55,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    // Configuración del BottomNavigationView
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+        // Configuración del BottomNavigationView
+        binding.bottomNavigationViewTutor.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                case R.id.info:
-                    replaceFragment(new InfoFragment());
+                case R.id.infoTutor:
+                    replaceFragment(new InfoTutorFragment());
                     break;
-                case R.id.recordatoris:
-                    replaceFragment(new RecordatoriFragment());
+                case R.id.chatTutor:
+                    replaceFragment(new ChatTutorFragment());
                     break;
-                case R.id.chat:
-                    replaceFragment(new ChatFamFragment());
-                    break;
-                case R.id.jocs:
-                    replaceFragment(new JocsFragment());
-                    break;
-                case R.id.localitzacio:
-                    replaceFragment(new LocalitzacioFragment());
+                case R.id.localitzacioTutor:
+                    replaceFragment(new localitzaTutorFragment());
                     break;
             }
             return true;
         });
 
         // Asegúrate de que el InfoFragment esté abierto al inicio
-        replaceFragment(new InfoFragment());
+        replaceFragment(new InfoTutorFragment());
     }
 
     private void showLogoutConfirmationDialog() {
@@ -129,13 +95,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout(){
-        SessionManagment sessionManagment = new SessionManagment(MainActivity.this);
+        SessionManagment sessionManagment = new SessionManagment(MainActivityTutor.this);
         sessionManagment.removeSession();
         movetoLogin();
     }
 
     private void movetoLogin() {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(MainActivityTutor.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
@@ -161,4 +127,3 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.syncState();
     }
 }
-
