@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class LocalitzacioFragment extends Fragment implements OnMapReadyCallback {
 
@@ -48,21 +50,45 @@ public class LocalitzacioFragment extends Fragment implements OnMapReadyCallback
 
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Log o mensaje de depuración indicando que los permisos no están otorgados
             Log.d("Ubicación", "Permisos de ubicación no otorgados");
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
         } else {
-            // Log o mensaje de depuración indicando que los permisos están otorgados
             Log.d("Ubicación", "Permisos de ubicación otorgados");
-            // Resto del código para solicitar actualizaciones de ubicación
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
             fusedLocationClient.requestLocationUpdates(createLocationRequest(), locationCallback, null);
         }
+
+        // Implementación de los métodos de zoom y ubicación
+        Button btnZoomIn = getView().findViewById(R.id.btnZoomIn);
+        Button btnZoomOut = getView().findViewById(R.id.btnZoomOut);
+        Button btnCenterOnMyLocation = getView().findViewById(R.id.btnCenterOnMyLocation);
+
+        btnZoomIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                zoomIn(v);
+            }
+        });
+
+        btnZoomOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                zoomOut(v);
+            }
+        });
+
+        btnCenterOnMyLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                centerOnMyLocation(v);
+            }
+        });
     }
 
     private LocationRequest createLocationRequest() {
         LocationRequest locationRequest = new LocationRequest();
-        locationRequest.setInterval(10000); // Intervalo en milisegundos para recibir actualizaciones de ubicación
-        locationRequest.setFastestInterval(5000); // Intervalo más rápido en milisegundos
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(5000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         return locationRequest;
     }
@@ -101,5 +127,33 @@ public class LocalitzacioFragment extends Fragment implements OnMapReadyCallback
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
+    }
+
+    public void zoomIn(View view) {
+        if (gmap != null) {
+            gmap.animateCamera(CameraUpdateFactory.zoomIn());
+        }
+    }
+
+    public void zoomOut(View view) {
+        if (gmap != null) {
+            gmap.animateCamera(CameraUpdateFactory.zoomOut());
+        }
+    }
+
+    public void centerOnMyLocation(View view) {
+        if (gmap != null && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            if (location != null) {
+                                LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                                gmap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));
+                            }
+                        }
+                    });
+        }
     }
 }
