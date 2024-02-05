@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.recuerdate.MainActivity"
+    tools:showIn = "navigation_view">
+
+    <item
+        android:icon="@drawable/persona"
+        android:id="@+id/infoTutor"
+        android:title="Info"
+        />
+    <item
+        android:icon="@drawable/baseline_chat_24"
+        android:id="@+id/chatTutor"
+        android:title="Chat"/>
+    <item
+        android:icon="@drawable/baseline_my_location_24"
+        android:id="@+id/localitzacioTutor"
+        android:title="Localitza"/>
+</menu>

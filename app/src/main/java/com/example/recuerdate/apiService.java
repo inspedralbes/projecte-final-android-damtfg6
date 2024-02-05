@@ -15,5 +15,5 @@ public interface apiService {
     Call<Resposta> EnviarTutor(@Body TutorTrobat tutorTrobat);
 
     @POST("usuarisLogin")
-    Call<Resposta> EnviarUsuari(@Body UsuariLocalitzat usuariTrobat);
+    Call<RespostaLogin> EnviarUsuari(@Body UsuariLocalitzat usuariTrobat);
 }

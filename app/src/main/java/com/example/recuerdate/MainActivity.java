@@ -1,5 +1,6 @@
 package com.example.recuerdate;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.IDNA;
@@ -36,8 +37,44 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
+        // Obtener el rol del usuario
+        SessionManagment sessionManagment = new SessionManagment(this);
+        String rol = sessionManagment.getRol();  // Asegúrate de tener un método en SessionManagment para obtener el rol.
+
+        // Inflar el diseño correspondiente según el rol antes de configurar las vistas
+        if ("tutor".equals(rol)) {
+            setContentView(R.layout.activity_main_tutor);
+            binding = ActivityMainBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+            setSupportActionBar(findViewById(R.id.toolbar));
+
+            // Configuración del ActionBarDrawerToggle
+            drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close);
+            navigationView = findViewById(R.id.nav_view);
+            binding.drawerLayout.addDrawerListener(drawerToggle);
+            drawerToggle.syncState();
+            setSupportActionBar(findViewById(R.id.toolbar));
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.perfilmenu:
+                            return true;
+
+                        case R.id.sesiomenu:
+                            showLogoutConfirmationDialog();
+                            return true;
+                    }
+                    return true;
+                }
+            });
+            // Configurar las vistas específicas para el tutor usando findViewById si es necesario
+        } else {
+            binding = ActivityMainBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+        }
 
         setSupportActionBar(findViewById(R.id.toolbar));
 
@@ -63,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Configuración del BottomNavigationView
+    // Configuración del BottomNavigationView
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.info:
@@ -109,9 +146,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout(){
-        //SessionManagment sessionManagment = new SessionManagment(MainActivity.this);
-        //sessionManagment.removeSession();
-
+        SessionManagment sessionManagment = new SessionManagment(MainActivity.this);
+        sessionManagment.removeSession();
         movetoLogin();
     }
 

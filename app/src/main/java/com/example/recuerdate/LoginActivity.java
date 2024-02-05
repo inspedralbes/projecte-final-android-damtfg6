@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login2);
     }
 
-    /*@Override
+    @Override
     protected void onStart() {
         super.onStart();
         checkSession();
@@ -37,16 +37,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void checkSession() {
         SessionManagment sessionManagment = new SessionManagment(LoginActivity.this);
-        int userID = sessionManagment.getSession();
+        String dniSaved = sessionManagment.getDni();
 
-        if (userID != -1){
-            //user id esta loggejat i mourel a la mainActivity
+        if (dniSaved != null) {
             moveToMainActivity();
+        } else {
+            // No hagas nada
         }
-        else {
-            //No fes res
-        }
-    }*/
+    }
 
     public void iniciSessio(View view) {
 
@@ -87,17 +85,25 @@ public class LoginActivity extends AppCompatActivity {
 
         UsuariLocalitzat datosLogin = new UsuariLocalitzat(dni,contrasenya);
 
-        Call<Resposta> call = apiService.EnviarUsuari(datosLogin);
+        Call<RespostaLogin> call = apiService.EnviarUsuari(datosLogin);
 
-        call.enqueue(new Callback<Resposta>() {
+        call.enqueue(new Callback<RespostaLogin>() {
             @Override
-            public void onResponse(Call<Resposta> call, Response<Resposta> response) {
+            public void onResponse(Call<RespostaLogin> call, Response<RespostaLogin> response) {
                 if (response.isSuccessful()) {
-                    Resposta r = response.body();
+                    RespostaLogin r = response.body();
                     if (r.isAutoritzacio()) {
                         Log.d("Usuari", "Has ");
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
+
+                        SessionManagment sessionManagment = new SessionManagment(LoginActivity.this);
+                        sessionManagment.saveSession(dni, r.getRol());
+
+                        // Verificar el rol y actuar en consecuencia
+                        if ("tutor".equals(r.getRol())) {
+                            moveToMainActivity();
+                        } else {
+                            moveToMainActivity();
+                        }
                     } else {
                         Toast.makeText(LoginActivity.this, "L'usuari no existeix", Toast.LENGTH_SHORT).show();
                     }
@@ -105,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Resposta> call, Throwable t) {
+            public void onFailure(Call<RespostaLogin> call, Throwable t) {
                 Log.d("Error", t.getMessage());
             }
         });
@@ -118,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void moveToMainActivity() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 }
