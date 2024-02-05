@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="center"
-
+    tools:context=".LoginActivity">
     >
 
     <TextView
@@ -25,6 +26,7 @@
         android:layout_marginTop="5dp"/>
 
     <EditText
+        android:id="@+id/editTextTextLogDNI"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@drawable/round_back_dark_blue5_15"
@@ -49,6 +51,7 @@
 
 
     <EditText
+        android:id="@+id/editTextTextLogContrasenya"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
@@ -86,6 +89,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:text="Accedir"
+        android:onClick="iniciSessio"
         android:textAllCaps="false"
         android:layout_marginTop="40dp"
         android:background="@drawable/round_back_primary_15"
@@ -110,6 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Registrat"
+            android:onClick="launchRegister"
             android:textColor="@color/primary"
             android:textStyle="bold"/>
 

@@ -1,112 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.568">
+    >
+    <EditText
+        android:id="@+id/nomTutor"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/round_back_dark_blue5_15"
+        android:hint="Nom i cognoms"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nom_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
+        />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nomTutor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nom i cognoms"
-                android:inputType="textPersonName" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+    <EditText
+        android:id="@+id/dniTutor"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/round_back_dark_blue5_15"
+        android:hint="Dni"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/dni_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
+    <EditText
+        android:id="@+id/telefonTutor"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/round_back_dark_blue5_15"
+        android:hint="Telèfon"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:inputType="phone" />
+        />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dniTutor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="DNI"
-                android:inputType="number" />
+    <EditText
+        android:id="@+id/correuTutor"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/round_back_dark_blue5_15"
+        android:hint="Correu electrònic"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:inputType="textEmailAddress" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+    <EditText
+        android:id="@+id/contrasenyaTutor"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/round_back_dark_blue5_15"
+        android:hint="Contrasenya"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:inputType="textPassword"
+        />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/telefon_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
+    <EditText
+        android:id="@+id/identificador"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/round_back_dark_blue5_15"
+        android:hint="Identificador d'usuari"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:inputType="text"
+        android:layout_marginBottom="20dp"
+        />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/telefonTutor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Telèfon"
-                android:inputType="phone" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/correu_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/correuTutor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Correu electrònic"
-                android:inputType="textEmailAddress" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/contrasenya_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:passwordToggleEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/contrasenyaTutor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Contrasenya"
-                android:inputType="textPassword" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/identificador_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/identificador"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Identificador d'usuari"
-                android:inputType="text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

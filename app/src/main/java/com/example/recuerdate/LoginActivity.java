@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String URL = "http://192.168.1.80:3672/";
+    private static final String URL = "http://192.168.205.57:3672/";
     public static apiService apiService;
     private String dni;
     private String contrasenya;
@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login2);
     }
 
     /*@Override
