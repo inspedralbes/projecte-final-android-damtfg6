@@ -112,6 +112,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<RespostaLogin> call, Throwable t) {
                 Log.d("Error", t.getMessage());
+                Toast.makeText(LoginActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

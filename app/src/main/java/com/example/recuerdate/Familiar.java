@@ -4,9 +4,6 @@ public class Familiar {
     private String nombre;
 
     private int imagen;
-
-
-
     public Familiar(String nombre, int imagen) {
         this.nombre = nombre;
         this.imagen = imagen;
