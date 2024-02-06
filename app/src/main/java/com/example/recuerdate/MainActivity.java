@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.perfilmenu:
+                        obrirPerfil();
                         return true;
-
                     case R.id.sesiomenu:
                         showLogoutConfirmationDialog();
                         return true;
@@ -136,6 +136,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void movetoLogin() {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void obrirPerfil() {
+        Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
