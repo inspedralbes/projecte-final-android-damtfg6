@@ -58,5 +58,7 @@ public class InfoFragment extends Fragment {
     public void addFamiliar(Familiar familiar) {
         listaFamiliares.add(familiar);
         adapter.notifyItemInserted(listaFamiliares.size() - 1);
+        TextView textTitol = getView().findViewById(R.id.Nom_seccio);
+        textTitol.setText(familiar.getNombre());
     }
 }

@@ -16,4 +16,7 @@ public interface apiService {
 
     @POST("usuarisLogin")
     Call<RespostaLogin> EnviarUsuari(@Body UsuariLocalitzat usuariTrobat);
+
+    @POST("enviarMensaje")
+    Call<Resposta> EnviarMensaje(@Body Mensaje mensaje);
 }
