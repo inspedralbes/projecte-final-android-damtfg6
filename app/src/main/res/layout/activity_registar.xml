@@ -54,8 +54,37 @@
         android:layout_marginTop="60dp"
         android:background="@drawable/round_back_primary_15"
         android:textColor="#FFFFFF"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         android:textSize="22sp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/txtRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginStart="84dp"
+        android:gravity="center"
+        android:text="¿Ja estas registrat?"
+        android:layout_marginEnd="8dp"
+        android:textColor="#2883C3"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:id="@+id/txtRegister2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="96dp"
+        android:gravity="center"
+        android:onClick="launchLogin"
+        android:text="Inicia Sessió."
+        android:textSize="15sp"
+        android:textColor="#2E80BA"
+        android:textStyle="bold"
+        />
+    </LinearLayout>
 
         <Button
         android:layout_width="match_parent"

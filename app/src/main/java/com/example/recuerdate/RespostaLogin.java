@@ -4,12 +4,14 @@ public class RespostaLogin {
 
     private boolean autoritzacio;
     private String rol;
-    private Usuari userData; // Agregar campo para los datos del usuario
+    private Usuari userData; // Campo para los datos del usuario
+    private Usuari usuariTutoritzatData; // Campo para los datos del usuario tutorizado
 
-    public RespostaLogin(boolean autoritzacio, String rol, Usuari userData) {
+    public RespostaLogin(boolean autoritzacio, String rol, Usuari userData, Usuari usuariTutoritzatData) {
         this.autoritzacio = autoritzacio;
         this.rol = rol;
         this.userData = userData;
+        this.usuariTutoritzatData = usuariTutoritzatData;
     }
 
     public boolean isAutoritzacio() {
@@ -36,12 +38,21 @@ public class RespostaLogin {
         this.userData = userData;
     }
 
+    public Usuari getUsuariTutoritzatData() {
+        return usuariTutoritzatData;
+    }
+
+    public void setUsuariTutoritzatData(Usuari usuariTutoritzatData) {
+        this.usuariTutoritzatData = usuariTutoritzatData;
+    }
+
     @Override
     public String toString() {
         return "RespostaLogin{" +
                 "autoritzacio=" + autoritzacio +
                 ", rol='" + rol + '\'' +
                 ", userData=" + userData +
+                ", usuariTutoritzatData=" + usuariTutoritzatData +
                 '}';
     }
 }

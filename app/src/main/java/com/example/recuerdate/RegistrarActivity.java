@@ -29,7 +29,7 @@ public class RegistrarActivity extends AppCompatActivity {
     Spinner spinner1;
 
     private apiService apiService;
-    private static final String URL = "http://192.168.205.57:3672/";
+    private static final String URL = "http://192.168.1.80:3672/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,6 +230,10 @@ public class RegistrarActivity extends AppCompatActivity {
         }
     }
 
+    public void launchLogin (View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 
     public void botto(View view){
         Intent intent = new Intent(this, MainActivity.class);

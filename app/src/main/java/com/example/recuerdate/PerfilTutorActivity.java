@@ -18,7 +18,9 @@ public class PerfilTutorActivity extends AppCompatActivity {
         TextView textViewCorreuPerfil = findViewById(R.id.textViewCorreuPerfilTutor);
         TextView textViewTelefonPerfil = findViewById(R.id.textViewTelefonPerfilTutor2);
         TextView textViewDniPerfil = findViewById(R.id.textViewDniPerfilTutor2);
+        TextView textViewNomTutoritzatPerfil = findViewById(R.id.textViewNomCognomsPerfilTutor2);
         TextView textViewIdentificadorPerfil = findViewById(R.id.textViewIdentificadorPerfilTutor2);
+
 
         SessionManagment sessionManagment = new SessionManagment(this);
 
@@ -29,6 +31,7 @@ public class PerfilTutorActivity extends AppCompatActivity {
         String dniTutor = sessionManagment.getUserData().getDni();//Dni
         String telefonTutorString = String.valueOf(sessionManagment.getUserData().getTelefon());//Telefon
         String IdentificadorTutorString = String.valueOf(sessionManagment.getUserData().getUsuariIdentificador());//Identificador
+        String nomUsuariTutoritzat = sessionManagment.getUsuariTutoritzatData().getNomCognoms();//Nom Cognoms
 
         // Asignar el nombre del usuario al TextView
         textViewNomPerfil.setText(nombreTutor);
@@ -36,6 +39,7 @@ public class PerfilTutorActivity extends AppCompatActivity {
         textViewDniPerfil.setText(dniTutor);
         textViewTelefonPerfil.setText(telefonTutorString);
         textViewIdentificadorPerfil.setText(IdentificadorTutorString);
+        textViewNomTutoritzatPerfil.setText(nomUsuariTutoritzat);
     }
 
 

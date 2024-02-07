@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String URL = "http://192.168.205.57:3672/";
+    private static final String URL = "http://192.168.1.80:3672/";
     public static apiService apiService;
     private String dni;
     private String contrasenya;
@@ -40,7 +40,12 @@ public class LoginActivity extends AppCompatActivity {
         String dniSaved = sessionManagment.getDni();
 
         if (dniSaved != null) {
-            moveToMainActivity();
+            if (sessionManagment.getRol().equals("usuari")){
+                moveToMainActivity();
+            }
+            else{
+                moveToMainTutorActivity();
+            }
         } else {
             // No hagas nada
         }
@@ -96,7 +101,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         SessionManagment sessionManagment = new SessionManagment(LoginActivity.this);
                         Usuari userData = r.getUserData();
-                        sessionManagment.saveSession(dni, r.getRol(), userData);
+                        Usuari usuariTutoritzatData = r.getUsuariTutoritzatData();
+                        sessionManagment.saveSession(dni, r.getRol(), userData, usuariTutoritzatData);
 
                         // Verificar el rol y actuar en consecuencia
                         if ("tutor".equals(r.getRol())) {
@@ -109,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             }
+
 
             @Override
             public void onFailure(Call<RespostaLogin> call, Throwable t) {
