@@ -3,11 +3,13 @@ package com.example.recuerdate;
 public class RespostaLogin {
 
     private boolean autoritzacio;
-    private String rol; // Agregamos el campo para el rol
+    private String rol;
+    private Usuari userData; // Agregar campo para los datos del usuario
 
-    public RespostaLogin(boolean autoritzacio, String rol) {
+    public RespostaLogin(boolean autoritzacio, String rol, Usuari userData) {
         this.autoritzacio = autoritzacio;
         this.rol = rol;
+        this.userData = userData;
     }
 
     public boolean isAutoritzacio() {
@@ -26,11 +28,20 @@ public class RespostaLogin {
         this.rol = rol;
     }
 
+    public Usuari getUserData() {
+        return userData;
+    }
+
+    public void setUserData(Usuari userData) {
+        this.userData = userData;
+    }
+
     @Override
     public String toString() {
         return "RespostaLogin{" +
                 "autoritzacio=" + autoritzacio +
                 ", rol='" + rol + '\'' +
+                ", userData=" + userData +
                 '}';
     }
 }

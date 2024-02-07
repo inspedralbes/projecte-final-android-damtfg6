@@ -95,7 +95,8 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("Usuari", "Has ");
 
                         SessionManagment sessionManagment = new SessionManagment(LoginActivity.this);
-                        sessionManagment.saveSession(dni, r.getRol());
+                        Usuari userData = r.getUserData();
+                        sessionManagment.saveSession(dni, r.getRol(), userData);
 
                         // Verificar el rol y actuar en consecuencia
                         if ("tutor".equals(r.getRol())) {

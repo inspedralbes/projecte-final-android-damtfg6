@@ -45,6 +45,7 @@ public class MainActivityTutor extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.perfilmenu:
+                        obrirPerfil();
                         return true;
 
                     case R.id.sesiomenu:
@@ -102,6 +103,12 @@ public class MainActivityTutor extends AppCompatActivity {
 
     private void movetoLogin() {
         Intent intent = new Intent(MainActivityTutor.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void obrirPerfil() {
+        Intent intent = new Intent(MainActivityTutor.this, PerfilTutorActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
