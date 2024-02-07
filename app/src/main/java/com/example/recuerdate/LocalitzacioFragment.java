@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -59,9 +61,9 @@ public class LocalitzacioFragment extends Fragment implements OnMapReadyCallback
         }
 
         // Implementación de los métodos de zoom y ubicación
-        Button btnZoomIn = getView().findViewById(R.id.btnZoomIn);
-        Button btnZoomOut = getView().findViewById(R.id.btnZoomOut);
-        Button btnCenterOnMyLocation = getView().findViewById(R.id.btnCenterOnMyLocation);
+        AppCompatImageButton btnZoomIn = getView().findViewById(R.id.btnZoomIn);
+        AppCompatImageButton btnZoomOut = getView().findViewById(R.id.btnZoomOut);
+        AppCompatImageButton btnCenterOnMyLocation = getView().findViewById(R.id.btnCenterOnMyLocation);
 
         btnZoomIn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,5 +13,8 @@
     <string name="confirm_logout">Estas segur de tancar la sessió</string>
     <string name="si">Si</string>
     <string name="cancelar">Cancel·la</string>
+    <string name="zoom_in_button_description">Acercar</string>
+    <string name="zoom_out_button_description">Alejar</string>
+    <string name="center_on_my_location_button_description">Mi Ubicación</string>
 
 </resources>

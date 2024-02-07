@@ -1,51 +1,74 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardview_shadow_start_color"
     tools:context=".LocalitzacioFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recordatoris"
-        android:textSize="26dp"
-        android:layout_gravity="center"/>
-
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <!-- Botones para hacer zoom, alejar y centrar en la ubicación -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="16dp">
+        android:orientation="vertical"
+        android:gravity="start"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="48dp">
 
-        <Button
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Acercar"
+            android:textSize="16sp"
+            android:layout_marginStart="0dp"/>
+
+        <ImageButton
             android:id="@+id/btnZoomIn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/mas"
+            android:contentDescription="@string/zoom_in_button_description"
+            android:onClick="zoomIn"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Zoom In"
-            android:onClick="zoomIn" />
+            android:text="Alejar"
+            android:textSize="16sp"
+            android:layout_marginStart="0dp"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/btnZoomOut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Zoom Out"
-            android:onClick="zoomOut" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/menos"
+            android:contentDescription="@string/zoom_out_button_description"
+            android:onClick="zoomOut"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true" />
 
-        <Button
-            android:id="@+id/btnCenterOnMyLocation"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mi Ubicación"
-            android:onClick="centerOnMyLocation" />
-    </LinearLayout>
+            android:textSize="16sp"
+            android:layout_marginStart="0dp"/>
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/btnCenterOnMyLocation"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/miubicacion"
+            android:contentDescription="@string/center_on_my_location_button_description"
+            android:onClick="centerOnMyLocation"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true" />
+    </LinearLayout>
+</RelativeLayout>
