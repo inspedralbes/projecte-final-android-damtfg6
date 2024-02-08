@@ -141,12 +141,6 @@ public class ChatFamFragment extends Fragment {
                     }
                     mSocket.emit("chat message", data);
                     editMessage.setText("");
-                    Mensaje mensaje = new Mensaje(nomCognoms, message);
-                    mensajes.add(mensaje);
-                    adapter.notifyDataSetChanged();
-                    recyclerView.scrollToPosition(mensajes.size() - 1);
-
-                    editMessage.setText("");
                 }
             }
         });
