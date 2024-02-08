@@ -8,7 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="toolbar">#76A15C</color>
-
+    <color name="colorSelected">#0000FF</color> <!-- Azul fuerte para cuando el ítem está seleccionado -->
+    <color name="colorDefault">#FFFFFF</color> <!-- Blanco para cuando el ítem no está seleccionado -->
     <color name="primary">#01AED8</color>
 
 </resources>
