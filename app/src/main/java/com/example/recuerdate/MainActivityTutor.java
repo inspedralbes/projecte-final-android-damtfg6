@@ -35,7 +35,7 @@ public class MainActivityTutor extends AppCompatActivity {
 
         // Configuración del ActionBarDrawerToggle
         drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayoutTutor, R.string.open, R.string.close);
-        navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view2);
         binding.drawerLayoutTutor.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
         setSupportActionBar(findViewById(R.id.toolbar));
@@ -44,11 +44,14 @@ public class MainActivityTutor extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.perfilmenu:
+                    case R.id.tutorMenu:
+                        ObrirScreenTutoritzar();
+                        return true;
+                    case R.id.perfilmenuTutor:
                         obrirPerfil();
                         return true;
 
-                    case R.id.sesiomenu:
+                    case R.id.sesiomenuTutor:
                         showLogoutConfirmationDialog();
                         return true;
                 }
@@ -109,6 +112,12 @@ public class MainActivityTutor extends AppCompatActivity {
 
     private void obrirPerfil() {
         Intent intent = new Intent(MainActivityTutor.this, PerfilTutorActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void ObrirScreenTutoritzar() {
+        Intent intent = new Intent(MainActivityTutor.this, TutoritzarNouUsuari.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

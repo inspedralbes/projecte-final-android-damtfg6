@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.recuerdate.MainActivity"
+    tools:showIn = "navigation_view">
+
+    <item android:title="Informació tutor">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/tutorMenu"
+                    android:title="Tutoritzar usuaris"
+                    android:icon="@drawable/baseline_supervisor_account_24"
+                    />
+            </group>
+        </menu>
+    </item>
+    <item android:title="Dades d'usuari">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/perfilmenuTutor"
+                    android:title="Perfil"
+                    android:icon="@drawable/baseline_person_24"
+                    />
+                <item
+                    android:id="@+id/sesiomenuTutor"
+                    android:title="Tancar sessió"
+                    android:icon="@drawable/baseline_logout_24"/>
+            </group>
+        </menu>
+    </item>
+</menu>
