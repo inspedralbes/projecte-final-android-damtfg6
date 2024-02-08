@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -71,5 +72,9 @@ public class TutoritzarNouUsuari extends AppCompatActivity {
         alertDialog.show();
     }
 
+    public void TornaBotoTutor(View view){
+        Intent intent = new Intent(TutoritzarNouUsuari.this, MainActivityTutor.class);
+        startActivity(intent);
+    }
 
 }

@@ -1,74 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".TutoritzarNouUsuari">
 
-    <!-- Título -->
-    <TextView
-        android:id="@+id/textViewTitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tutorització"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:orientation="vertical"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="60dp"/>
+    <ImageButton
+        android:id="@+id/button5"
+        android:layout_width="31dp"
+        android:layout_height="31dp"
+        android:onClick="TornaBotoTutor"
+        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/baseline_keyboard_backspace_24"
+        />
 
-    <!-- Segundo LinearLayout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/white_backgrund_profile"
-        android:elevation="12dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitulo">
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <!-- Título -->
+        <TextView
+            android:id="@+id/textViewTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical"
+            android:text="Tutorització"
 
-        <EditText
-            android:id="@+id/editTextTextNovaTutoritzacio"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:background="@drawable/round_back_dark_blue5_15"
-            android:hint="Identificador de l'usuari a tutoritzar"
-            android:maxLines="1"
-            android:textSize="16sp"
-            android:paddingStart="20dp"
-            android:paddingEnd="13dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
-            android:drawableEnd="@drawable/clickable_help_icon"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            />
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <!-- Segundo LinearLayout -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginStart="100dp"
-            android:text="Confirmar"
-            android:onClick="registraNovaTutoritzacio"
-            android:textAllCaps="false"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/boto_personalitzat"
-            android:textColor="#777070"
-            android:textSize="16sp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/white_backgrund_profile"
+            android:elevation="12dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitulo">
+
+            <EditText
+                android:id="@+id/editTextTextNovaTutoritzacio"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/round_back_dark_blue5_15"
+                android:clickable="true"
+                android:drawableEnd="@drawable/clickable_help_icon"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="Identificador de l'usuari a tutoritzar"
+                android:maxLines="1"
+                android:paddingStart="20dp"
+                android:paddingEnd="13dp"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/boto_personalitzat"
+                android:onClick="registraNovaTutoritzacio"
+                android:text="Confirmar"
+                android:textAllCaps="false"
+                android:textColor="#777070"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-
-
-</LinearLayout>
+</FrameLayout>
