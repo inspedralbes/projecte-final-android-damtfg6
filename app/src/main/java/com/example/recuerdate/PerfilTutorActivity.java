@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -31,7 +32,15 @@ public class PerfilTutorActivity extends AppCompatActivity {
         String dniTutor = sessionManagment.getUserData().getDni();//Dni
         String telefonTutorString = String.valueOf(sessionManagment.getUserData().getTelefon());//Telefon
         String IdentificadorTutorString = String.valueOf(sessionManagment.getUserData().getUsuariIdentificador());//Identificador
-        String nomUsuariTutoritzat = sessionManagment.getUsuariTutoritzatData().getNomCognoms();//Nom Cognoms
+        String nomUsuariTutoritzat;
+
+        if (sessionManagment.getUsuariTutoritzatData() != null) {
+            Log.d("userData", String.valueOf(sessionManagment.getUsuariTutoritzatData()));
+            nomUsuariTutoritzat = sessionManagment.getUsuariTutoritzatData().getNomCognoms();
+        } else {
+            nomUsuariTutoritzat = "Null";
+        }
+
 
         // Asignar el nombre del usuario al TextView
         textViewNomPerfil.setText(nombreTutor);

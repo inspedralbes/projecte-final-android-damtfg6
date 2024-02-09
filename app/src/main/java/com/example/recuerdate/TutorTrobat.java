@@ -18,8 +18,8 @@ public class TutorTrobat {
     @SerializedName("contrasenya")
     private String contrasenya;
 
-    @SerializedName("usuari_identificador")
-    private int usuari_identificador;
+    //@SerializedName("usuari_identificador")
+    //private int usuari_identificador;
 
 
 
@@ -28,12 +28,12 @@ public class TutorTrobat {
         this.contrasenya = contrasenya;
     }
 
-    public TutorTrobat(String nomCognoms, String dni, int telefon, String correu, String contrasenya, int usuari_identificador) {
+    public TutorTrobat(String nomCognoms, String dni, int telefon, String correu, String contrasenya/*int usuari_identificador*/) {
         this.nomCognoms = nomCognoms;
         this.dni = dni;
         this.telefon = telefon;
         this.correu = correu;
         this.contrasenya = contrasenya;
-        this.usuari_identificador = usuari_identificador;
+        //this.usuari_identificador = usuari_identificador;
     }
 }

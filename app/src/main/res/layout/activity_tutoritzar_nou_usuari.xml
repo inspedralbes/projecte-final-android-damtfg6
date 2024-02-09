@@ -47,6 +47,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="20dp"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitulo">
 
             <EditText
@@ -79,9 +80,30 @@
                 android:text="Confirmar"
                 android:textAllCaps="false"
                 android:textColor="#777070"
+
                 android:textSize="16sp" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewTutoritzacioRegistrada"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+
+            android:textColor="@color/toolbar"
+            android:textSize="15sp"
+            android:text="Tutorització registrada" />
+
+        <TextView
+            android:id="@+id/textViewTutoritzacioError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#F44C51"
+            android:textSize="15sp"
+            android:text="Aquest usuari no existeix" />
 
     </LinearLayout>
 
