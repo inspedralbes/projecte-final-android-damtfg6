@@ -1,17 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frameLayoutJoc"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardview_shadow_start_color"
     tools:context=".JocsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Jocs"
-        android:textSize="26dp"
-        android:layout_gravity="center"/>
+    <!-- Contenido del fragmento -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TextJocs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jocs Memoria"
+            android:textSize="26dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="20dp"
+            android:gravity="center_horizontal"
+            android:background="@android:color/transparent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/LaunchJoc1"
+                    android:layout_width="100dp"
+                    android:layout_height="78dp"
+                    android:src="@drawable/juegos"
+                    android:onClick="botoJoc1"
+                    android:layout_margin="5dp"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Joc1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
+
+                <ImageButton
+                    android:id="@+id/LaunchJoc2"
+                    android:layout_width="100dp"
+                    android:layout_height="78dp"
+                    android:src="@drawable/juegos"
+                    android:onClick="botoJoc2"
+                    android:layout_margin="5dp"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Joc2"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>
