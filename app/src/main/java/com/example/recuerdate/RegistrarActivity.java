@@ -98,7 +98,7 @@ public class RegistrarActivity extends AppCompatActivity {
         EditText telefonTutor1 = findViewById(R.id.telefonTutor);
         EditText correuTutor1 = findViewById(R.id.correuTutor);
         EditText contrasenyesTutor = findViewById(R.id.contrasenyaTutor);
-        EditText id_usuari = findViewById(R.id.identificador);
+        //EditText id_usuari = findViewById(R.id.identificador);
 
 
         String nomCognomsTutor = nomCognomsTutor1.getText().toString().trim();
@@ -106,7 +106,7 @@ public class RegistrarActivity extends AppCompatActivity {
         String telefonInputTutor = telefonTutor1.getText().toString().trim();
         String correuTutor = correuTutor1.getText().toString().trim();
         String contrasenyaTutor = contrasenyesTutor.getText().toString().trim();
-        String identificadorUsuari1 = id_usuari.getText().toString().trim();
+        //String identificadorUsuari1 = id_usuari.getText().toString().trim();
         int telefonTutor;
 
         // Check the selected item in the Spinner
@@ -188,12 +188,12 @@ public class RegistrarActivity extends AppCompatActivity {
                 if (telefonInputTutor.isEmpty()) {
                     telefonTutor1.setError(getString(R.string.value_required));
                 }
-                if (identificadorUsuari1.isEmpty()) {
+                /*if (identificadorUsuari1.isEmpty()) {
                     id_usuari.setError(getString(R.string.value_required));
-                }
+                }*/
             } else {
                 telefonTutor = Integer.parseInt(telefonInputTutor);
-                int usuari_identificador = Integer.parseInt(identificadorUsuari1);
+                //int usuari_identificador = Integer.parseInt(identificadorUsuari1);
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(URL)
                         .addConverterFactory(GsonConverterFactory.create())
@@ -201,7 +201,7 @@ public class RegistrarActivity extends AppCompatActivity {
                 apiService = retrofit.create(apiService.class);
 
                 // Tutor registration API call
-                TutorTrobat tutorTrobat = new TutorTrobat(nomCognomsTutor, dniTutor, telefonTutor, correuTutor, contrasenyaTutor, usuari_identificador);
+                TutorTrobat tutorTrobat = new TutorTrobat(nomCognomsTutor, dniTutor, telefonTutor, correuTutor, contrasenyaTutor/*,usuari_identificador*/);
                 Call<Resposta> call = apiService.EnviarTutor(tutorTrobat);
 
                 call.enqueue(new Callback<Resposta>() {
