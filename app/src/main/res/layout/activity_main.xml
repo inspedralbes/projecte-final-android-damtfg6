@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:elevation="4dp"
-            android:background="#01AED8"
+            android:background="#49B1BA"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -43,7 +43,7 @@
             android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#01AED8"
+            android:background="#FF49B1BA"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
