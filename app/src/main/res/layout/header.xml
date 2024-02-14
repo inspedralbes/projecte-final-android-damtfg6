@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="175dp"
-    android:background="#B1B6AE"
+    android:background="@drawable/header_color"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="20dp"
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nom Usuari"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold" />
 </LinearLayout>
