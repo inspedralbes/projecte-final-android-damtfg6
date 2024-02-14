@@ -10,7 +10,7 @@
         android:title="Info"
         />
     <item
-        android:icon="@drawable/baseline_person_24"
+        android:icon="@drawable/baseline_calendar_month_24"
         android:id="@+id/recordatoris"
         android:title="Recorda"/>
     <item
@@ -18,7 +18,7 @@
         android:id="@+id/chat"
         android:title="Chat"/>
     <item
-        android:icon="@drawable/baseline_chat_24"
+        android:icon="@drawable/baseline_videogame_asset_24"
         android:id="@+id/jocs"
         android:title="Jocs"/>
     <item
