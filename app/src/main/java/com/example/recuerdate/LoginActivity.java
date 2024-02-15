@@ -2,10 +2,12 @@ package com.example.recuerdate;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String URL = "http://192.168.205.57:3672/";
+    private static final String URL = "http://192.168.1.80:3672/";
     public static apiService apiService;
     private String dni;
     private String contrasenya;
