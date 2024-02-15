@@ -31,14 +31,23 @@ public class PerfilTutorActivity extends AppCompatActivity {
         String ContrasenyaTutor = sessionManagment.getUserData().getContrasenya();
         String dniTutor = sessionManagment.getUserData().getDni();//Dni
         String telefonTutorString = String.valueOf(sessionManagment.getUserData().getTelefon());//Telefon
-        String IdentificadorTutorString = String.valueOf(sessionManagment.getUserData().getUsuariIdentificador());//Identificador
+        String IdentificadorTutorString;//Identificador
         String nomUsuariTutoritzat;
+
+
 
         if (sessionManagment.getUsuariTutoritzatData() != null) {
             Log.d("userData", String.valueOf(sessionManagment.getUsuariTutoritzatData()));
             nomUsuariTutoritzat = sessionManagment.getUsuariTutoritzatData().getNomCognoms();
         } else {
             nomUsuariTutoritzat = "Null";
+        }
+
+        if (sessionManagment.getUsuariTutoritzatData() != null) {
+            Log.d("userData", String.valueOf(sessionManagment.getUsuariTutoritzatData()));
+            IdentificadorTutorString = String.valueOf(sessionManagment.getUsuariTutoritzatData().getUsuariIdentificador());
+        } else {
+            IdentificadorTutorString = "Null";
         }
 
 

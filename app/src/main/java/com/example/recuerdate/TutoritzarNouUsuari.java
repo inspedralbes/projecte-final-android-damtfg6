@@ -30,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TutoritzarNouUsuari extends AppCompatActivity {
 
     private apiService apiService;
-    private static final String URL = "http://192.168.205.57:3672/";
+    private static final String URL = "http://192.168.1.80:3672/";
 
     TextView textViewOK;
     TextView textViewnNoOK;
@@ -74,7 +74,7 @@ public class TutoritzarNouUsuari extends AppCompatActivity {
 
         // Configura la imagen en el diálogo (asumiendo que tienes una imagen llamada "telefono" en tu carpeta "drawable")
         ImageView imageView = dialogView.findViewById(R.id.imageViewHelp);
-        imageView.setImageResource(R.drawable.telefono);
+        imageView.setImageResource(R.drawable.header_color);
 
         // Configura el botón "Tancar"
         Button closeButton = dialogView.findViewById(R.id.Tancar);

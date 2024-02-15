@@ -66,7 +66,7 @@ public class MainActivityTutor extends AppCompatActivity {
                     replaceFragment(new InfoTutorFragment());
                     break;
                 case R.id.chatTutor:
-                    replaceFragment(new ChatTutorFragment());
+                    replaceFragment(new ChatFamFragment());
                     break;
                 case R.id.localitzacioTutor:
                     replaceFragment(new localitzaTutorFragment());
