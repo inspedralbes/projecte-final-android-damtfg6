@@ -30,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TutoritzarNouUsuari extends AppCompatActivity {
 
     private apiService apiService;
-    private static final String URL = "http://192.168.1.80:3672/";
+    private static final String URL = "http://192.168.205.57:3672/";
 
     TextView textViewOK;
     TextView textViewnNoOK;
