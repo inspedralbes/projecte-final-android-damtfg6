@@ -66,7 +66,8 @@ public class MainActivityTutor extends AppCompatActivity {
                     replaceFragment(new InfoTutorFragment());
                     break;
                 case R.id.chatTutor:
-                    replaceFragment(new ChatFamFragment());
+                    Intent intent = new Intent(this, VoiceChat.class);
+                    startActivity(intent);
                     break;
                 case R.id.localitzacioTutor:
                     replaceFragment(new localitzaTutorFragment());
