@@ -1,7 +1,5 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-/copilot/chatSessions/00000000000.xd
-/migrations.xml
-/copilot/chatSessions/xd.lck
-/copilot/chatSessions/blobs/version
+# GitHub Copilot persisted chat sessions
+/copilot/chatSessions
