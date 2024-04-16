@@ -43,7 +43,7 @@ public class ChatFamFragment extends Fragment {
     private List<Mensaje> mensajes;
 
     private Socket mSocket;
-    private String serverUrl = "http://10.0.2.2:3672";
+    private String serverUrl = Settings.SERVER + ":" + Settings.PORT;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

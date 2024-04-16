@@ -29,7 +29,7 @@ public class RegistrarActivity extends AppCompatActivity {
     Spinner spinner1;
 
     private apiService apiService;
-    private static final String URL = "http://192.168.205.57:3672/";
+    private static final String URL = Settings.SERVER + ":" + Settings.PORT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
