@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VoiceChat">
+    tools:context=".chat.VoiceChat">
 
 
     <TextView
@@ -14,14 +14,14 @@
         android:text="Press mic button to input voice..."
         android:textSize="20sp"
         android:textColor="#000" />
+
     <ImageButton
         android:id="@+id/voiceBtn"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_centerInParent="true"
         android:background="@null"
-        android:src="@drawable/ic_mic"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:src="@drawable/ic_mic" />
 
 
 </RelativeLayout>

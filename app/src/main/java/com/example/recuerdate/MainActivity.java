@@ -75,8 +75,9 @@ public class MainActivity extends AppCompatActivity {
                     binding.bottomNavigationView.setVisibility(View.GONE); // Oculta el BottomNavigationView
                     break;
                 case R.id.chat:
-                    Intent intent = new Intent(this, VoiceChat.class);
-                    startActivity(intent);
+                    replaceFragment(new ChatFamFragment());
+                   // Intent intent = new Intent(this, VoiceChat.class);
+                    //startActivity(intent);
                     break;
                 case R.id.mapa:
                     replaceFragment(new LocalitzacioFragment());
