@@ -93,8 +93,9 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new RecordatoriFragment());
                     break;
                 case R.id.chat:
-                    Intent intent = new Intent(this, VoiceChat.class);
-                    startActivity(intent);
+                    replaceFragment(new ChatFamFragment());
+                   // Intent intent = new Intent(this, VoiceChat.class);
+                    //startActivity(intent);
                     break;
                 case R.id.jocs:
                     replaceFragment(new JocsFragment());
