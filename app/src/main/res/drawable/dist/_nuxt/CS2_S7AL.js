@@ -1,0 +1,1 @@
+import{_ as a,c,o,p as s,e as t,a as _}from"./CRJtOhYy.js";const p=e=>(s("data-v-bca26161"),e=e(),t(),e),n=p(()=>_("h3",null,"Inici a",-1)),d=[n],r={__name:"index",setup(e){return(i,l)=>(o(),c("div",null,d))}},h=a(r,[["__scopeId","data-v-bca26161"]]);export{h as default};

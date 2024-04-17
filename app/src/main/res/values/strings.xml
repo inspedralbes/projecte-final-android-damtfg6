@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Recuerdate</string>
+    <string name="app_name">ReMind</string>
     <string name="login">Iniciar sessió</string>
     <string name="introdueix_dni">Introdueix  el teu DNI</string>
     <string name="introdueix_contra">Introdueix la teva contrasenya</string>

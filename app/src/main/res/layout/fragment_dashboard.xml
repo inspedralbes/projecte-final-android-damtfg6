@@ -104,19 +104,20 @@
 
                             <ImageView
                                 android:id="@+id/imageView15"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_width="120dp"
+                                android:layout_height="50dp"
                                 android:layout_margin="10dp"
-                                android:src="@drawable/video_call" />
+                                android:src="@drawable/usergreyt" />
 
                             <TextView
-                                android:id="@+id/textView4"
+                                android:id="@+id/textView5"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
-                                android:text="Video Trucada"
+                                android:text="Perfil"
+                                android:textSize="18sp"
                                 android:textStyle="bold"
-                                android:textColor="#1DA6C8"
+                                android:textColor="#2e3d6d"
                                 android:textAlignment="center" />
                         </LinearLayout>
 
@@ -129,20 +130,21 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:id="@+id/imageView15"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:id="@+id/imageView16"
+                                android:layout_width="120dp"
+                                android:layout_height="50dp"
                                 android:layout_margin="10dp"
-                                android:src="@drawable/voice_call" />
+                                android:src="@drawable/chat4" />
 
                             <TextView
-                                android:id="@+id/textView4"
+                                android:id="@+id/textView6"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
-                                android:text="Trucada veu"
+                                android:text="Chat"
+                                android:textSize="18sp"
                                 android:textStyle="bold"
-                                android:textColor="#1DA6C8"
+                                android:textColor="#2e3d6d"
                                 android:textAlignment="center" />
                         </LinearLayout>
 
@@ -155,11 +157,11 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:id="@+id/imageView15"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:id="@+id/imageView17"
+                                android:layout_width="120dp"
+                                android:layout_height="50dp"
                                 android:layout_margin="10dp"
-                                android:src="@drawable/notification" />
+                                android:src="@drawable/alarma" />
 
                             <TextView
                                 android:id="@+id/textView4"
@@ -167,8 +169,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
                                 android:text="Notificacions"
+                                android:textSize="18sp"
                                 android:textStyle="bold"
-                                android:textColor="#1DA6C8"
+                                android:textColor="#2e3d6d"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </LinearLayout>
@@ -178,9 +181,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginEnd="80dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="80dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -191,24 +194,26 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+
+                            android:layout_margin="25dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/white_top_button">
+                                android:background="@drawable/white_top_button"
+                                >
 
                                 <ImageView
-                                    android:id="@+id/imageView17"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:id="@+id/imageView18"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
                                     android:layout_marginStart="16dp"
                                     android:layout_marginTop="16dp"
                                     android:layout_marginEnd="16dp"
                                     android:layout_marginBottom="16dp"
-                                    android:src="@drawable/ic_1"
+                                    android:src="@drawable/family2"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -216,21 +221,21 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <TextView
-                                android:id="@+id/textView8"
+                                android:id="@+id/textView7"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Chat"
+                                android:text="Familiars"
                                 android:textAlignment="center"
                                 android:textColor="#2e3d6d"
-                                android:textSize="14sp"
+                                android:textSize="20sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_margin="25dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
@@ -240,14 +245,14 @@
                                 android:background="@drawable/white_top_button">
 
                                 <ImageView
-                                    android:id="@+id/imageView17"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:id="@+id/imageView19"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
                                     android:layout_marginStart="16dp"
                                     android:layout_marginTop="16dp"
                                     android:layout_marginEnd="16dp"
                                     android:layout_marginBottom="16dp"
-                                    android:src="@drawable/ic_1"
+                                    android:src="@drawable/calendar"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -259,17 +264,17 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Chat"
+                                android:text="Calendari"
                                 android:textAlignment="center"
                                 android:textColor="#2e3d6d"
-                                android:textSize="14sp"
+                                android:textSize="20sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_margin="25dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
@@ -279,14 +284,14 @@
                                 android:background="@drawable/white_top_button">
 
                                 <ImageView
-                                    android:id="@+id/imageView17"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:id="@+id/imageView20"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
                                     android:layout_marginStart="16dp"
                                     android:layout_marginTop="16dp"
                                     android:layout_marginEnd="16dp"
                                     android:layout_marginBottom="16dp"
-                                    android:src="@drawable/ic_1"
+                                    android:src="@drawable/pin"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -294,14 +299,14 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <TextView
-                                android:id="@+id/textView8"
+                                android:id="@+id/textView9"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Chat"
+                                android:text="Ubicació"
                                 android:textAlignment="center"
                                 android:textColor="#2e3d6d"
-                                android:textSize="14sp"
+                                android:textSize="20sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
@@ -314,7 +319,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_margin="25dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
@@ -324,14 +329,14 @@
                                 android:background="@drawable/white_top_button">
 
                                 <ImageView
-                                    android:id="@+id/imageView17"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:id="@+id/imageView21"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
                                     android:layout_marginStart="16dp"
                                     android:layout_marginTop="16dp"
                                     android:layout_marginEnd="16dp"
                                     android:layout_marginBottom="16dp"
-                                    android:src="@drawable/ic_1"
+                                    android:src="@drawable/gaming"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -339,21 +344,21 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <TextView
-                                android:id="@+id/textView8"
+                                android:id="@+id/textView10"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Chat"
+                                android:text="Jocs"
                                 android:textAlignment="center"
                                 android:textColor="#2e3d6d"
-                                android:textSize="14sp"
+                                android:textSize="20sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_margin="25dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
@@ -363,14 +368,14 @@
                                 android:background="@drawable/white_top_button">
 
                                 <ImageView
-                                    android:id="@+id/imageView17"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:id="@+id/imageView22"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
                                     android:layout_marginStart="16dp"
                                     android:layout_marginTop="16dp"
                                     android:layout_marginEnd="16dp"
                                     android:layout_marginBottom="16dp"
-                                    android:src="@drawable/ic_1"
+                                    android:src="@drawable/graphic"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -378,21 +383,21 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <TextView
-                                android:id="@+id/textView8"
+                                android:id="@+id/textView11"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Chat"
+                                android:text="Progrés"
                                 android:textAlignment="center"
                                 android:textColor="#2e3d6d"
-                                android:textSize="14sp"
+                                android:textSize="20sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_margin="25dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
@@ -402,14 +407,14 @@
                                 android:background="@drawable/white_top_button">
 
                                 <ImageView
-                                    android:id="@+id/imageView17"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:id="@+id/imageView23"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
                                     android:layout_marginStart="16dp"
                                     android:layout_marginTop="16dp"
                                     android:layout_marginEnd="16dp"
                                     android:layout_marginBottom="16dp"
-                                    android:src="@drawable/ic_1"
+                                    android:src="@drawable/question"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -417,14 +422,14 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <TextView
-                                android:id="@+id/textView8"
+                                android:id="@+id/textView12"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Chat"
+                                android:text="Info"
                                 android:textAlignment="center"
                                 android:textColor="#2e3d6d"
-                                android:textSize="14sp"
+                                android:textSize="20sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
