@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "254988233407",
+    "project_id": "remind-cff01",
+    "storage_bucket": "remind-cff01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254988233407:android:5ef4fc7092af4b5fb4f40a",
+        "android_client_info": {
+          "package_name": "com.example.recuerdate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA09OFYlH45tA6JrP4ay-R2Tac74eAYsaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
