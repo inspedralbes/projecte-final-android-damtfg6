@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.recuerdate.dashboard.dashboard;
 import com.example.recuerdate.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
 
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.info:
-                    replaceFragment(new InfoFragment());
+                    replaceFragment(new dashboard());
                     break;
                 case R.id.recordatoris:
                     replaceFragment(new RecordatoriFragment());
