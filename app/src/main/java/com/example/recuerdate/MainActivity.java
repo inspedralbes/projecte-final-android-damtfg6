@@ -8,11 +8,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import androidx.databinding.DataBindingUtil;
+
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -41,34 +45,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        /*SessionManagment sessionManagment = new SessionManagment(MainActivity.this);
-        String rol = sessionManagment.getRol();
-
-
-        final View usuariLayout = LayoutInflater.from(this).inflate(R.layout.activity_main, null);
-        final View tutorLayout = LayoutInflater.from(this).inflate(R.layout.activity_main_tutor2, null);
-
-        if (rol.equals("tutor")) {
-            usuariLayout.setVisibility(View.VISIBLE);
-            tutorLayout.setVisibility(View.GONE);
-        } else if (rol.equals("usauri")) {
-            tutorLayout.setVisibility(View.VISIBLE);
-            usuariLayout.setVisibility(View.GONE);
-        }*/
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        setSupportActionBar(findViewById(R.id.toolbar));
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         // Configuración del ActionBarDrawerToggle
         drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close);
         navigationView = findViewById(R.id.nav_view);
         binding.drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
-        setSupportActionBar(findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -84,22 +67,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    // Configuración del BottomNavigationView
+        // Configuración del BottomNavigationView
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                case R.id.info:
+                case R.id.home:
                     replaceFragment(new dashboard());
-                    break;
-                case R.id.recordatoris:
-                    replaceFragment(new RecordatoriFragment());
+                    binding.bottomNavigationView.setVisibility(View.GONE); // Oculta el BottomNavigationView
                     break;
                 case R.id.chat:
                     replaceFragment(new ChatFamFragment());
                     break;
-                case R.id.jocs:
-                    replaceFragment(new JocsFragment());
-                    break;
-                case R.id.localitzacio:
+                case R.id.mapa:
                     replaceFragment(new LocalitzacioFragment());
                     break;
             }
@@ -107,8 +85,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Asegúrate de que el InfoFragment esté abierto al inicio
-        replaceFragment(new InfoFragment());
+        replaceFragment(new dashboard());
+        binding.bottomNavigationView.setVisibility(View.GONE);
     }
+
 
     private void showLogoutConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -147,11 +127,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
+
+        if (!(fragment instanceof dashboard)) {
+            binding.bottomNavigationView.setVisibility(View.VISIBLE); // Muestra el BottomNavigationView
+        }
     }
 
     @Override
@@ -166,6 +150,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         drawerToggle.syncState();
+    }
+    public void openDrawer(View view) {
+        binding.drawerLayout.openDrawer(GravityCompat.START);
     }
 }
 
