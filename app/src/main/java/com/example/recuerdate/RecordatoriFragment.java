@@ -1,27 +1,28 @@
 package com.example.recuerdate;
 
+import static com.example.recuerdate.CalendarUtils.daysInMonthArray;
+import static com.example.recuerdate.CalendarUtils.monthYearFromDate;
+import static com.example.recuerdate.CalendarUtils.selectedDate;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class RecordatoriFragment extends Fragment implements CalendarAdapter.OnItemListener
 {
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
-    private LocalDate selectedDate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -30,7 +31,6 @@ public class RecordatoriFragment extends Fragment implements CalendarAdapter.OnI
         initWidgets(view);
         selectedDate = LocalDate.now();
         setMonthView();
-
         Button previousButton = view.findViewById(R.id.previousButton);
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +49,16 @@ public class RecordatoriFragment extends Fragment implements CalendarAdapter.OnI
             }
         });
 
+        // Aquí agregamos el manejador de eventos de clic para el botón "Semana"
+        Button weeklyButton = view.findViewById(R.id.weeklyButton);
+        weeklyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                weeklyAction(v);
+            }
+        });
         return view;
+
     }
 
     private void initWidgets(View view)
@@ -57,45 +66,16 @@ public class RecordatoriFragment extends Fragment implements CalendarAdapter.OnI
         calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
         monthYearText = view.findViewById(R.id.monthYearTV);
     }
+
     private void setMonthView()
     {
         monthYearText.setText(monthYearFromDate(selectedDate));
-        ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
+        ArrayList<LocalDate> daysInMonth = daysInMonthArray();
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
-    }
-
-    private ArrayList<String> daysInMonthArray(LocalDate date)
-    {
-        ArrayList<String> daysInMonthArray = new ArrayList<>();
-        YearMonth yearMonth = YearMonth.from(date);
-
-        int daysInMonth = yearMonth.lengthOfMonth();
-
-        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
-        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
-
-        for(int i = 1; i <= 42; i++)
-        {
-            if(i <= dayOfWeek || i > daysInMonth + dayOfWeek)
-            {
-                daysInMonthArray.add("");
-            }
-            else
-            {
-                daysInMonthArray.add(String.valueOf(i - dayOfWeek));
-            }
-        }
-        return  daysInMonthArray;
-    }
-
-    private String monthYearFromDate(LocalDate date)
-    {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-        return date.format(formatter);
     }
 
     public void previousMonthAction(View view)
@@ -111,14 +91,18 @@ public class RecordatoriFragment extends Fragment implements CalendarAdapter.OnI
     }
 
     @Override
-    public void onItemClick(int position, String dayText)
+    public void onItemClick(int position, LocalDate date)
     {
-        if(!dayText.equals(""))
+        if(date != null)
         {
-            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-            if (getActivity() != null) {
-                Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
-            }
+            selectedDate = date;
+            setMonthView();
         }
     }
+
+    public void weeklyAction(View view)
+    {
+        startActivity(new Intent(getActivity(), WeekViewActivity.class));
+    }
 }
+

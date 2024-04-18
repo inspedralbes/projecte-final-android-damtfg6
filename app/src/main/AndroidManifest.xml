@@ -34,7 +34,12 @@
         <activity
             android:name=".MainActivityTutor"
             android:exported="false" />
-
+        <activity android:name=".WeekViewActivity"
+            android:exported="false"/>
+        <activity android:name=".DailyCalendarActivity"
+            android:exported="false"/>
+        <activity android:name=".EventEditActivity"
+            android:exported="false"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB_FfeVKZ7Ovh38CrqpC9LAcwJ_Uq_naqg" />
