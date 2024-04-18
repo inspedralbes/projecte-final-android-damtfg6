@@ -16,5 +16,15 @@
     <string name="zoom_in_button_description">Acercar</string>
     <string name="zoom_out_button_description">Alejar</string>
     <string name="center_on_my_location_button_description">Mi Ubicación</string>
+    <string name="welcome_back">Benvingut!</string>
+    <string name="login_to_continue">Fes el Login</string>
+    <string name="email">Dni</string>
+    <string name="password">Contrasenya</string>
+    <string name="sign_in">Iniciar sessió</string>
+    <string name="create_new_account">Crea un nou compte</string>
+    <string name="add_image">Fica una imatge</string>
+    <string name="name">Nom i Cognoms</string>
+    <string name="confirm_password">Confirma la Contrasenya</string>
+    <string name="sign_up">Registrat</string>
 
 </resources>
