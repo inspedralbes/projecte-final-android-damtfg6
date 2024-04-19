@@ -9,19 +9,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.example.recuerdate.ChatFamFragment;
-import com.example.recuerdate.FamiliarsActivity;
+import com.example.recuerdate.FamiliarsFragmentUsuari;
 import com.example.recuerdate.JocsFragment;
 import com.example.recuerdate.LocalitzacioFragment;
-import com.example.recuerdate.LoginActivity;
 import com.example.recuerdate.MainActivity;
 import com.example.recuerdate.PerfilActivity;
 import com.example.recuerdate.R;
 import com.example.recuerdate.RecordatoriFragment;
-import com.example.recuerdate.jocs.Launcher;
 
 public class dashboard extends Fragment {
     // Constructor y otros métodos si es necesario
@@ -143,10 +140,7 @@ public class dashboard extends Fragment {
     }
 
     public void FamiliarsClick(View view) {
-        // Lógica para manejar el clic en el LinearLayout
-        // Por ejemplo, abrir una nueva actividad
-        Intent intent = new Intent(getActivity(), FamiliarsActivity.class);
-        startActivity(intent);
+        mainActivity.replaceFragment(new FamiliarsFragmentUsuari());;
     }
 
     public void CalendariClick(View view) {

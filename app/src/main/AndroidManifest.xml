@@ -16,9 +16,6 @@
         android:theme="@style/Theme.Recuerdate"
         android:usesCleartextTraffic="true"
         tools:targetApi="31" >
-        <activity
-            android:name=".FamiliarsActivity"
-            android:exported="false" />
         <activity android:name=".jocs.Launcher2" />
         <activity android:name=".jocs.Launcher" />
         <activity
