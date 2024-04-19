@@ -6,17 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".EventEditActivity">
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Name:"
+        android:text="Nom del event:"
+        android:textStyle="bold"
         android:textSize="20sp"
         android:textAlignment="center"
         android:textColor="@color/black"/>
-
     <EditText
         android:id="@+id/eventNameET"
         android:layout_width="wrap_content"
@@ -25,7 +24,6 @@
         android:textSize="20sp"
         android:ems="10"
         android:inputType="text"/>
-
     <TextView
         android:id="@+id/eventDateTV"
         android:layout_width="wrap_content"
@@ -34,30 +32,29 @@
         android:layout_marginTop="20dp"
         android:text="Date"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@color/black"/>
-
     <TextView
         android:id="@+id/eventTimeTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Time"
+        android:text="Selecciona l'hora"
         android:textSize="20sp"
         android:textAlignment="center"
-        android:textColor="@color/black"/>
-
+        android:textStyle="bold"
+        android:textColor="@color/primary" />
     <Button
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:textColor="@color/primary"
-        android:background="@null"
-        android:textStyle="bold"
-        android:onClick="saveEventAction"
         android:layout_gravity="center"
-        android:textSize="20sp"/>
-
+        android:layout_marginTop="20dp"
+        android:background="#00FFFFFF"
+        android:onClick="saveEventAction"
+        android:text="Guardar"
+        android:textColor="@color/primary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 </LinearLayout>
