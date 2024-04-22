@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -32,6 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
     private ActivitySignUpBinding binding;
     private PreferenceManager preferenceManager;
     private String encodedImage;
+    private Spinner spinnerRole;
 
 
     @Override
@@ -61,9 +63,11 @@ public class SignUpActivity extends AppCompatActivity {
     private void signUp(){
         loading(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
+        String role = binding.spinnerRole.getSelectedItem().toString();
+        String collection = role.equals("Usuari") ? Constants.KEY_COLLECTION_USERS : Constants.KEY_COLLECTION_RELATIVES;
 
         // Primero, verifica si el DNI ya existe en la base de datos
-        database.collection(Constants.KEY_COLLECTION_USERS)
+        database.collection(collection)
                 .whereEqualTo(Constants.KEY_EMAIL, binding.inputEmail.getText().toString())
                 .get()
                 .addOnCompleteListener(task -> {
@@ -75,7 +79,11 @@ public class SignUpActivity extends AppCompatActivity {
                             user.put(Constants.KEY_EMAIL, binding.inputEmail.getText().toString());
                             user.put(Constants.KEY_PASSWORD, binding.inputPassword.getText().toString());
                             user.put(Constants.KEY_IMAGE, encodedImage);
-                            database.collection(Constants.KEY_COLLECTION_USERS)
+                            user.put("role", role); // Añade el rol al registro
+                            if (role.equals("Tutor")) {
+                                user.put("usuari_identificador", ""); // Añade el campo usuari_identificador vacío si el rol es Tutor
+                            }
+                            database.collection(collection)
                                     .add(user)
                                     .addOnSuccessListener(documentReference -> {
                                         loading(false);

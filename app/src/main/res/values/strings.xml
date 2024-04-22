@@ -26,5 +26,9 @@
     <string name="name">Nom i Cognoms</string>
     <string name="confirm_password">Confirma la Contrasenya</string>
     <string name="sign_up">Registrat</string>
+    <string-array name="role_array">
+        <item>Usuari</item>
+        <item>Tutor</item>
+    </string-array>
 
 </resources>
