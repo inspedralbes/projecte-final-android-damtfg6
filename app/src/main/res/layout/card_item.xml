@@ -52,13 +52,6 @@
                   android:text="Telefon"></TextView>
 
           </LinearLayout>
-
-
-
-        
-</LinearLayout>
-
-
-
+        </LinearLayout>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

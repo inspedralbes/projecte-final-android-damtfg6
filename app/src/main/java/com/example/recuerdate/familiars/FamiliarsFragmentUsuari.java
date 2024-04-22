@@ -56,7 +56,7 @@ public class FamiliarsFragmentUsuari extends Fragment {
             }
         });
 
-        
+
         modelRecyclerView = new ModelRecyclerView(getActivity(),arrayList);
         recyclerView.setAdapter(modelRecyclerView);
 
