@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.recuerdate.ChatFamFragment;
-import com.example.recuerdate.FamiliarsFragmentUsuari;
+import com.example.recuerdate.familiars.FamiliarsFragmentUsuari;
 import com.example.recuerdate.JocsFragment;
 import com.example.recuerdate.LocalitzacioFragment;
 import com.example.recuerdate.MainActivity;
@@ -140,7 +140,7 @@ public class dashboard extends Fragment {
     }
 
     public void FamiliarsClick(View view) {
-        mainActivity.replaceFragment(new FamiliarsFragmentUsuari());;
+        mainActivity.replaceFragment(new FamiliarsFragmentUsuari());
     }
 
     public void CalendariClick(View view) {
