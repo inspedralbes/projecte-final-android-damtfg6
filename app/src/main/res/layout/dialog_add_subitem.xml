@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/edit_text_subitem_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Sub Item Title"/>
+
+    <EditText
+        android:id="@+id/edit_text_subitem_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Sub Item Description"/>
+
+    <ImageView
+        android:id="@+id/image_view_sub_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_help_24"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/darker_gray"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <Button
+        android:id="@+id/button_add_subitem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Sub Item"/>
+
+</LinearLayout>
