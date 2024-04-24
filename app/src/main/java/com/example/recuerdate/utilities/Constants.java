@@ -12,4 +12,5 @@ public class Constants {
     public static final String KEY_COLLECTION_RELATIVES = "relatives";
 
     public static final String KEY_FCM_TOKEN = "fcmToken";
+    public static final String KEY_USER="user";
 }
