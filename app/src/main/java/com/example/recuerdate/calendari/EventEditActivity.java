@@ -1,4 +1,4 @@
-package com.example.recuerdate;
+package com.example.recuerdate.calendari;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,6 @@ import android.widget.TimePicker;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -23,6 +22,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import com.example.recuerdate.R;
+import com.example.recuerdate.SessionManagment;
 import com.google.gson.Gson;
 
 

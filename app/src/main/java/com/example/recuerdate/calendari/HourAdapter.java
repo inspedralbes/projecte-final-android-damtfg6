@@ -1,4 +1,4 @@
-package com.example.recuerdate;
+package com.example.recuerdate.calendari;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+
+import com.example.recuerdate.R;
+
 
 import java.time.LocalTime;
 import java.util.ArrayList;

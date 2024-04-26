@@ -1,8 +1,8 @@
-package com.example.recuerdate;
+package com.example.recuerdate.calendari;
 
-import static com.example.recuerdate.CalendarUtils.daysInMonthArray;
-import static com.example.recuerdate.CalendarUtils.monthYearFromDate;
-import static com.example.recuerdate.CalendarUtils.selectedDate;
+import static com.example.recuerdate.calendari.CalendarUtils.daysInMonthArray;
+import static com.example.recuerdate.calendari.CalendarUtils.monthYearFromDate;
+import static com.example.recuerdate.calendari.CalendarUtils.selectedDate;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.recuerdate.R;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

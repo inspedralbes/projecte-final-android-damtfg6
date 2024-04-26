@@ -1,4 +1,4 @@
-package com.example.recuerdate;
+package com.example.recuerdate.calendari;
 
 public class EventFromServer {
     private String name;

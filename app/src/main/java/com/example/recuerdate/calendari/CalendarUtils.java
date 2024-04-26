@@ -1,4 +1,4 @@
-package com.example.recuerdate;
+package com.example.recuerdate.calendari;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

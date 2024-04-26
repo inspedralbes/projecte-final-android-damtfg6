@@ -34,11 +34,11 @@
         <activity
             android:name=".MainActivityTutor"
             android:exported="false" />
-        <activity android:name=".WeekViewActivity"
+        <activity android:name=".calendari.WeekViewActivity"
             android:exported="false"/>
-        <activity android:name=".DailyCalendarActivity"
+        <activity android:name=".calendari.DailyCalendarActivity"
             android:exported="false"/>
-        <activity android:name=".EventEditActivity"
+        <activity android:name=".calendari.EventEditActivity"
             android:exported="false"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"

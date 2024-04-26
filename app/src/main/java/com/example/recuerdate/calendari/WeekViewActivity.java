@@ -1,7 +1,7 @@
-package com.example.recuerdate;
+package com.example.recuerdate.calendari;
 
-import static com.example.recuerdate.CalendarUtils.daysInWeekArray;
-import static com.example.recuerdate.CalendarUtils.monthYearFromDate;
+import static com.example.recuerdate.calendari.CalendarUtils.daysInWeekArray;
+import static com.example.recuerdate.calendari.CalendarUtils.monthYearFromDate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,8 +12,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.recuerdate.R;
+import com.example.recuerdate.SessionManagment;
+import com.example.recuerdate.calendari.CalendarAdapter;
+import com.example.recuerdate.calendari.CalendarUtils;
+import com.example.recuerdate.calendari.DailyCalendarActivity;
+import com.example.recuerdate.calendari.Event;
+import com.example.recuerdate.calendari.EventAdapter;
+import com.example.recuerdate.calendari.EventEditActivity;
+import com.example.recuerdate.calendari.EventFromServer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

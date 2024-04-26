@@ -1,4 +1,6 @@
-package com.example.recuerdate;
+package com.example.recuerdate.calendari;
+
+import com.example.recuerdate.calendari.Event;
 
 import java.time.LocalTime;
 import java.util.ArrayList;

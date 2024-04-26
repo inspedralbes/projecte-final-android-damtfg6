@@ -1,12 +1,8 @@
 package com.example.recuerdate;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.text.IDNA;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -17,19 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.recuerdate.calendari.RecordatoriFragment;
 import com.example.recuerdate.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;

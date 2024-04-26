@@ -1,10 +1,13 @@
-package com.example.recuerdate;
+package com.example.recuerdate.calendari;
 
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.recuerdate.R;
+import com.example.recuerdate.calendari.CalendarAdapter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

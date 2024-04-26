@@ -1,9 +1,8 @@
-package com.example.recuerdate;
+package com.example.recuerdate.calendari;
 
-import static com.example.recuerdate.CalendarUtils.selectedDate;
+import static com.example.recuerdate.calendari.CalendarUtils.selectedDate;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +10,11 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.recuerdate.R;
+
 import java.time.LocalTime;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class DailyCalendarActivity extends AppCompatActivity
