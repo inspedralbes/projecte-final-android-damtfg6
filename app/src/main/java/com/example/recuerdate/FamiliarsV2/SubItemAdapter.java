@@ -3,6 +3,7 @@ package com.example.recuerdate.FamiliarsV2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,8 +32,8 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
     public void onBindViewHolder(@NonNull SubItemViewHolder subItemViewHolder, int i) {
         SubItem subItem = subItemList.get(i);
         subItemViewHolder.tvSubItemTitle.setText(subItem.getSubItemTitle());
-        // Configurar la descripción del subítem
         subItemViewHolder.tvSubItemDescription.setText(subItem.getSubItemDesc());
+        subItemViewHolder.ivSubItemImage.setImageDrawable(subItem.getSubItemImage().getDrawable());
     }
 
     @Override
@@ -43,11 +44,13 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
     class SubItemViewHolder extends RecyclerView.ViewHolder {
         TextView tvSubItemTitle;
         TextView tvSubItemDescription;
+        ImageView ivSubItemImage; // ImageView field
 
         SubItemViewHolder(View itemView) {
             super(itemView);
             tvSubItemTitle = itemView.findViewById(R.id.tv_sub_item_title);
-            tvSubItemDescription = itemView.findViewById(R.id.tv_sub_item_description); // Agregar la referencia al TextView de la descripción
+            tvSubItemDescription = itemView.findViewById(R.id.tv_sub_item_description);
+            ivSubItemImage = itemView.findViewById(R.id.img_sub_item); // ImageView assignment
         }
     }
 }

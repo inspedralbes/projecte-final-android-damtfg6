@@ -28,11 +28,14 @@
                     android:padding="12sp"
                     android:textSize="18sp"
                     android:text="Item Title"/>
-                <Button
+                <ImageButton
                     android:id="@+id/btn_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+"/>
+                    android:src="@drawable/baseline_person_add_24"
+               />
+                <!-- Asegúrate de proporcionar una descripción accesible -->
+
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_sub_item"

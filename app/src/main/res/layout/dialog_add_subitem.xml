@@ -29,6 +29,16 @@
         android:focusable="true" />
 
     <Button
+        android:id="@+id/button_select_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar Imagen"
+        android:textColor="@android:color/white"
+        android:padding="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"/>
+
+    <Button
         android:id="@+id/button_add_subitem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

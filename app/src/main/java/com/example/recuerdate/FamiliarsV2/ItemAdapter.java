@@ -1,15 +1,21 @@
 package com.example.recuerdate.FamiliarsV2;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,9 +29,21 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     private List<Item> itemList;
     private Context context;
 
-    ItemAdapter(Context context, List<Item> itemList) {
+    private Uri selectedImageUri;
+
+    // ImageView reference moved here
+    public ImageView imageViewSelectedImage;
+
+    public ImageView imageViewSelectedImage2;
+
+    public static final int REQUEST_IMAGE = 1001;
+
+    private Fragment fragment;
+
+    ItemAdapter(Context context, List<Item> itemList, Fragment fragment) {
         this.context = context;
         this.itemList = itemList;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -69,7 +87,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView tvItemTitle;
-        private Button btnAddSubItem;
+        private ImageButton btnAddSubItem;
         private RecyclerView rvSubItem;
 
         ItemViewHolder(View itemView) {
@@ -89,24 +107,45 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         EditText editTextSubItemTitle = dialogView.findViewById(R.id.edit_text_subitem_title);
         EditText editTextSubItemDescription = dialogView.findViewById(R.id.edit_text_subitem_description);
         Button buttonAddSubItem = dialogView.findViewById(R.id.button_add_subitem);
-
+        imageViewSelectedImage = dialogView.findViewById(R.id.image_view_sub_item); // Add ImageView
+        Button btnSeleccionarFoto = dialogView.findViewById(R.id.button_select_image);
         AlertDialog alertDialog = dialogBuilder.create();
+
+        // Handle image selection from the gallery
+        btnSeleccionarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                fragment.startActivityForResult(intent, REQUEST_IMAGE);
+            }
+        });
 
         buttonAddSubItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String subItemTitle = editTextSubItemTitle.getText().toString().trim();
                 String subItemDescription = editTextSubItemDescription.getText().toString().trim();
+                ImageView etImagen = imageViewSelectedImage2;
+
 
                 if (!subItemTitle.isEmpty() && !subItemDescription.isEmpty()) {
-                    itemList.get(position).getSubItemList().add(new SubItem(subItemTitle, subItemDescription));
+                    SubItem newSubItem = new SubItem(subItemTitle, subItemDescription, etImagen);
+                    itemList.get(position).getSubItemList().add(newSubItem);
                     notifyDataSetChanged(); // Refresh the RecyclerView
                     alertDialog.dismiss(); // Dismiss the dialog
+                    editTextSubItemTitle.setText("");
+                    editTextSubItemDescription.setText("");
                 }
             }
         });
 
         alertDialog.show();
+    }
+
+    public void setSelectedImageUri(Uri selectedImageUri) {
+        this.selectedImageUri = selectedImageUri;
+            imageViewSelectedImage.setImageURI(selectedImageUri);
+            imageViewSelectedImage2 = imageViewSelectedImage;
     }
 }
 
