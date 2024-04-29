@@ -66,7 +66,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
 
     public void getEventsFromServer(String dniUsuario) {
         Request request = new Request.Builder()
-                .url("http://192.168.17.62:3672/events?dni=" + dniUsuario)
+                .url("http://192.168.19.174:3672/events?dni=" + dniUsuario)
                 .get()
                 .build();
 

@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String URL = "http://192.168.17.62:3672/";
+    private static final String URL = "http://192.168.19.174:3672/";
     public static apiService apiService;
     private String dni;
     private String contrasenya;

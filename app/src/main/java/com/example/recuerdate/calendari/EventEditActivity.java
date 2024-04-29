@@ -98,7 +98,7 @@ public class EventEditActivity extends AppCompatActivity {
 
         RequestBody body = RequestBody.create(json, MediaType.parse("application/json; charset=utf-8"));
         Request request = new Request.Builder()
-                .url("http://192.168.17.62:3672")
+                .url("http://192.168.19.174:3672")
                 .post(body)
                 .build();
 
