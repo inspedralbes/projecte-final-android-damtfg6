@@ -58,7 +58,12 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
 
         // Obtener el DNI del usuario
         SessionManagment sessionManagment = new SessionManagment(this);
-        String dniUsuario = sessionManagment.getUserData().getDni();
+        String dniUsuario;
+        if (sessionManagment.getRol().equals("tutor")) {
+            dniUsuario = sessionManagment.getUsuariTutoritzatData().getDni();
+        } else {
+            dniUsuario = sessionManagment.getUserData().getDni();
+        }
 
         // Obtener los eventos del servidor
         getEventsFromServer(dniUsuario);

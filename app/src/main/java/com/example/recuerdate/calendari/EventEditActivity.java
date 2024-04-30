@@ -85,7 +85,12 @@ public class EventEditActivity extends AppCompatActivity {
     public void postEventToServer(Event event) {
         // Obtener el DNI del usuario
         SessionManagment sessionManagment = new SessionManagment(this);
-        String dniUsuario = sessionManagment.getUserData().getDni();
+        String dniUsuario;
+        if (sessionManagment.getRol().equals("tutor")) {
+            dniUsuario = sessionManagment.getUsuariTutoritzatData().getDni();
+        } else {
+            dniUsuario = sessionManagment.getUserData().getDni();
+        }
 
         // Crear un mapa para almacenar los datos del evento
         Map<String, String> eventMap = new LinkedHashMap<>();

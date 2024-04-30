@@ -19,12 +19,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-
     private static final String URL = "http://192.168.19.174:3672/";
     public static apiService apiService;
     private String dni;
     private String contrasenya;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +106,9 @@ public class LoginActivity extends AppCompatActivity {
 
                         // Verificar el rol y actuar en consecuencia
                         if ("tutor".equals(r.getRol())) {
+                            // Aquí es donde obtendrías el DNI del usuario vinculado
+                            String dniUsuarioVinculado = sessionManagment.getUsuariTutoritzatData().getDni();
+                            sessionManagment.setDniUsuarioVinculado(dniUsuarioVinculado);
                             moveToMainTutorActivity();
                         } else {
                             moveToMainActivity();
@@ -117,8 +118,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             }
-
-
             @Override
             public void onFailure(Call<RespostaLogin> call, Throwable t) {
                 Log.d("Error", t.getMessage());
