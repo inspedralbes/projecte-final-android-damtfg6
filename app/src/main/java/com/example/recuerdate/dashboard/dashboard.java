@@ -18,7 +18,7 @@ import com.example.recuerdate.LocalitzacioFragment;
 import com.example.recuerdate.MainActivity;
 import com.example.recuerdate.PerfilActivity;
 import com.example.recuerdate.R;
-import com.example.recuerdate.RecordatoriFragment;
+import com.example.recuerdate.calendari.RecordatoriFragment;
 
 public class dashboard extends Fragment {
     // Constructor y otros métodos si es necesario

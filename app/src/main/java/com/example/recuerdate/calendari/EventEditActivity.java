@@ -25,6 +25,7 @@ import okhttp3.Response;
 
 import com.example.recuerdate.R;
 import com.example.recuerdate.SessionManagment;
+import com.example.recuerdate.Settings;
 import com.google.gson.Gson;
 
 
@@ -103,7 +104,7 @@ public class EventEditActivity extends AppCompatActivity {
 
         RequestBody body = RequestBody.create(json, MediaType.parse("application/json; charset=utf-8"));
         Request request = new Request.Builder()
-                .url("http://192.168.19.174:3672")
+                .url(Settings.SERVER+ ":" + Settings.PORT)
                 .post(body)
                 .build();
 

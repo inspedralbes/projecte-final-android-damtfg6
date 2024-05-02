@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.recuerdate.R;
 import com.example.recuerdate.SessionManagment;
+import com.example.recuerdate.Settings;
 import com.example.recuerdate.calendari.CalendarAdapter;
 import com.example.recuerdate.calendari.CalendarUtils;
 import com.example.recuerdate.calendari.DailyCalendarActivity;
@@ -71,7 +72,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
 
     public void getEventsFromServer(String dniUsuario) {
         Request request = new Request.Builder()
-                .url("http://192.168.19.174:3672/events?dni=" + dniUsuario)
+                .url(Settings.SERVER+ ":" + Settings.PORT + "/events?dni=" + dniUsuario)
                 .get()
                 .build();
 
