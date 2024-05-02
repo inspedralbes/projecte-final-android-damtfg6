@@ -6,19 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".calendari.RecordatoriFragment">
+    tools:context=".calendari.WeekViewActivity">
 
     <Button
-        android:id="@+id/weeklyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="#00FFFFFF"
-        android:onClick="weeklyAction"
-        android:text="@string/Semana"
+        android:text="Diari"
         android:textColor="@color/primary"
-        android:textSize="18sp"
+        android:background="#00FFFFFF"
         android:textStyle="bold"
+        android:onClick="dailyAction"
+        android:textSize="18sp"
         android:shadowColor="#000000"
         android:shadowDx="3"
         android:shadowDy="3"
@@ -31,18 +30,16 @@
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp">
 
-
         <Button
-            android:id="@+id/previousButton"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#00FFFFFF"
-            android:onClick="previousMonthAction"
             android:text="@string/Enrere"
             android:textColor="@color/primary"
-            android:textSize="18dp"
+            android:background="#00FFFFFF"
             android:textStyle="bold"
+            android:onClick="previousWeekAction"
+            android:textSize="18sp"
             android:shadowColor="#000000"
             android:shadowDx="3"
             android:shadowDy="3"
@@ -59,20 +56,19 @@
             android:textColor="@color/black"/>
 
         <Button
-            android:id="@+id/nextButton"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="@string/Endavant"
+            android:textColor="@color/primary"
             android:background="#00FFFFFF"
-            android:onClick="nextMonthAction"
+            android:textStyle="bold"
+            android:onClick="nextWeekAction"
+            android:textSize="18sp"
             android:shadowColor="#000000"
             android:shadowDx="3"
             android:shadowDy="3"
-            android:shadowRadius="1"
-            android:text="@string/Endavant"
-            android:textColor="@color/primary"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:shadowRadius="1" />
 
     </LinearLayout>
 
@@ -86,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="D"
-            android:textColor="@color/black"
+            android:textColor="@color/primary"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -95,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="L"
-            android:textColor="@color/black"
+            android:textColor="@color/primary"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -104,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="M"
-            android:textColor="@color/black"
+            android:textColor="@color/primary"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -113,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="X"
-            android:textColor="@color/black"
+            android:textColor="@color/primary"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -122,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="J"
-            android:textColor="@color/black"
+            android:textColor="@color/primary"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -131,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="V"
-            android:textColor="@color/black"
+            android:textColor="@color/primary"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -140,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="S"
-            android:textColor="@color/black"
+            android:textColor="@color/primary"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -151,6 +147,29 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nou Event"
+        android:textColor="@color/primary"
+        android:background="#00FFFFFF"
+        android:textStyle="bold"
+        android:onClick="newEventAction"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:shadowColor="#000000"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="1" />
+
+    <ListView
+        android:id="@+id/eventListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"/>
+
 
 </LinearLayout>

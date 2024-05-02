@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 public class SessionManagment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
+    String SESSION_KEY_DNI_USUARIO_VINCULADO = "session_dni_usuario_vinculado";
     String SHARED_PREF_NAME = "session";
     String SESSION_KEY_DNI = "session_dni";
     String SESSION_KEY_ROL = "session_rol";
@@ -58,6 +60,15 @@ public class SessionManagment {
         editor.remove(SESSION_KEY_USERDATA);
         editor.remove(SESSION_KEY_USUARI_TUTORITZAT_DATA);
         editor.apply();
+    }
+
+    public void setDniUsuarioVinculado(String dniUsuarioVinculado) {
+        editor.putString(SESSION_KEY_DNI_USUARIO_VINCULADO, dniUsuarioVinculado);
+        editor.apply();
+    }
+
+    public String getDniUsuarioVinculado() {
+        return sharedPreferences.getString(SESSION_KEY_DNI_USUARIO_VINCULADO, null);
     }
 }
 

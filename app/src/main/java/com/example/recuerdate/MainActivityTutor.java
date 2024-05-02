@@ -13,6 +13,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.recuerdate.calendari.RecordatoriFragment;
+import com.example.recuerdate.calendariTutor.RecordatoriFragmentTutor;
 import com.example.recuerdate.databinding.ActivityMainBinding;
 import com.example.recuerdate.databinding.ActivityMainTutor2Binding;
 import com.google.android.material.navigation.NavigationView;
@@ -70,6 +72,9 @@ public class MainActivityTutor extends AppCompatActivity {
                     break;
                 case R.id.localitzacioTutor:
                     replaceFragment(new localitzaTutorFragment());
+                    break;
+                case R.id.recordatoris:
+                    replaceFragment(new RecordatoriFragment());
                     break;
             }
             return true;

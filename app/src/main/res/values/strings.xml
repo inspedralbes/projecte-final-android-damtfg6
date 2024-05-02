@@ -16,5 +16,8 @@
     <string name="zoom_in_button_description">Acercar</string>
     <string name="zoom_out_button_description">Alejar</string>
     <string name="center_on_my_location_button_description">Mi Ubicación</string>
+    <string name="Enrere">Enrere</string>
+    <string name="Endavant">Endavant</string>
+    <string name="Semana">Semana</string>
 
 </resources>
