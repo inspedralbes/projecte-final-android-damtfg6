@@ -1,4 +1,4 @@
-package com.example.animalmatchup.game;
+package com.example.recuerdate.jocMemoria.game;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.animalmatchup.model.ScoreModel;
+import com.example.recuerdate.jocMemoria.model.ScoreModel;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package com.example.animalmatchup.adapter.gameadapter;
+package com.example.recuerdate.jocMemoria.adapter.gameadapter;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.animalmatchup.R;
+import com.example.recuerdate.R;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 public class CardHolder  extends RecyclerView.ViewHolder{

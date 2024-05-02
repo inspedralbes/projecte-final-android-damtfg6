@@ -1,4 +1,4 @@
-package com.example.animalmatchup.adapter.scoreadapter;
+package com.example.recuerdate.jocMemoria.adapter.scoreadapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.animalmatchup.R;
-import com.example.animalmatchup.adapter.gameadapter.CardHolder;
-import com.example.animalmatchup.model.ScoreModel;
+
+import com.example.recuerdate.R;
+import com.example.recuerdate.jocMemoria.model.ScoreModel;
 
 import java.util.ArrayList;
 

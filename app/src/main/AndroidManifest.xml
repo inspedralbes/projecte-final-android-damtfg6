@@ -33,6 +33,15 @@
         <activity
             android:name=".MainActivityTutor"
             android:exported="false" />
+        <activity
+            android:name=".jocMemoria.PlayScreen"
+            android:exported="false" />
+        <activity
+            android:name=".jocMemoria.WelcomeScreen"
+            android:exported="false" />
+        <activity
+            android:name=".jocMemoria.HighScoreScreen"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

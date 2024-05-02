@@ -1,4 +1,4 @@
-package com.example.animalmatchup.play;
+package com.example.recuerdate.jocMemoria.play;
 
 import android.os.Bundle;
 
@@ -14,11 +14,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.animalmatchup.R;
-import com.example.animalmatchup.adapter.gameadapter.CardAdapter;
-import com.example.animalmatchup.game.InfoBox;
-import com.example.animalmatchup.model.GameModel;
-import com.example.animalmatchup.game.PopulateCard;
+import com.example.recuerdate.R;
+import com.example.recuerdate.jocMemoria.adapter.gameadapter.CardAdapter;
+import com.example.recuerdate.jocMemoria.game.InfoBox;
+import com.example.recuerdate.jocMemoria.game.PopulateCard;
+import com.example.recuerdate.jocMemoria.model.GameModel;
+
 
 public class RoundTwo extends Fragment {
 
@@ -44,7 +45,6 @@ public class RoundTwo extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.animals_card);
         gameScore = view.findViewById(R.id.game_score);
-        infoBtn = view.findViewById(R.id.info_btn);
         backBtn = view.findViewById(R.id.back_btn);
         animScore = view.findViewById(R.id.anim_score);
         infoBox = new InfoBox();

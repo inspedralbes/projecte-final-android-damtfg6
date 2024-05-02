@@ -11,5 +11,7 @@
     <color name="colorSelected">#0000FF</color> <!-- Azul fuerte para cuando el ítem está seleccionado -->
     <color name="colorDefault">#FFFFFF</color> <!-- Blanco para cuando el ítem no está seleccionado -->
     <color name="primary">#01AED8</color>
+    <color name="grey">#EDEDED</color>
+    <color name="green">#48CE40</color>
 
 </resources>

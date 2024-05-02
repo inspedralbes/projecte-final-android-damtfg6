@@ -1,4 +1,4 @@
-package com.example.animalmatchup.game;
+package com.example.recuerdate.jocMemoria.game;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.animalmatchup.R;
+import com.example.recuerdate.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -54,7 +54,7 @@ public class InfoBox {
     private void createDialog(Context context, String score) {
         // Create a custom layout for the dialog
         LayoutInflater inflater = LayoutInflater.from(context);
-        View dialogView = inflater.inflate(R.layout.dialog_layout, null);
+        View dialogView = inflater.inflate(R.layout.dialog_layout_joc, null);
         TextInputLayout editText = dialogView.findViewById(R.id.enter_name_txt);
         TextView alertScore = dialogView.findViewById(R.id.alert_score);
         Button button = dialogView.findViewById(R.id.ok_button);

@@ -1,11 +1,13 @@
-package com.example.animalmatchup;
+package com.example.recuerdate.jocMemoria;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.animalmatchup.model.GameModel;
-import com.example.animalmatchup.play.RoundOne;
+
+import com.example.recuerdate.R;
+import com.example.recuerdate.jocMemoria.model.GameModel;
+import com.example.recuerdate.jocMemoria.play.RoundOne;
 
 public class PlayScreen extends AppCompatActivity {
 

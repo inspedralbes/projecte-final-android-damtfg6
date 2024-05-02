@@ -1,4 +1,4 @@
-package com.example.animalmatchup.adapter.gameadapter;
+package com.example.recuerdate.jocMemoria.adapter.gameadapter;
 
 import android.content.Context;
 import android.os.Handler;
@@ -12,13 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.animalmatchup.R;
-import com.example.animalmatchup.WelcomeScreen;
-import com.example.animalmatchup.game.InfoBox;
-import com.example.animalmatchup.game.ScoreAnimation;
-import com.example.animalmatchup.model.CardModel;
-import com.example.animalmatchup.model.GameModel;
-import com.example.animalmatchup.play.CongratsScreen;
+import com.example.recuerdate.R;
+import com.example.recuerdate.jocMemoria.game.InfoBox;
+import com.example.recuerdate.jocMemoria.game.ScoreAnimation;
+import com.example.recuerdate.jocMemoria.model.CardModel;
+import com.example.recuerdate.jocMemoria.model.GameModel;
+import com.example.recuerdate.jocMemoria.play.CongratsScreen;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.animalmatchup.model;
+package com.example.recuerdate.jocMemoria.model;
 
 public class GameModel {
     private int score;

@@ -1,7 +1,7 @@
-package com.example.animalmatchup.game;
+package com.example.recuerdate.jocMemoria.game;
 
-import com.example.animalmatchup.R;
-import com.example.animalmatchup.model.CardModel;
+import com.example.recuerdate.R;
+import com.example.recuerdate.jocMemoria.model.CardModel;
 
 import java.util.ArrayList;
 import java.util.Collections;

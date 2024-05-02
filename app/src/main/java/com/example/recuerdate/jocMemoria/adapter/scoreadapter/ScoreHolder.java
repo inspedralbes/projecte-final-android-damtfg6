@@ -1,12 +1,11 @@
-package com.example.animalmatchup.adapter.scoreadapter;
+package com.example.recuerdate.jocMemoria.adapter.scoreadapter;
 
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.animalmatchup.R;
+import com.example.recuerdate.R;
 
 public class ScoreHolder extends RecyclerView.ViewHolder {
     private TextView rank, name, score;

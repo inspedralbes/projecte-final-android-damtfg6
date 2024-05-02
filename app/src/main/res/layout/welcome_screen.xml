@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".jocMemoria.WelcomeScreen"
+    android:background="@drawable/background"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/tanca_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/back_joc"
+        android:layout_alignParentEnd="true"
+        android:elevation="10dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+
+        <ImageView
+            android:id="@+id/animal_text"
+            android:layout_width="match_parent"
+            android:layout_height="145dp"
+            android:src="@drawable/animal_text"/>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:src="@drawable/match_up_text"
+            android:layout_marginTop="-30dp"/>
+
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_marginTop="15dp">
+
+            <ImageButton
+                android:id="@+id/play_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/play_button"
+                android:layout_gravity="center"
+                android:background="?android:selectableItemBackground"/>
+
+            <ImageButton
+                android:id="@+id/high_score_button"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:src="@drawable/trophy_button"
+                android:layout_gravity="center"
+                android:layout_marginTop="80dp"
+                android:layout_marginLeft="50dp"
+                android:scaleType="fitCenter"
+                android:background="?android:selectableItemBackground"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

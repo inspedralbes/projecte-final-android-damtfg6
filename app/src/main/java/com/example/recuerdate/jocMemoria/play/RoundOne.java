@@ -1,4 +1,4 @@
-package com.example.animalmatchup.play;
+package com.example.recuerdate.jocMemoria.play;
 
 import android.os.Bundle;
 
@@ -14,11 +14,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.animalmatchup.R;
-import com.example.animalmatchup.adapter.gameadapter.CardAdapter;
-import com.example.animalmatchup.game.InfoBox;
-import com.example.animalmatchup.model.GameModel;
-import com.example.animalmatchup.game.PopulateCard;
+import com.example.recuerdate.R;
+import com.example.recuerdate.jocMemoria.adapter.gameadapter.CardAdapter;
+import com.example.recuerdate.jocMemoria.game.InfoBox;
+import com.example.recuerdate.jocMemoria.game.PopulateCard;
+import com.example.recuerdate.jocMemoria.model.GameModel;
+
 
 public class RoundOne extends Fragment {
 
@@ -42,7 +43,6 @@ public class RoundOne extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.animals_card);
-        infoBtn = view.findViewById(R.id.info_btn);
         gameScore = view.findViewById(R.id.game_score);
         animScore = view.findViewById(R.id.anim_score);
         backBtn = view.findViewById(R.id.back_btn);
@@ -56,13 +56,6 @@ public class RoundOne extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().finish();
-            }
-        });
-
-        infoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                infoBox.infoBox(getContext());
             }
         });
     }

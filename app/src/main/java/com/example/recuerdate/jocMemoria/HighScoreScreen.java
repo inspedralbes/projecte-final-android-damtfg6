@@ -10,10 +10,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.animalmatchup.adapter.scoreadapter.ScoreAdapter;
-import com.example.animalmatchup.game.InfoBox;
-import com.example.animalmatchup.game.PopulateScore;
-import com.example.animalmatchup.model.ScoreModel;
+
+import com.example.recuerdate.R;
+import com.example.recuerdate.jocMemoria.adapter.scoreadapter.ScoreAdapter;
+import com.example.recuerdate.jocMemoria.game.InfoBox;
+import com.example.recuerdate.jocMemoria.game.PopulateScore;
+import com.example.recuerdate.jocMemoria.model.ScoreModel;
 
 import java.util.ArrayList;
 
@@ -36,7 +38,6 @@ public class HighScoreScreen extends AppCompatActivity {
 
     public void init(){
         backBtn = findViewById(R.id.back_btn);
-        infoBtn = findViewById(R.id.info_btn);
         infoBox = new InfoBox();
         highest_score_txt = findViewById(R.id.highest_score_txt);
         highest_score_name_txt = findViewById(R.id.highest_score_name_txt);
@@ -49,13 +50,6 @@ public class HighScoreScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-
-        infoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                infoBox.infoBox(HighScoreScreen.this);
             }
         });
     }

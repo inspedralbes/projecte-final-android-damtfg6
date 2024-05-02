@@ -1,8 +1,9 @@
-package com.example.animalmatchup.game;
+package com.example.recuerdate.jocMemoria.game;
 
 import android.content.Context;
 
-import com.example.animalmatchup.model.ScoreModel;
+
+import com.example.recuerdate.jocMemoria.model.ScoreModel;
 
 import java.util.ArrayList;
 

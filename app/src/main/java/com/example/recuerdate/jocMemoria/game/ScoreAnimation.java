@@ -1,4 +1,4 @@
-package com.example.animalmatchup.game;
+package com.example.recuerdate.jocMemoria.game;
 
 import android.os.Handler;
 import android.view.animation.AlphaAnimation;
