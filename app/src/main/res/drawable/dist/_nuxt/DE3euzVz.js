@@ -1,0 +1,1 @@
+import{_ as t,c as o,o as c,a as e}from"./CRJtOhYy.js";const s={},n=e("footer",{class:"bg-white text-black text-center p-4 fixed bottom-0 left-0 w-full"},[e("p",null,"© 2024 - Nuxt")],-1),r=[n];function a(l,_){return c(),o("div",null,r)}const d=t(s,[["render",a]]);export{d as default};
