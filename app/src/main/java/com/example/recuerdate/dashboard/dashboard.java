@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 
 import com.example.recuerdate.ChatFamFragment;
 import com.example.recuerdate.FamiliarsV2.FamiliarsV2;
-import com.example.recuerdate.familiars.FamiliarsFragmentUsuari;
 import com.example.recuerdate.JocsFragment;
 import com.example.recuerdate.LocalitzacioFragment;
 import com.example.recuerdate.MainActivity;
