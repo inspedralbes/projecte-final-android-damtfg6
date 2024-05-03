@@ -126,21 +126,17 @@ public class TokenActivity extends BaseActivity implements ConversionListener {
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
     }
     private void updateToken(String token) {
-        String[] collections = {Constants.KEY_COLLECTION_USERS, Constants.KEY_COLLECTION_RELATIVES};
+        preferenceManager.putString(Constants.KEY_FCM_TOKEN, token);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         String currentUserId = preferenceManager.getString(Constants.KEY_USER_ID);
-        for (String collection : collections) {
-            database.collection(collection).document(currentUserId).get()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful() && task.getResult() != null && task.getResult().exists()) {
-                            // El usuario existe en esta colección, actualizar el token
-                            DocumentReference documentReference = database.collection(collection)
-                                    .document(currentUserId);
-                            documentReference.update(Constants.KEY_FCM_TOKEN, token)
-                                    .addOnFailureListener(e -> showToast("Unable to update token for " + collection));
-                        }
-                    });
-        }
+        DocumentReference userDocumentReference =
+                database.collection(Constants.KEY_COLLECTION_USERS).document(currentUserId);
+        userDocumentReference.update(Constants.KEY_FCM_TOKEN, token)
+                .addOnFailureListener(e -> showToast("No se puede actualizar token en la colección de usuarios"));
+        DocumentReference relativeDocumentReference =
+                database.collection(Constants.KEY_COLLECTION_RELATIVES).document(currentUserId);
+        relativeDocumentReference.update(Constants.KEY_FCM_TOKEN, token)
+                .addOnFailureListener(e -> showToast("No se puede actualizar token en la colección de parientes"));
     }
 
     private void signOut(){
