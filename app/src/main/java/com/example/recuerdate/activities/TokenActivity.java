@@ -1,6 +1,5 @@
 package com.example.recuerdate.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -29,7 +28,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class TokenActivity extends AppCompatActivity implements ConversionListener {
+public class TokenActivity extends BaseActivity implements ConversionListener {
     private ActivityTokenBinding binding;
     private PreferenceManager preferenceManager;
 
@@ -126,18 +125,24 @@ public class TokenActivity extends AppCompatActivity implements ConversionListen
     private void getToken(){
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
     }
-    private void updateToken(String token){
-        updateTokenForCollection(Constants.KEY_COLLECTION_USERS, token);
-        updateTokenForCollection(Constants.KEY_COLLECTION_RELATIVES, token);
+    private void updateToken(String token) {
+        String[] collections = {Constants.KEY_COLLECTION_USERS, Constants.KEY_COLLECTION_RELATIVES};
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        String currentUserId = preferenceManager.getString(Constants.KEY_USER_ID);
+        for (String collection : collections) {
+            database.collection(collection).document(currentUserId).get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && task.getResult() != null && task.getResult().exists()) {
+                            // El usuario existe en esta colección, actualizar el token
+                            DocumentReference documentReference = database.collection(collection)
+                                    .document(currentUserId);
+                            documentReference.update(Constants.KEY_FCM_TOKEN, token)
+                                    .addOnFailureListener(e -> showToast("Unable to update token for " + collection));
+                        }
+                    });
+        }
     }
 
-    private void updateTokenForCollection(String collection, String token){
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = database.collection(collection)
-                .document(preferenceManager.getString(Constants.KEY_USER_ID));
-        documentReference.update(Constants.KEY_FCM_TOKEN, token)
-                .addOnFailureListener(e -> showToast("Unable to update token for " + collection));
-    }
     private void signOut(){
         showToast("Signing out...");
         removeTokenFromCollection(Constants.KEY_COLLECTION_USERS);

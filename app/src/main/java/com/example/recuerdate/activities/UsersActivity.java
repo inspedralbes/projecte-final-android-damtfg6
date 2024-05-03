@@ -1,13 +1,10 @@
 package com.example.recuerdate.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.recuerdate.R;
 import com.example.recuerdate.adapters.UsersAdapter;
 import com.example.recuerdate.databinding.ActivityUsersBinding;
 import com.example.recuerdate.listeners.UserListener;
@@ -24,7 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersActivity extends AppCompatActivity  implements UserListener {
+public class UsersActivity extends BaseActivity  implements UserListener {
 
     private ActivityUsersBinding binding;
     private PreferenceManager preferenceManager;
