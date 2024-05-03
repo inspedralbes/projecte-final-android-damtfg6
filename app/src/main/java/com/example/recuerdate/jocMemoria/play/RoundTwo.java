@@ -60,12 +60,5 @@ public class RoundTwo extends Fragment {
                 getActivity().finish();
             }
         });
-
-        infoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                infoBox.infoBox(getContext());
-            }
-        });
     }
 }
