@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,7 +14,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.example.recuerdate.dashboard.dashboard;
+import com.example.recuerdate.dashboard.dashboardTutor;
 import com.example.recuerdate.databinding.ActivityMainBinding;
 import com.example.recuerdate.databinding.ActivityMainTutor2Binding;
 import com.google.android.material.navigation.NavigationView;
@@ -28,18 +33,13 @@ public class MainActivityTutor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainTutor2Binding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        setSupportActionBar(findViewById(R.id.toolbar));
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main_tutor2);
 
         // Configuración del ActionBarDrawerToggle
         drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayoutTutor, R.string.open, R.string.close);
-        navigationView = findViewById(R.id.nav_view2);
+        navigationView = findViewById(R.id.nav_viewTutor);
         binding.drawerLayoutTutor.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
-        setSupportActionBar(findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -62,21 +62,23 @@ public class MainActivityTutor extends AppCompatActivity {
         // Configuración del BottomNavigationView
         binding.bottomNavigationViewTutor.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                case R.id.infoTutor:
-                    replaceFragment(new InfoTutorFragment());
+                case R.id.homeTutor:
+                    replaceFragment(new dashboardTutor());
+                    binding.bottomNavigationViewTutor.setVisibility(View.GONE); // Oculta el BottomNavigationView
                     break;
                 case R.id.chatTutor:
                     replaceFragment(new ChatFamFragment());
                     break;
-                case R.id.localitzacioTutor:
-                    replaceFragment(new localitzaTutorFragment());
+                case R.id.mapaTutor:
+                    replaceFragment(new LocalitzacioFragment());
                     break;
             }
             return true;
         });
 
         // Asegúrate de que el InfoFragment esté abierto al inicio
-        replaceFragment(new InfoTutorFragment());
+        replaceFragment(new dashboardTutor());
+        binding.bottomNavigationViewTutor.setVisibility(View.GONE);
     }
 
     private void showLogoutConfirmationDialog() {
@@ -122,13 +124,16 @@ public class MainActivityTutor extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.replace(R.id.frame_layout_tutor, fragment);
         fragmentTransaction.commit();
-    }
 
+        if (!(fragment instanceof dashboard)) {
+            binding.bottomNavigationViewTutor.setVisibility(View.VISIBLE); // Muestra el BottomNavigationView
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (drawerToggle.onOptionsItemSelected(item)) {
@@ -141,5 +146,8 @@ public class MainActivityTutor extends AppCompatActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         drawerToggle.syncState();
+    }
+    public void openDrawer(View view) {
+        binding.drawerLayoutTutor.openDrawer(GravityCompat.START);
     }
 }

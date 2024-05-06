@@ -1,65 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawerLayoutTutor"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Contenido principal -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawerLayoutTutor"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:elevation="4dp"
-            android:background="#FF49B1BA"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            tools:openDrawer="start"
+            tools:context=".MainActivityTutor">
 
-        <FrameLayout
-            android:id="@+id/frame_layout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationViewTutor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:layout_constraintVertical_bias="0.0">
-
-            <!-- Aquí se reemplazarán los fragmentos -->
-
-        </FrameLayout>
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationViewTutor"
+         <!-- Contenido principal -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FF49B1BA"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_nav_tutor"/>
+            android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <FrameLayout
+                android:id="@+id/frame_layout_tutor"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
 
-    <!-- NavigationView -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view2"
-        android:layout_width="250dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/header"
-        app:menu="@menu/menu_main_tutor"
-        />
+                <!-- Aquí se reemplazarán los fragmentos -->
 
-</androidx.drawerlayout.widget.DrawerLayout>
+            </FrameLayout>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationViewTutor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottom_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:labelVisibilityMode="labeled"
+                android:layout_marginEnd="100dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginBottom="20dp"
+                android:elevation="2dp"
+                app:menu="@menu/bottom_nav_tutor" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- NavigationView -->
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/nav_viewTutor"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                app:headerLayout="@layout/header"
+                app:menu="@menu/menu_main_tutor" />
+
+        </androidx.drawerlayout.widget.DrawerLayout>
+    <!-- ImageButton para abrir el NavigationView -->
+    <ImageButton
+        android:id="@+id/open_drawer_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_menu_24"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="15dp"
+        android:onClick="openDrawer"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+</RelativeLayout>
+
+</layout>
