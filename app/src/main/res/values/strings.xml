@@ -19,5 +19,22 @@
     <string name="Enrere">Enrere</string>
     <string name="Endavant">Endavant</string>
     <string name="Semana">Semana</string>
+    <string name="welcome_back">Benvingut!</string>
+    <string name="login_to_continue">Fes el Login</string>
+    <string name="email">Dni</string>
+    <string name="password">Contrasenya</string>
+    <string name="sign_in">Iniciar sessió</string>
+    <string name="create_new_account">Crea un nou compte</string>
+    <string name="add_image">Fica una imatge</string>
+    <string name="name">Nom i Cognoms</string>
+    <string name="confirm_password">Confirma la Contrasenya</string>
+    <string name="sign_up">Registrat</string>
+    <string name="select_user">Selecciona els usuaris</string>
+    <string name="type_a_message">Escriu un Missatge</string>
+    <string name="online">Online</string>
+    <string-array name="role_array">
+        <item>Usuari</item>
+        <item>Tutor</item>
+    </string-array>
 
 </resources>
