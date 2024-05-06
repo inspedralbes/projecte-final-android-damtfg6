@@ -26,10 +26,12 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String token) {
         super.onNewToken(token);
+        Log.d("FCM", "Token: " + token);
     }
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
+        Log.d("FCM", "Message Received " + remoteMessage.getNotification().getBody());
         super.onMessageReceived(remoteMessage);
         User user = new User();
         user.id = remoteMessage.getData().get(Constants.KEY_USER_ID);
