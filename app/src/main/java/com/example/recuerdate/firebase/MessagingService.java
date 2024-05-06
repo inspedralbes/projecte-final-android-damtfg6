@@ -31,7 +31,11 @@ public class MessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
-        Log.d("FCM", "Message Received " + remoteMessage.getNotification().getBody());
+        if (remoteMessage.getNotification() != null) {
+            Log.d("FCM", "Message Received " + remoteMessage.getNotification().getBody());
+        } else {
+            Log.d("FCM", "Notification is null");
+        }
         super.onMessageReceived(remoteMessage);
         User user = new User();
         user.id = remoteMessage.getData().get(Constants.KEY_USER_ID);
@@ -44,7 +48,8 @@ public class MessagingService extends FirebaseMessagingService {
         Intent intent = new Intent(this, ChatActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra(Constants.KEY_USER, user);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId);
         builder.setSmallIcon(R.drawable.ic_notification);
@@ -57,8 +62,8 @@ public class MessagingService extends FirebaseMessagingService {
         builder.setContentIntent(pendingIntent);
         builder.setAutoCancel(true);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence channelName = "chat_message";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence channelName = "Chat Message";
             String channelDescription = "This is a channel for chat messages";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);

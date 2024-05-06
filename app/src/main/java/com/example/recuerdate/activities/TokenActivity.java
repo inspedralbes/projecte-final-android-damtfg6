@@ -1,13 +1,21 @@
 package com.example.recuerdate.activities;
 
 
+import android.content.BroadcastReceiver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Toast;
+
+import android.app.AlertDialog;
+import androidx.core.app.NotificationManagerCompat;
+
 import com.example.recuerdate.adapters.RecentConversationsAdapter;
 import com.example.recuerdate.databinding.ActivityTokenBinding;
 import com.example.recuerdate.listeners.ConversionListener;
@@ -31,11 +39,10 @@ import java.util.List;
 public class TokenActivity extends BaseActivity implements ConversionListener {
     private ActivityTokenBinding binding;
     private PreferenceManager preferenceManager;
-
     private List<ChatMessage> conversations;
-
     private RecentConversationsAdapter conversationsAdapter;
     private FirebaseFirestore database;
+    private BroadcastReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,29 @@ public class TokenActivity extends BaseActivity implements ConversionListener {
         getToken();
         setListeners();
         listenConversations();
+        // Comprobar si las notificaciones están habilitadas
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+        if (!notificationManagerCompat.areNotificationsEnabled()) {
+            // Las notificaciones están deshabilitadas
+            // Muestra un diálogo al usuario
+            new AlertDialog.Builder(TokenActivity.this)
+                    .setTitle("Permisos de notificación")
+                    .setMessage("Las notificaciones están deshabilitadas. ¿Te gustaría habilitarlas?")
+                    .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // El usuario ha hecho clic en 'Sí'
+                            // Abre la pantalla de configuración de la aplicación
+                            Intent settingsIntent = new Intent();
+                            settingsIntent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                            settingsIntent.setData(uri);
+                            startActivity(settingsIntent);
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
     }
 
     private void init(){

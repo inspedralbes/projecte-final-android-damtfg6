@@ -150,6 +150,7 @@ public class ChatActivity extends BaseActivity {
                     }catch (JSONException e) {
                         e.printStackTrace();
                     } showToast("Notification sent successfully");
+                    Log.d("FCM", "onResponse: "+response.body());
 
                 }else{
                     showToast("Error: "+response.code());
