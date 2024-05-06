@@ -49,6 +49,15 @@
             android:name=".PerfilTutorActivity"
             android:exported="false" />
         <activity
+            android:name=".calendari.WeekViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".calendari.DailyCalendarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".calendari.EventEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".PerfilActivity"
             android:exported="false" />
         <activity
