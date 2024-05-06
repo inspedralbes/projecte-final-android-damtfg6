@@ -19,7 +19,8 @@ import com.example.recuerdate.MainActivity;
 import com.example.recuerdate.MainActivityTutor;
 import com.example.recuerdate.PerfilActivity;
 import com.example.recuerdate.R;
-import com.example.recuerdate.RecordatoriFragment;
+import com.example.recuerdate.calendari.RecordatoriFragment;
+
 
 public class dashboardTutor extends Fragment {
 

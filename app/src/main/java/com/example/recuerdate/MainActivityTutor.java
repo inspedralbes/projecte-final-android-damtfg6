@@ -74,9 +74,6 @@ public class MainActivityTutor extends AppCompatActivity {
                 case R.id.mapaTutor:
                     replaceFragment(new LocalitzacioFragment());
                     break;
-                case R.id.recordatoris:
-                    replaceFragment(new RecordatoriFragment());
-                    break;
             }
             return true;
         });
