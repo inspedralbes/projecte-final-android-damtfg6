@@ -44,9 +44,6 @@
         <activity
             android:name=".chat.VoiceChat"
             android:exported="false" />
-        <activity
-            android:name=".chat.VoiceChat"
-            android:exported="false" />
         <activity android:name=".jocs.Launcher2" />
         <activity android:name=".jocs.Launcher" />
         <activity
@@ -71,8 +68,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
-        </activity>
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".RegistrarActivity"
             android:exported="false" />
@@ -89,5 +86,4 @@
             </intent-filter>
         </service>
     </application>
-
 </manifest>
