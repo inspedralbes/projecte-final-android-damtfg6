@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.example.recuerdate.jocMemoria.PlayScreen;
+import com.example.recuerdate.jocMemoria.WelcomeScreen;
 import com.example.recuerdate.jocs.Launcher;
 import com.example.recuerdate.jocs.Launcher2;
 
@@ -51,7 +53,7 @@ public class JocsFragment extends Fragment {
 
     private void abrirJoc1() {
         // Lógica para abrir el primer juego
-        Intent intent = new Intent(getContext(), Launcher.class);
+        Intent intent = new Intent(getContext(), WelcomeScreen.class);
         startActivity(intent);
     }
 

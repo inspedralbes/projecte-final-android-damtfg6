@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".jocMemoria.play.CongratsScreen"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="45dp"
+            android:padding="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/back_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/back_joc"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:elevation="10dp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginTop="-150dp">
+
+            <TextView
+                android:id="@+id/final_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Final Score: 20"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:fontFamily="@font/baloo2_bold"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:src="@drawable/congrats" />
+
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:id="@+id/next_level_btn"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:src="@drawable/next_level_btn"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

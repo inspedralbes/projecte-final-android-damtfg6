@@ -5,20 +5,20 @@
     tools:showIn = "navigation_view">
 
     <item
-        android:icon="@drawable/persona"
-        android:id="@+id/infoTutor"
+        android:icon="@drawable/baseline_home_50"
+        android:id="@+id/homeTutor"
         android:title="Info"
         />
+
     <item
         android:icon="@drawable/baseline_chat_24"
         android:id="@+id/chatTutor"
-        android:title="Chat"/>
+        android:title="Chat"
+        />
+
     <item
-        android:icon="@drawable/baseline_my_location_24"
-        android:id="@+id/localitzacioTutor"
-        android:title="Localitza"/>
-    <item
-        android:icon="@drawable/baseline_calendar_month_24"
-        android:id="@+id/recordatoris"
-        android:title="Recorda"/>
+        android:icon="@drawable/baseline_location_on_24"
+        android:id="@+id/mapaTutor"
+        android:title="mapa"
+        />
 </menu>
