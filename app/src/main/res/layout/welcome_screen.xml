@@ -7,22 +7,25 @@
     android:layout_height="match_parent"
     tools:context=".jocMemoria.WelcomeScreen"
     android:background="@drawable/background"
-    android:gravity="center">
+    >
 
     <ImageView
         android:id="@+id/tanca_btn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/back_joc"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/close"
         android:layout_alignParentEnd="true"
-        android:elevation="10dp"/>
+        android:elevation="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center">
+
+        android:layout_marginTop="40dp">
 
 
         <ImageView
@@ -32,18 +35,10 @@
             android:src="@drawable/animal_text"/>
 
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:src="@drawable/match_up_text"
-            android:layout_marginTop="-30dp"/>
-
-
-
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="260dp"
-            android:layout_marginTop="15dp">
+            android:layout_height="250dp"
+            >
 
             <ImageButton
                 android:id="@+id/play_button"
