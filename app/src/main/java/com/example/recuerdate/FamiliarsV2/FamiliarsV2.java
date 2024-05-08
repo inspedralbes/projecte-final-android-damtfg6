@@ -100,7 +100,7 @@ public class FamiliarsV2 extends Fragment {
         if (requestCode == REQUEST_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
             Uri selectedImageUri = data.getData();
             System.out.println(selectedImageUri);
-            System.out.println("Hola");
+            System.out.println("Hola, arriba imatge");
             // Pass the selectedImageUri to your adapter
             if (itemAdapter != null) {
                 itemAdapter.setSelectedImageUri(selectedImageUri);
