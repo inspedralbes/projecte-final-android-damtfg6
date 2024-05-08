@@ -23,6 +23,8 @@ import com.example.recuerdate.calendari.Event;
 import com.example.recuerdate.calendari.EventAdapter;
 import com.example.recuerdate.calendari.EventEditActivity;
 import com.example.recuerdate.calendari.EventFromServer;
+import com.example.recuerdate.utilities.Constants;
+import com.example.recuerdate.utilities.PreferenceManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -50,21 +52,15 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     private Gson gson = new Gson();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week_view);
         initWidgets();
         setWeekView();
 
-        // Obtener el DNI del usuario
-        SessionManagment sessionManagment = new SessionManagment(this);
-        String dniUsuario;
-        if (sessionManagment.getRol().equals("tutor")) {
-            dniUsuario = sessionManagment.getUsuariTutoritzatData().getDni();
-        } else {
-            dniUsuario = sessionManagment.getUserData().getDni();
-        }
+        PreferenceManager preferenceManager = new PreferenceManager(this);
+        String dniUsuario = preferenceManager.getString(Constants.KEY_EMAIL);
 
         // Obtener los eventos del servidor
         getEventsFromServer(dniUsuario);

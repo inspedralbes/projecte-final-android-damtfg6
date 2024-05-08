@@ -28,12 +28,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
     private ActivitySignUpBinding binding;
     private PreferenceManager preferenceManager;
     private String encodedImage;
-    private Spinner spinnerRole;
+
 
 
     @Override
@@ -79,22 +81,33 @@ public class SignUpActivity extends AppCompatActivity {
                             user.put(Constants.KEY_EMAIL, binding.inputEmail.getText().toString());
                             user.put(Constants.KEY_PASSWORD, binding.inputPassword.getText().toString());
                             user.put(Constants.KEY_IMAGE, encodedImage);
-                            user.put("role", role); // Añade el rol al registro
+                            user.put(Constants.KEY_PHONE, binding.inputConfirmPassword.getText().toString());
+                            user.put(Constants.KEY_ROLE, role); // Añade el rol al registro
                             if (role.equals("Tutor")) {
-                                user.put("usuari_identificador", ""); // Añade el campo usuari_identificador vacío si el rol es Tutor
+                                user.put(Constants.KEY_USER_IDENTIFIER, "00000"); // Añade el campo usuari_identificador vacío si el rol es Tutor
                             }
+
                             database.collection(collection)
                                     .add(user)
                                     .addOnSuccessListener(documentReference -> {
+                                        // Obtén el usuari_identificador del documento que acabas de crear
+                                        documentReference.get().addOnSuccessListener(documentSnapshot -> {
+                                            String usuari_identificador = documentSnapshot.getString("usuari_identificador");
+                                            preferenceManager.putString(Constants.KEY_USER_IDENTIFIER, usuari_identificador);
+                                        });
+
                                         loading(false);
                                         preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
                                         preferenceManager.putString(Constants.KEY_USER_ID, documentReference.getId());
                                         preferenceManager.putString(Constants.KEY_NAME, binding.inputName.getText().toString());
                                         preferenceManager.putString(Constants.KEY_IMAGE, encodedImage);
+                                        preferenceManager.putString(Constants.KEY_EMAIL, binding.inputEmail.getText().toString());
+                                        preferenceManager.putString(Constants.KEY_PHONE, binding.inputConfirmPassword.getText().toString());
+                                        preferenceManager.putString(Constants.KEY_ROLE, role);
+                                        preferenceManager.putString(Constants.KEY_PASSWORD, binding.inputPassword.getText().toString());
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
-
                                     })
                                     .addOnFailureListener(exception -> {
                                         loading(false);
@@ -111,6 +124,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private String encodeImage(Bitmap bitmap){
         int previewWidth = 150;
         int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
@@ -155,11 +169,8 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (binding.inputPassword.getText().toString().trim().isEmpty()) {
             showToast("Introdueix una contrasenya");
             return false;
-        } else if (binding.inputConfirmPassword.getText().toString().trim().isEmpty()){
-            showToast("Confirma la contrasenya");
-            return false;
-        } else if (!binding.inputPassword.getText().toString().equals(binding.inputConfirmPassword.getText().toString())){
-            showToast("Les contrasenyes no coincideixen");
+        } else if (!esTelefonoValido(binding.inputConfirmPassword.getText().toString())) {
+            showToast("Introdueix un número de teléfon vàlid");
             return false;
         } else{
             return true;
@@ -200,5 +211,12 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Si todo es correcto, el DNI es válido
         return true;
+    }
+    public boolean esTelefonoValido(String numero) {
+        String REGEX_TELEFONO = "^[0-9]{9}$";
+        Pattern pattern = Pattern.compile(REGEX_TELEFONO);
+        Matcher matcher = pattern.matcher(numero);
+
+        return matcher.matches();
     }
 }

@@ -18,6 +18,7 @@ import com.example.recuerdate.LocalitzacioFragment;
 import com.example.recuerdate.MainActivity;
 import com.example.recuerdate.PerfilActivity;
 import com.example.recuerdate.R;
+import com.example.recuerdate.activities.TokenActivity;
 import com.example.recuerdate.calendari.RecordatoriFragment;
 
 public class dashboard extends Fragment {
@@ -132,7 +133,8 @@ public class dashboard extends Fragment {
     }
 
     public void ChatClick(View view) {
-        mainActivity.replaceFragment(new ChatFamFragment());
+        Intent intent = new Intent(getActivity(), TokenActivity.class);
+        startActivity(intent);
     }
 
     public void UbiClick(View view) {

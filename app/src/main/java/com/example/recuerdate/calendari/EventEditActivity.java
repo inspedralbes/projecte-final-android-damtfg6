@@ -26,6 +26,8 @@ import okhttp3.Response;
 import com.example.recuerdate.R;
 import com.example.recuerdate.SessionManagment;
 import com.example.recuerdate.Settings;
+import com.example.recuerdate.utilities.Constants;
+import com.example.recuerdate.utilities.PreferenceManager;
 import com.google.gson.Gson;
 
 
@@ -85,13 +87,8 @@ public class EventEditActivity extends AppCompatActivity {
 
     public void postEventToServer(Event event) {
         // Obtener el DNI del usuario
-        SessionManagment sessionManagment = new SessionManagment(this);
-        String dniUsuario;
-        if (sessionManagment.getRol().equals("tutor")) {
-            dniUsuario = sessionManagment.getUsuariTutoritzatData().getDni();
-        } else {
-            dniUsuario = sessionManagment.getUserData().getDni();
-        }
+        PreferenceManager preferenceManager = new PreferenceManager(this);
+        String dniUsuario = preferenceManager.getString(Constants.KEY_SUPERVISED_USER_DNI);
 
         // Crear un mapa para almacenar los datos del evento
         Map<String, String> eventMap = new LinkedHashMap<>();
