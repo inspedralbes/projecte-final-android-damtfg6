@@ -1,12 +1,8 @@
 package com.example.recuerdate;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.text.IDNA;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import androidx.databinding.DataBindingUtil;
 
@@ -21,20 +17,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.recuerdate.dashboard.dashboard;
+import com.example.recuerdate.dashboard.Dashboard;
 import com.example.recuerdate.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
 
-import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
@@ -45,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // Configuración del ActionBarDrawerToggle
         drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close);
@@ -71,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.home:
-                    replaceFragment(new dashboard());
+                    replaceFragment(new Dashboard());
                     binding.bottomNavigationView.setVisibility(View.GONE); // Oculta el BottomNavigationView
                     break;
                 case R.id.chat:
                     replaceFragment(new ChatFamFragment());
-                   // Intent intent = new Intent(this, VoiceChat.class);
+                    // Intent intent = new Intent(this, VoiceChat.class);
                     //startActivity(intent);
                     break;
                 case R.id.mapa:
@@ -87,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Asegúrate de que el InfoFragment esté abierto al inicio
-        replaceFragment(new dashboard());
+        replaceFragment(new Dashboard());
         binding.bottomNavigationView.setVisibility(View.GONE);
     }
 
@@ -135,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
 
-        if (!(fragment instanceof dashboard)) {
+        if (!(fragment instanceof Dashboard)) {
             binding.bottomNavigationView.setVisibility(View.VISIBLE); // Muestra el BottomNavigationView
         }
     }

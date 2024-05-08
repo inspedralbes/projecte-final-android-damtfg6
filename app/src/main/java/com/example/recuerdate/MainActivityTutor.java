@@ -1,26 +1,22 @@
 package com.example.recuerdate;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.recuerdate.dashboard.dashboard;
-import com.example.recuerdate.dashboard.dashboardTutor;
-import com.example.recuerdate.calendari.RecordatoriFragment;
-import com.example.recuerdate.calendariTutor.RecordatoriFragmentTutor;
-import com.example.recuerdate.databinding.ActivityMainBinding;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.recuerdate.dashboard.Dashboard;
+import com.example.recuerdate.dashboard.DashboardTutor;
 import com.example.recuerdate.databinding.ActivityMainTutor2Binding;
 import com.google.android.material.navigation.NavigationView;
 
@@ -35,7 +31,8 @@ public class MainActivityTutor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main_tutor2);
+        binding = ActivityMainTutor2Binding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // Configuración del ActionBarDrawerToggle
         drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayoutTutor, R.string.open, R.string.close);
@@ -65,7 +62,7 @@ public class MainActivityTutor extends AppCompatActivity {
         binding.bottomNavigationViewTutor.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.homeTutor:
-                    replaceFragment(new dashboardTutor());
+                    replaceFragment(new DashboardTutor());
                     binding.bottomNavigationViewTutor.setVisibility(View.GONE); // Oculta el BottomNavigationView
                     break;
                 case R.id.chatTutor:
@@ -79,7 +76,7 @@ public class MainActivityTutor extends AppCompatActivity {
         });
 
         // Asegúrate de que el InfoFragment esté abierto al inicio
-        replaceFragment(new dashboardTutor());
+        replaceFragment(new DashboardTutor());
         binding.bottomNavigationViewTutor.setVisibility(View.GONE);
     }
 
@@ -132,7 +129,7 @@ public class MainActivityTutor extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout_tutor, fragment);
         fragmentTransaction.commit();
 
-        if (!(fragment instanceof dashboard)) {
+        if (!(fragment instanceof Dashboard)) {
             binding.bottomNavigationViewTutor.setVisibility(View.VISIBLE); // Muestra el BottomNavigationView
         }
     }
