@@ -52,7 +52,6 @@ public class FamiliarsV2 extends Fragment {
     private List<Item> itemList;
     private ItemAdapter itemAdapter;
     private Context context;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
