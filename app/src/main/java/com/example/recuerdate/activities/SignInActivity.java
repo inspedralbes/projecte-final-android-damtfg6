@@ -109,8 +109,10 @@ public class SignInActivity extends AppCompatActivity {
                         if (task.isSuccessful() && !task.getResult().isEmpty()) {
                             DocumentSnapshot userDocument = task.getResult().getDocuments().get(0);
                             String supervisedUserDni = userDocument.getString(Constants.KEY_EMAIL);
+                            String supervisedUserName = userDocument.getString(Constants.KEY_NAME);
                             // Guarda el DNI del usuario que el tutor supervisa en preferenceManager
                             preferenceManager.putString(Constants.KEY_SUPERVISED_USER_DNI, supervisedUserDni);
+                            preferenceManager.putString(Constants.KEY_SUPERVISED_USER_NAME, supervisedUserName);
 
                             // Decide a qué actividad redirigir en función del rol del usuario
                             Intent intent;

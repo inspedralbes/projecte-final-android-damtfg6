@@ -3,64 +3,53 @@ package com.example.recuerdate;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.recuerdate.databinding.ActivityPerfilTutorBinding;
+import com.example.recuerdate.utilities.Constants;
+import com.example.recuerdate.utilities.PreferenceManager;
+
 public class PerfilTutorActivity extends AppCompatActivity {
+
+    private ActivityPerfilTutorBinding binding;
+    private PreferenceManager preferenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil_tutor);
+        binding = ActivityPerfilTutorBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        TextView textViewNomPerfil = findViewById(R.id.textViewNomPerfilTutor);
-        TextView textViewCorreuPerfil = findViewById(R.id.textViewCorreuPerfilTutor);
-        TextView textViewTelefonPerfil = findViewById(R.id.textViewTelefonPerfilTutor2);
-        TextView textViewDniPerfil = findViewById(R.id.textViewDniPerfilTutor2);
-        TextView textViewNomTutoritzatPerfil = findViewById(R.id.textViewNomCognomsPerfilTutor2);
-        TextView textViewIdentificadorPerfil = findViewById(R.id.textViewIdentificadorPerfilTutor2);
+        preferenceManager = new PreferenceManager(getApplicationContext());
 
+        String nombreTutor = preferenceManager.getString(Constants.KEY_NAME);
+        String CorreuTutor = preferenceManager.getString(Constants.KEY_EMAIL);
+        String ContrasenyaTutor = preferenceManager.getString(Constants.KEY_PASSWORD);
+        String dniTutor = preferenceManager.getString(Constants.KEY_EMAIL);
+        String telefonTutorString = preferenceManager.getString(Constants.KEY_PHONE);
+        String IdentificadorTutorString = preferenceManager.getString(Constants.KEY_USER_IDENTIFIER);
+        String nomUsuariTutoritzat = preferenceManager.getString(Constants.KEY_SUPERVISED_USER_NAME); // Obtén el nombre del usuario supervisado desde PreferenceManager
 
-        SessionManagment sessionManagment = new SessionManagment(this);
-
-        String nombreTutor = sessionManagment.getUserData().getNomCognoms();//nom Cognoms
-        String CorreuTutor = sessionManagment.getUserData().getCorreu();//correu
-        //Contrasenya
-        String ContrasenyaTutor = sessionManagment.getUserData().getContrasenya();
-        String dniTutor = sessionManagment.getUserData().getDni();//Dni
-        String telefonTutorString = String.valueOf(sessionManagment.getUserData().getTelefon());//Telefon
-        String IdentificadorTutorString;//Identificador
-        String nomUsuariTutoritzat;
-
-
-
-        if (sessionManagment.getUsuariTutoritzatData() != null) {
-            Log.d("userData", String.valueOf(sessionManagment.getUsuariTutoritzatData()));
-            nomUsuariTutoritzat = sessionManagment.getUsuariTutoritzatData().getNomCognoms();
-        } else {
-            nomUsuariTutoritzat = "Null";
-        }
-
-        if (sessionManagment.getUsuariTutoritzatData() != null) {
-            Log.d("userData", String.valueOf(sessionManagment.getUsuariTutoritzatData()));
-            IdentificadorTutorString = String.valueOf(sessionManagment.getUsuariTutoritzatData().getUsuariIdentificador());
-        } else {
-            IdentificadorTutorString = "Null";
-        }
-
-
-        // Asignar el nombre del usuario al TextView
-        textViewNomPerfil.setText(nombreTutor);
-        textViewCorreuPerfil.setText(CorreuTutor);
-        textViewDniPerfil.setText(dniTutor);
-        textViewTelefonPerfil.setText(telefonTutorString);
-        textViewIdentificadorPerfil.setText(IdentificadorTutorString);
-        textViewNomTutoritzatPerfil.setText(nomUsuariTutoritzat);
+        binding.textViewNomPerfilTutor.setText(nombreTutor);
+        binding.textViewCorreuPerfilTutor.setText(CorreuTutor);
+        binding.textViewDniPerfilTutor2.setText(dniTutor);
+        binding.textViewTelefonPerfilTutor2.setText(telefonTutorString);
+        binding.textViewIdentificadorPerfilTutor2.setText(IdentificadorTutorString);
+        binding.textViewNomCognomsPerfilTutor2.setText(nomUsuariTutoritzat);
+        binding.textViewModificarPerfilTutor.setText(ContrasenyaTutor);
+        loadUserDetails();
     }
-
-
+    private void loadUserDetails() {
+        byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        binding.imageViewPerfilTutor.setImageBitmap(bitmap);
+    }
 
     public void TornaBotoTutor(View view){
         Intent intent = new Intent(PerfilTutorActivity.this, MainActivityTutor.class);

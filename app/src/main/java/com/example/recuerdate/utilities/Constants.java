@@ -7,6 +7,7 @@ public class Constants {
     public static final String  KEY_NAME ="name";
     public static final String KEY_USER_IDENTIFIER = "usuari_identificador";
     public static final String KEY_SUPERVISED_USER_DNI = "supervised_user_dni";
+    public static final String KEY_SUPERVISED_USER_NAME = "supervised_user_name";
     public static final String  KEY_EMAIL ="dni";
     public static final String  KEY_PHONE ="phone";
     public static final String  KEY_ROLE ="role";

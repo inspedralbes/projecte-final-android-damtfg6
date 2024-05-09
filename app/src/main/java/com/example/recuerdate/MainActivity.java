@@ -18,7 +18,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.recuerdate.dashboard.Dashboard;
+import com.example.recuerdate.dashboard.DashboardTutor;
 import com.example.recuerdate.databinding.ActivityMainBinding;
+import com.example.recuerdate.utilities.Constants;
+import com.example.recuerdate.utilities.PreferenceManager;
 import com.google.android.material.navigation.NavigationView;
 
 import android.view.View;
@@ -144,6 +147,16 @@ public class MainActivity extends AppCompatActivity {
     }
     public void openDrawer(View view) {
         binding.drawerLayout.openDrawer(GravityCompat.START);
+    }
+    @Override
+    public void onBackPressed() {
+        PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
+        String role = preferenceManager.getString(Constants.KEY_ROLE);
+        if (role.equals("Tutor")) {
+            replaceFragment(new DashboardTutor());
+        } else {
+            replaceFragment(new Dashboard());
+        }
     }
 }
 

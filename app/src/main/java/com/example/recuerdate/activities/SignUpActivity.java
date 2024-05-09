@@ -84,7 +84,8 @@ public class SignUpActivity extends AppCompatActivity {
                             user.put(Constants.KEY_PHONE, binding.inputConfirmPassword.getText().toString());
                             user.put(Constants.KEY_ROLE, role); // Añade el rol al registro
                             if (role.equals("Tutor")) {
-                                user.put(Constants.KEY_USER_IDENTIFIER, "00000"); // Añade el campo usuari_identificador vacío si el rol es Tutor
+                                user.put(Constants.KEY_USER_IDENTIFIER, "00000");
+                                user.put(Constants.KEY_SUPERVISED_USER_NAME, "Nombre del usuario supervisado");// Añade el campo usuari_identificador vacío si el rol es Tutor
                             }
 
                             database.collection(collection)
@@ -93,7 +94,9 @@ public class SignUpActivity extends AppCompatActivity {
                                         // Obtén el usuari_identificador del documento que acabas de crear
                                         documentReference.get().addOnSuccessListener(documentSnapshot -> {
                                             String usuari_identificador = documentSnapshot.getString("usuari_identificador");
+                                            String supervisedUserName = documentSnapshot.getString(Constants.KEY_SUPERVISED_USER_NAME);
                                             preferenceManager.putString(Constants.KEY_USER_IDENTIFIER, usuari_identificador);
+                                            preferenceManager.putString(Constants.KEY_SUPERVISED_USER_NAME, supervisedUserName);
                                         });
 
                                         loading(false);

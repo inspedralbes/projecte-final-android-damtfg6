@@ -18,6 +18,7 @@ import com.example.recuerdate.FamiliarsV2.FamiliarsV2;
 import com.example.recuerdate.LocalitzacioFragment;
 import com.example.recuerdate.MainActivityTutor;
 import com.example.recuerdate.PerfilActivity;
+import com.example.recuerdate.PerfilTutorActivity;
 import com.example.recuerdate.calendari.RecordatoriFragment;
 import com.example.recuerdate.databinding.FragmentDashboardTutorBinding;
 import com.example.recuerdate.utilities.Constants;
@@ -66,7 +67,7 @@ public class DashboardTutor extends Fragment {
 
     // Métodos para manejar el clic en el LinearLayout
     public void PerfilClick(View view) {
-        Intent intent = new Intent(getActivity(), PerfilActivity.class);
+        Intent intent = new Intent(getActivity(), PerfilTutorActivity.class);
         startActivity(intent);
     }
 
