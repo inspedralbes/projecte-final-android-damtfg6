@@ -3,6 +3,7 @@ package com.example.recuerdate.FamiliarsV2;
 import static com.example.recuerdate.FamiliarsV2.ItemAdapter.REQUEST_IMAGE;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.recuerdate.R;
+import com.example.recuerdate.SessionManagment;
+import com.example.recuerdate.Settings;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,13 +34,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class FamiliarsV2 extends Fragment {
 
     private List<Item> itemList;
     private ItemAdapter itemAdapter;
+    private Context context;
 
     @Nullable
     @Override
@@ -57,6 +68,34 @@ public class FamiliarsV2 extends Fragment {
             @Override
             public void onClick(View v) {
                 addItem();
+            }
+        });
+        SessionManagment sessionManagment = new SessionManagment(getContext());
+        // Aquí es donde haces la llamada a la API para obtener los datos de los familiares
+        String dni = sessionManagment.getUserData().getDni(); // Reemplaza esto con el DNI del usuario
+
+
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url(Settings.SERVER+ ":" + Settings.PORT + "/familyItems?dni=" + Uri.encode(dni))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    // Aquí puedes manejar la respuesta. Por ejemplo, puedes convertir la respuesta a una lista de Items y SubItems y actualizar tu interfaz de usuario.
+                    String responseData = response.body().string();
+                    // Convierte 'responseData' a una lista de Items y SubItems
+                }
             }
         });
 
