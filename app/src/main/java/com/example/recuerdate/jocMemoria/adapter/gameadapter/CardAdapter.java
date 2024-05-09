@@ -34,6 +34,18 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
     FragmentManager fragment;
     ScoreAnimation scoreAnimation;
 
+
+    String nomRonda;
+    int acertadesRnd1;
+    int falladesRnd1;
+
+    int acertadesRnd2;
+    int falladesRnd2;
+
+    int acertades;
+    int fallades;
+
+
     public CardAdapter(ArrayList<CardModel> mData, Context context, GameModel gameModel, TextView gameScore, TextView animScore, int totalCard, FragmentManager fragment, String fragment_round_num){
         this.mData = mData;
         this.context = context;
@@ -85,6 +97,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
                     if(names.get(0).equals(names.get(1))){
                         totalCard--;
                         scoreAnimation.animationScore(animScore, "+10");
+                        acertades++;
                         gameModel.setScore(+10);
 
                         handler.postDelayed(new Runnable() {
@@ -100,6 +113,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
                     } else {
                         scoreAnimation.animationScore(animScore, "-5");
                         gameModel.setScore(-5);
+                        fallades++;
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -121,10 +135,34 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
                         public void run() {
                             if(fragment_round_num.equals("Round 1")){
                                 fragment.beginTransaction().replace(R.id.fragment_container, new CongratsScreen(gameModel, "Round 1")).commit();
+
+                                nomRonda = "Nivell 1";
+                                acertadesRnd1 = acertades;
+                                falladesRnd1 = fallades;
+
+                                System.out.println("Fallades: "+ falladesRnd1);
+                                System.out.println("Acertades: " +acertadesRnd1);
+
                             } else if(fragment_round_num.equals("Round 2")){
-                                InfoBox infoBox = new InfoBox();
-                                infoBox.addNameScore(context, String.valueOf(gameModel.getScore()));
+                                //InfoBox infoBox = new InfoBox();
+                                //infoBox.addNameScore(context, String.valueOf(gameModel.getScore()));
                                 fragment.beginTransaction().replace(R.id.fragment_container, new CongratsScreen(gameModel, "Round 2")).commit();
+
+                                // ----------------------------- Guardar stats de la partida -------------------------------------
+
+                                nomRonda = "Nivell 2";
+                                acertadesRnd2 = acertades;
+                                falladesRnd2 = fallades;
+                                int totalScore = (gameModel.getScore());
+                                System.out.println("ScoreTotal: " +totalScore);
+
+                                System.out.println("Fallades: "+ falladesRnd2);
+                                System.out.println("Acertades: " +acertadesRnd2);
+
+
+
+
+
                             }
                         }
                     }, 800);
