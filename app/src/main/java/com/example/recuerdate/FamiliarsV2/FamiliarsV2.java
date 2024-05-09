@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import com.example.recuerdate.R;
 import com.example.recuerdate.SessionManagment;
 import com.example.recuerdate.Settings;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,6 +37,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,15 +73,15 @@ public class FamiliarsV2 extends Fragment {
                 addItem();
             }
         });
+
         SessionManagment sessionManagment = new SessionManagment(getContext());
         // Aquí es donde haces la llamada a la API para obtener los datos de los familiares
         String dni = sessionManagment.getUserData().getDni(); // Reemplaza esto con el DNI del usuario
 
-
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
-                .url(Settings.SERVER+ ":" + Settings.PORT + "/familyItems?dni=" + Uri.encode(dni))
+                .url(Settings.SERVER+ ":" + Settings.PORT + "/familyItems?dni=" + dni)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -92,9 +95,23 @@ public class FamiliarsV2 extends Fragment {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-                    // Aquí puedes manejar la respuesta. Por ejemplo, puedes convertir la respuesta a una lista de Items y SubItems y actualizar tu interfaz de usuario.
                     String responseData = response.body().string();
-                    // Convierte 'responseData' a una lista de Items y SubItems
+
+                    // Deserializar la respuesta JSON a una lista de Items
+                    Gson gson = new Gson();
+                    Type itemListType = new TypeToken<ArrayList<Item>>(){}.getType();
+                    ArrayList<Item> newItems = gson.fromJson(responseData, itemListType);
+
+                    // Actualizar la interfaz de usuario en el hilo principal
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Aquí puedes usar newItems para actualizar tu RecyclerView
+                            itemList.clear();
+                            itemList.addAll(newItems);
+                            itemAdapter.notifyDataSetChanged();
+                        }
+                    });
                 }
             }
         });
