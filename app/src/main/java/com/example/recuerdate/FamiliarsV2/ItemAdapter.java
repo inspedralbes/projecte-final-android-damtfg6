@@ -182,7 +182,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         RequestBody body = RequestBody.create(json, MediaType.parse("application/json; charset=utf-8"));
         Request request = new Request.Builder()
-                .url(Settings.SERVER+ ":" + Settings.PORT)
+                .url(Settings.SERVER+ ":" + Settings.PORT + "/family")
                 .post(body)
                 .build();
 
