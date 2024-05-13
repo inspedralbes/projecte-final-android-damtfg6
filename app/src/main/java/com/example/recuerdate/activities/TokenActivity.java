@@ -1,7 +1,7 @@
 package com.example.recuerdate.activities;
 
 
-import android.content.BroadcastReceiver;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,9 +13,10 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Toast;
 
-import android.app.AlertDialog;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.recuerdate.MainActivity;
+import com.example.recuerdate.MainActivityTutor;
 import com.example.recuerdate.adapters.RecentConversationsAdapter;
 import com.example.recuerdate.databinding.ActivityTokenBinding;
 import com.example.recuerdate.listeners.ConversionListener;
@@ -42,7 +43,7 @@ public class TokenActivity extends BaseActivity implements ConversionListener {
     private List<ChatMessage> conversations;
     private RecentConversationsAdapter conversationsAdapter;
     private FirebaseFirestore database;
-    private BroadcastReceiver receiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,24 +171,16 @@ public class TokenActivity extends BaseActivity implements ConversionListener {
     }
 
     private void signOut(){
-        showToast("Signing out...");
-        removeTokenFromCollection(Constants.KEY_COLLECTION_USERS);
-        removeTokenFromCollection(Constants.KEY_COLLECTION_RELATIVES);
-    }
-
-    private void removeTokenFromCollection(String collection){
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = database.collection(collection)
-                .document(preferenceManager.getString(Constants.KEY_USER_ID));
-        HashMap<String, Object> updates = new HashMap<>();
-        updates.put(Constants.KEY_FCM_TOKEN, FieldValue.delete());
-        documentReference.update(updates)
-                .addOnSuccessListener(unused -> {
-                    preferenceManager.clear();
-                    startActivity(new Intent(getApplicationContext(), SignInActivity.class));
-                    finish();
-                })
-                .addOnFailureListener(e -> showToast("Unable to sign out from " + collection));
+        String role = preferenceManager.getString(Constants.KEY_ROLE);
+        if (role.equals("Tutor")) {
+            Intent intent = new Intent(TokenActivity.this, MainActivityTutor.class);
+            startActivity(intent);
+            finish();
+        } else if (role.equals("Usuari")) {
+            Intent intent = new Intent(TokenActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
     public void onConversionClicked(User user){
         Intent intent = new Intent(getApplicationContext(), ChatActivity.class);

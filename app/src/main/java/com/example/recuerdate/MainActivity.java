@@ -1,51 +1,47 @@
 package com.example.recuerdate;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.text.IDNA;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import androidx.databinding.DataBindingUtil;
-
-
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.recuerdate.dashboard.dashboard;
+import com.example.recuerdate.activities.BaseActivity;
+import com.example.recuerdate.activities.SignInActivity;
+import com.example.recuerdate.dashboard.Dashboard;
+import com.example.recuerdate.dashboard.DashboardTutor;
 import com.example.recuerdate.databinding.ActivityMainBinding;
+import com.example.recuerdate.utilities.Constants;
+import com.example.recuerdate.utilities.PreferenceManager;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
+import java.util.HashMap;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     ActivityMainBinding binding;
     ActionBarDrawerToggle drawerToggle;
 
     NavigationView navigationView;
-
+    private PreferenceManager preferenceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        preferenceManager = new PreferenceManager(getApplicationContext());
 
         // Configuración del ActionBarDrawerToggle
         drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close);
@@ -60,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         obrirPerfil();
                         return true;
                     case R.id.sesiomenu:
-                        showLogoutConfirmationDialog();
+                        logout();
                         return true;
                 }
                 return true;
@@ -71,12 +67,12 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.home:
-                    replaceFragment(new dashboard());
+                    replaceFragment(new Dashboard());
                     binding.bottomNavigationView.setVisibility(View.GONE); // Oculta el BottomNavigationView
                     break;
                 case R.id.chat:
                     replaceFragment(new ChatFamFragment());
-                   // Intent intent = new Intent(this, VoiceChat.class);
+                    // Intent intent = new Intent(this, VoiceChat.class);
                     //startActivity(intent);
                     break;
                 case R.id.mapa:
@@ -87,19 +83,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Asegúrate de que el InfoFragment esté abierto al inicio
-        replaceFragment(new dashboard());
+        replaceFragment(new Dashboard());
         binding.bottomNavigationView.setVisibility(View.GONE);
     }
-
-
-    private void showLogoutConfirmationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.logout))
+    public void logout() {
+        // Muestra un diálogo de confirmación antes de cerrar la sesión
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.logout))
                 .setMessage(getString(R.string.confirm_logout))
                 .setPositiveButton(getString(R.string.si), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        logout();
+                        // Cierra la sesión y quita el token de FCM
+                        signOut();
                     }
                 })
                 .setNegativeButton(getString(R.string.cancelar), new DialogInterface.OnClickListener() {
@@ -111,31 +107,42 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    public void logout(){
-        SessionManagment sessionManagment = new SessionManagment(MainActivity.this);
-        sessionManagment.removeSession();
-        movetoLogin();
+    private void signOut() {
+        showToast("Signing out...");
+        removeTokenFromCollection(Constants.KEY_COLLECTION_USERS);
+        removeTokenFromCollection(Constants.KEY_COLLECTION_RELATIVES);
     }
 
-    private void movetoLogin() {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
 
     private void obrirPerfil() {
         Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+    private void removeTokenFromCollection(String collection) {
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = database.collection(collection)
+                .document(preferenceManager.getString(Constants.KEY_USER_ID));
+        HashMap<String, Object> updates = new HashMap<>();
+        updates.put(Constants.KEY_FCM_TOKEN, FieldValue.delete());
+        documentReference.update(updates)
+                .addOnSuccessListener(unused -> {
+                    preferenceManager.clear();
+                    startActivity(new Intent(getApplicationContext(), SignInActivity.class));
+                    finish();
+                })
+                .addOnFailureListener(e -> showToast("Unable to sign out from " + collection));
+    }
     public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
 
-        if (!(fragment instanceof dashboard)) {
+        if (!(fragment instanceof Dashboard)) {
             binding.bottomNavigationView.setVisibility(View.VISIBLE); // Muestra el BottomNavigationView
         }
     }
@@ -155,6 +162,16 @@ public class MainActivity extends AppCompatActivity {
     }
     public void openDrawer(View view) {
         binding.drawerLayout.openDrawer(GravityCompat.START);
+    }
+    @Override
+    public void onBackPressed() {
+        PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
+        String role = preferenceManager.getString(Constants.KEY_ROLE);
+        if (role.equals("Tutor")) {
+            replaceFragment(new DashboardTutor());
+        } else {
+            replaceFragment(new Dashboard());
+        }
     }
 }
 

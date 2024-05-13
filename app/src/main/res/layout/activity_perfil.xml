@@ -86,7 +86,7 @@
                     android:id="@+id/textViewCorreuPerfil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Correu Electronic"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@+id/textViewNomPerfil"
@@ -233,7 +233,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Adreça:"
+                            android:text="Rol:"
                             android:textColor="#1B1C22"
                             android:textSize="18sp" />
 

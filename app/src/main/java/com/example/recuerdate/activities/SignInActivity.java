@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recuerdate.MainActivity;
+import com.example.recuerdate.MainActivityTutor;
 import com.example.recuerdate.databinding.ActivitySignInBinding;
 import com.example.recuerdate.utilities.Constants;
 import com.example.recuerdate.utilities.PreferenceManager;
@@ -29,7 +30,13 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         preferenceManager = new PreferenceManager(getApplicationContext());
         if(preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN)){
-            Intent intent = new Intent(getApplicationContext(), TokenActivity.class);
+            String role = preferenceManager.getString(Constants.KEY_ROLE);
+            Intent intent;
+            if (role.equals("Tutor")) {
+                intent = new Intent(getApplicationContext(), MainActivityTutor.class);
+            } else {
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+            }
             startActivity(intent);
             finish();
         }
@@ -84,10 +91,50 @@ public class SignInActivity extends AppCompatActivity {
         preferenceManager.putString(Constants.KEY_USER_ID, documentSnapshot.getId());
         preferenceManager.putString(Constants.KEY_NAME, documentSnapshot.getString(Constants.KEY_NAME));
         preferenceManager.putString(Constants.KEY_IMAGE, documentSnapshot.getString(Constants.KEY_IMAGE));
-        Intent intent = new Intent(getApplicationContext(), TokenActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        preferenceManager.putString(Constants.KEY_EMAIL, documentSnapshot.getString(Constants.KEY_EMAIL));
+        preferenceManager.putString(Constants.KEY_USER_IDENTIFIER, documentSnapshot.getString(Constants.KEY_USER_IDENTIFIER));
+        preferenceManager.putString(Constants.KEY_PASSWORD, documentSnapshot.getString(Constants.KEY_PASSWORD));
+        preferenceManager.putString(Constants.KEY_PHONE, documentSnapshot.getString(Constants.KEY_PHONE));
+        preferenceManager.putString(Constants.KEY_ROLE, documentSnapshot.getString(Constants.KEY_ROLE));
+
+        String role = documentSnapshot.getString(Constants.KEY_ROLE);
+        if (role.equals("Tutor")) {
+            // Si el usuario es un tutor, busca a través del usuari_identificador del usuario al que supervisa
+            String usuari_identificador = documentSnapshot.getString(Constants.KEY_USER_IDENTIFIER);
+            FirebaseFirestore database = FirebaseFirestore.getInstance();
+            database.collection(Constants.KEY_COLLECTION_USERS)
+                    .whereEqualTo(Constants.KEY_USER_IDENTIFIER, usuari_identificador)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                            DocumentSnapshot userDocument = task.getResult().getDocuments().get(0);
+                            String supervisedUserDni = userDocument.getString(Constants.KEY_EMAIL);
+                            String supervisedUserName = userDocument.getString(Constants.KEY_NAME);
+                            // Guarda el DNI del usuario que el tutor supervisa en preferenceManager
+                            preferenceManager.putString(Constants.KEY_SUPERVISED_USER_DNI, supervisedUserDni);
+                            preferenceManager.putString(Constants.KEY_SUPERVISED_USER_NAME, supervisedUserName);
+
+                            // Decide a qué actividad redirigir en función del rol del usuario
+                            Intent intent;
+                            if (role.equals("Tutor")) {
+                                intent = new Intent(getApplicationContext(), MainActivityTutor.class);
+                            } else {
+                                intent = new Intent(getApplicationContext(), MainActivity.class);
+                            }
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        } else {
+                            // Maneja el caso en el que no se encuentra el usuari_identificador
+                        }
+                    });
+        } else {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
     }
+
+
 
 
     private void loading(Boolean isLoading) {
