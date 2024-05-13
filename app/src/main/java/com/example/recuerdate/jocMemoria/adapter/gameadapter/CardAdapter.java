@@ -24,7 +24,10 @@ import com.google.gson.Gson;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -54,22 +57,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
     String fragment_round_num;
     FragmentManager fragment;
     ScoreAnimation scoreAnimation;
-
-
     String nomRonda;
-    int acertadesRnd1;
-    int falladesRnd1;
-
+    int acertadesRnd1; // MODIFICADO
+    int falladesRnd1; // MODIFICADO
     int acertadesRnd2;
     int falladesRnd2;
-
     int acertades;
     int fallades;
-
     private okhttp3.OkHttpClient client;
     private Gson gson;
-
-
     public CardAdapter(ArrayList<CardModel> mData, Context context, GameModel gameModel, TextView gameScore, TextView animScore, int totalCard, FragmentManager fragment, String fragment_round_num){
         this.mData = mData;
         this.context = context;
@@ -85,14 +81,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
         this.gson = new Gson();
         this.client = new OkHttpClient();
     }
-
     @NonNull
     @Override
     public CardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card, parent, false);
         return new CardHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull CardHolder holder, int position) {
         CardModel model = mData.get(position);
@@ -106,7 +100,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
     public int getItemCount() {
         return mData.size();
     }
-
     public void gameLogic(EasyFlipView flipView, Handler handler, CardModel model, ScoreAnimation scoreAnimation){
         flipView.setOnFlipListener(new EasyFlipView.OnFlipAnimationListener() {
             @Override
@@ -125,7 +118,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
                         scoreAnimation.animationScore(animScore, "+10");
                         acertades++;
                         gameModel.setScore(+10);
-
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -162,70 +154,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
                             if(fragment_round_num.equals("Round 1")){
                                 fragment.beginTransaction().replace(R.id.fragment_container, new CongratsScreen(gameModel, "Round 1")).commit();
 
-                                nomRonda = "Nivell 1";
-                                acertadesRnd1 = acertades;
-                                falladesRnd1 = fallades;
+                                // Almacena los datos de la primera ronda en GameModel
+                                gameModel.setNomRonda1("Nivell 1");
+                                gameModel.setAcertadesRnd1(acertades);
+                                gameModel.setFalladesRnd1(fallades);
 
-                                System.out.println("Fallades: "+ falladesRnd1);
-                                System.out.println("Acertades: " +acertadesRnd1);
-
-
-                                // Obtener el DNI del usuario
-                                SessionManagment sessionManagment = new SessionManagment(context);
-                                String dniUsuario;
-                                if (sessionManagment.getRol().equals("tutor")) {
-                                    dniUsuario = sessionManagment.getUsuariTutoritzatData().getDni();
-                                } else {
-                                    dniUsuario = sessionManagment.getUserData().getDni();
-                                }
-
-                                // Crear un mapa para almacenar los datos
-                                Map<String, Object> dataMap = new LinkedHashMap<>();
-                                dataMap.put("nomRonda", nomRonda);
-                                dataMap.put("acertadesRnd1", acertadesRnd1);
-                                dataMap.put("falladesRnd1", falladesRnd1);
-                                dataMap.put("dni", dniUsuario);
-
-                                String json = gson.toJson(dataMap);
-
-                                // Crear el cuerpo de la petición
-                                RequestBody body = RequestBody.create(json, MediaType.parse("application/json; charset=utf-8"));
-                                Request request = new Request.Builder()
-                                        .url(Settings.SERVER+ ":" + Settings.PORT + "/stats")
-                                        .post(body)
-                                        .build();
-                                client.newCall(request).enqueue(new Callback() {
-                                    @Override
-                                    public void onFailure(Call call, IOException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    @Override
-                                    public void onResponse(Call call, Response response) throws IOException {
-                                        if (!response.isSuccessful()) {
-                                            throw new IOException("Unexpected code " + response);
-                                        } else {
-                                            System.out.println("Coroné, en el aquaPark");
-                                        }
-                                    }
-                                });
-
-                        } else if(fragment_round_num.equals("Round 2")){
-                                //InfoBox infoBox = new InfoBox();
-                                //infoBox.addNameScore(context, String.valueOf(gameModel.getScore()));
+                                // No se envían los datos aquí, se almacenan para enviarlos después de la segunda ronda
+                            } else if(fragment_round_num.equals("Round 2")){
                                 fragment.beginTransaction().replace(R.id.fragment_container, new CongratsScreen(gameModel, "Round 2")).commit();
 
-                                // ----------------------------- Guardar stats de la partida -------------------------------------
-
-                                nomRonda = "Nivell 2";
-                                acertadesRnd2 = acertades;
-                                falladesRnd2 = fallades;
-                                int totalScore = (gameModel.getScore());
-                                System.out.println("ScoreTotal: " +totalScore);
-
-                                System.out.println("Fallades: "+ falladesRnd2);
-                                System.out.println("Acertades: " +acertadesRnd2);
-
                                 // Obtener el DNI del usuario
                                 SessionManagment sessionManagment = new SessionManagment(context);
                                 String dniUsuario;
@@ -234,18 +171,40 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
                                 } else {
                                     dniUsuario = sessionManagment.getUserData().getDni();
                                 }
+                                // Datos de la segunda ronda
+                                gameModel.setNomRonda2("Nivell 2");
+                                gameModel.setAcertadesRnd2(acertades);
+                                gameModel.setFalladesRnd2(fallades);
+                                gameModel.setTotalScore(gameModel.getScore());
 
-                                // Crear un mapa para almacenar los datos
+                                // Crear un mapa para almacenar los datos de ambas rondas
                                 Map<String, Object> dataMap = new LinkedHashMap<>();
-                                dataMap.put("nomRonda", nomRonda);
-                                dataMap.put("acertadesRnd1", acertadesRnd2);
-                                dataMap.put("falladesRnd1", falladesRnd2);
-                                dataMap.put("totalScore", totalScore);
                                 dataMap.put("dni", dniUsuario);
+
+// Agregar la marca de tiempo
+                                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                                Date date = new Date();
+                                dataMap.put("fecha", dateFormat.format(date));
+
+// Datos de la ronda 1
+                                Map<String, Object> ronda1 = new LinkedHashMap<>();
+                                ronda1.put("nomRonda", gameModel.getNomRonda1());
+                                ronda1.put("acertades", gameModel.getAcertadesRnd1());
+                                ronda1.put("fallades", gameModel.getFalladesRnd1());
+                                dataMap.put("ronda1", ronda1);
+
+// Datos de la ronda 2
+                                Map<String, Object> ronda2 = new LinkedHashMap<>();
+                                ronda2.put("nomRonda", gameModel.getNomRonda2());
+                                ronda2.put("acertades", gameModel.getAcertadesRnd2());
+                                ronda2.put("fallades", gameModel.getFalladesRnd2());
+                                dataMap.put("ronda2", ronda2);
+
+                                dataMap.put("totalScore", gameModel.getTotalScore());
 
                                 String json = gson.toJson(dataMap);
 
-                                // Crear el cuerpo de la petición
+// Crear el cuerpo de la petición
                                 RequestBody body = RequestBody.create(json, MediaType.parse("application/json; charset=utf-8"));
                                 Request request = new Request.Builder()
                                         .url(Settings.SERVER+ ":" + Settings.PORT + "/stats")
@@ -266,7 +225,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
                                         }
                                     }
                                 });
-
                             }
                         }
                     }, 800);
