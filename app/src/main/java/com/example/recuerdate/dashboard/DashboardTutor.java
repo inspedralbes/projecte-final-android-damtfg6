@@ -19,6 +19,7 @@ import com.example.recuerdate.LocalitzacioFragment;
 import com.example.recuerdate.MainActivityTutor;
 import com.example.recuerdate.PerfilActivity;
 import com.example.recuerdate.PerfilTutorActivity;
+import com.example.recuerdate.activities.TokenActivity;
 import com.example.recuerdate.calendari.RecordatoriFragment;
 import com.example.recuerdate.databinding.FragmentDashboardTutorBinding;
 import com.example.recuerdate.utilities.Constants;
@@ -72,9 +73,9 @@ public class DashboardTutor extends Fragment {
     }
 
     public void ChatClick(View view) {
-        mainActivityTutor.replaceFragment(new ChatFamFragment());
+        Intent intent = new Intent(getActivity(), TokenActivity.class);
+        startActivity(intent);
     }
-
     public void UbiClick(View view) {
         mainActivityTutor.replaceFragment(new LocalitzacioFragment());
     }

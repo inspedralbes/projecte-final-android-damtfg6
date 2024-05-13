@@ -1,15 +1,13 @@
 package com.example.recuerdate;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recuerdate.databinding.ActivityPerfilTutorBinding;
 import com.example.recuerdate.utilities.Constants;
@@ -29,12 +27,13 @@ public class PerfilTutorActivity extends AppCompatActivity {
         preferenceManager = new PreferenceManager(getApplicationContext());
 
         String nombreTutor = preferenceManager.getString(Constants.KEY_NAME);
-        String CorreuTutor = preferenceManager.getString(Constants.KEY_EMAIL);
+        String CorreuTutor = preferenceManager.getString(Constants.KEY_SUPERVISED_USER_DNI);
         String ContrasenyaTutor = preferenceManager.getString(Constants.KEY_PASSWORD);
         String dniTutor = preferenceManager.getString(Constants.KEY_EMAIL);
         String telefonTutorString = preferenceManager.getString(Constants.KEY_PHONE);
         String IdentificadorTutorString = preferenceManager.getString(Constants.KEY_USER_IDENTIFIER);
-        String nomUsuariTutoritzat = preferenceManager.getString(Constants.KEY_SUPERVISED_USER_NAME); // Obtén el nombre del usuario supervisado desde PreferenceManager
+        String nomUsuariTutoritzat = preferenceManager.getString(Constants.KEY_SUPERVISED_USER_NAME);
+        String rolUsuario = preferenceManager.getString(Constants.KEY_ROLE);
 
         binding.textViewNomPerfilTutor.setText(nombreTutor);
         binding.textViewCorreuPerfilTutor.setText(CorreuTutor);
@@ -43,7 +42,9 @@ public class PerfilTutorActivity extends AppCompatActivity {
         binding.textViewIdentificadorPerfilTutor2.setText(IdentificadorTutorString);
         binding.textViewNomCognomsPerfilTutor2.setText(nomUsuariTutoritzat);
         binding.textViewModificarPerfilTutor.setText(ContrasenyaTutor);
+        binding.textViewAdreAPerfil2Tutor.setText(rolUsuario);
         loadUserDetails();
+
     }
     private void loadUserDetails() {
         byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);

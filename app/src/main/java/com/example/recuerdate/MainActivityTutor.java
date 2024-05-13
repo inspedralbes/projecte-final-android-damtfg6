@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.recuerdate.activities.TokenActivity;
 import com.example.recuerdate.dashboard.Dashboard;
 import com.example.recuerdate.dashboard.DashboardTutor;
 import com.example.recuerdate.databinding.ActivityMainTutor2Binding;
@@ -68,7 +69,8 @@ public class MainActivityTutor extends AppCompatActivity {
                     binding.bottomNavigationViewTutor.setVisibility(View.GONE); // Oculta el BottomNavigationView
                     break;
                 case R.id.chatTutor:
-                    replaceFragment(new ChatFamFragment());
+                    Intent intent = new Intent(MainActivityTutor.this, TokenActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.mapaTutor:
                     replaceFragment(new LocalitzacioFragment());

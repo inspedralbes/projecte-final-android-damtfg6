@@ -19,6 +19,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.recuerdate.databinding.ActivityTutoritzarNouUsuariBinding;
+import com.example.recuerdate.utilities.Constants;
+import com.example.recuerdate.utilities.PreferenceManager;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import org.w3c.dom.Text;
 
 import retrofit2.Call;
@@ -29,43 +36,49 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TutoritzarNouUsuari extends AppCompatActivity {
 
-    private apiService apiService;
-    private static final String URL = Settings.SERVER + ":" + Settings.PORT;
-
-    TextView textViewOK;
-    TextView textViewnNoOK;
+    private ActivityTutoritzarNouUsuariBinding binding;
+    private FirebaseFirestore db;
+    private PreferenceManager preferenceManager;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tutoritzar_nou_usuari);
+        binding = ActivityTutoritzarNouUsuariBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        db = FirebaseFirestore.getInstance();
+        preferenceManager = new PreferenceManager(this);
 
-        EditText editText = findViewById(R.id.editTextTextNovaTutoritzacio);
-
-        textViewOK = findViewById(R.id.textViewTutoritzacioRegistrada);
-        textViewnNoOK = findViewById(R.id.textViewTutoritzacioError);
-        textViewOK.setVisibility(View.GONE);
-        textViewnNoOK.setVisibility(View.GONE);
-        editText.setOnTouchListener(new View.OnTouchListener() {
+        binding.textViewTutoritzacioError.setVisibility(View.GONE);
+        binding.textViewTutoritzacioRegistrada.setVisibility(View.GONE);
+        binding.editTextTextNovaTutoritzacio.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 // Abre el teclado solo cuando se toca el área del EditText, pero no el icono de ayuda
                 final int DRAWABLE_RIGHT = 2;
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (event.getRawX() >= (editText.getRight() - editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                    if (event.getRawX() >= (binding.editTextTextNovaTutoritzacio.getRight() - binding.editTextTextNovaTutoritzacio.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                         showImageHelpDialog();
                         return true;
                     } else {
                         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+                        imm.showSoftInput(binding.editTextTextNovaTutoritzacio, InputMethodManager.SHOW_IMPLICIT);
                         return false;
                     }
                 }
                 return false;
             }
         });
+        binding.botoConfirmarTutoritzacio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Aquí va el código que se ejecutará cuando se haga clic en el botón
+                String newUsuariIdentificador = binding.editTextTextNovaTutoritzacio.getText().toString().trim();
+                checkUsuariIdentificadorAndUpdate(newUsuariIdentificador);
+            }
+        });
     }
+
 
     private void showImageHelpDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -94,77 +107,69 @@ public class TutoritzarNouUsuari extends AppCompatActivity {
         alertDialog.show();
     }
 
-    public void registraNovaTutoritzacio(View view) {
 
-        Log.d("click", "hola");
-        SessionManagment sessionManagment = new SessionManagment(this);
+    private void checkUsuariIdentificadorAndUpdate(String newUsuariIdentificador) {
+        // Verifica si el usuari_identificador existe en la colección 'users'
+        db.collection(Constants.KEY_COLLECTION_USERS)
+                .whereEqualTo(Constants.KEY_USER_IDENTIFIER, newUsuariIdentificador)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (!task.getResult().isEmpty()) {
+                            // El usuari_identificador existe en la colección 'users', puedes proceder a cambiar el usuari_identificador del usuario
+                            DocumentSnapshot userDocument = task.getResult().getDocuments().get(0);
+                            userDocument.getReference().update(Constants.KEY_USER_IDENTIFIER, newUsuariIdentificador)
+                                    .addOnSuccessListener(aVoid -> {
+                                        Log.d("Firebase", "DocumentSnapshot successfully updated!");
 
-        int idFamiliar = sessionManagment.getUserData().getUserId();
+                                        // Guarda el nuevo usuari_identificador en las preferencias compartidas
+                                        preferenceManager.putString(Constants.KEY_USER_IDENTIFIER, newUsuariIdentificador);
 
-        EditText identificadorEditText = findViewById(R.id.editTextTextNovaTutoritzacio);
-        String identificadorInput = identificadorEditText.getText().toString().trim();
-        int Identificador;
+                                        // Muestra el mensaje de éxito
+                                        binding.textViewTutoritzacioRegistrada.setVisibility(View.VISIBLE);
+                                        binding.textViewTutoritzacioError.setVisibility(View.GONE);
 
-        if (identificadorInput.isEmpty()) {
-                identificadorEditText.setError(getString(R.string.value_required));
-            } else {
+                                        // Actualiza el usuari_identificador en la colección 'relatives'
+                                        updateRelativeUsuariIdentificador(newUsuariIdentificador);
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Log.w("Firebase", "Error updating document", e);
 
-                Identificador = Integer.parseInt(identificadorInput);
-
-
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(URL)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                apiService = retrofit.create(apiService.class);
-
-                Log.d("Button Click", "idFamiliar: " + idFamiliar +
-                    ", Identificador: " + Identificador);
-
-                Call<RespostaTutoritzacio> call = apiService.EnviarTutoritzacio(idFamiliar, Identificador);
-
-
-
-                call.enqueue(new Callback<RespostaTutoritzacio>() {
-                    @Override
-                    public void onResponse(Call<RespostaTutoritzacio> call, Response<RespostaTutoritzacio> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("CONEXION", "CONEXION SERVIDOR CONECTADO");
-                            RespostaTutoritzacio r = response.body();
-                            Log.d("error", "onFailure: "+ response.body());
-                            System.out.println(r.isAutoritzacio());
-                            if (r.isAutoritzacio()) {
-                                textViewOK = findViewById(R.id.textViewTutoritzacioRegistrada);
-                                textViewnNoOK.setVisibility(View.GONE);
-                                textViewOK.setVisibility(View.VISIBLE);
-
-                                Usuari usuariTutoritzatData = r.getUsuariTutoritzatData();
-                                //Log.d("dades", String.valueOf(usuariTutoritzatData));
-
-
-                                sessionManagment.saveSession(sessionManagment.getDni(), sessionManagment.getRol(), sessionManagment.getUserData(), usuariTutoritzatData);
-                                Log.d("session", String.valueOf(sessionManagment));
-
-                                int assignarIdentificador = sessionManagment.getUsuariTutoritzatData().getUsuariIdentificador();
-                                sessionManagment.getUserData().setUsuariIdentificador(assignarIdentificador);
-                            }
-                            else{
-                                textViewOK.setVisibility(View.GONE);
-                                textViewnNoOK.setVisibility(View.VISIBLE);
-                            }
+                                        // Muestra el mensaje de error
+                                        binding.textViewTutoritzacioError.setVisibility(View.VISIBLE);
+                                        binding.textViewTutoritzacioRegistrada.setVisibility(View.GONE);
+                                    });
                         } else {
-                            Log.e("ERROR", "Error");
-                        }
-                    }
+                            Log.d("Firebase", "El usuari_identificador no existe en la colección 'users'");
 
-                    @Override
-                    public void onFailure(Call<RespostaTutoritzacio> call, Throwable t) {
-                        Log.d("error", "onFailure: " + t.getMessage());
+                            // Muestra el mensaje de error
+                            binding.textViewTutoritzacioError.setVisibility(View.VISIBLE);
+                            binding.textViewTutoritzacioRegistrada.setVisibility(View.GONE);
+                        }
+                    } else {
+                        Log.w("Firebase", "Error getting documents", task.getException());
+
+                        // Muestra el mensaje de error
+                        binding.textViewTutoritzacioError.setVisibility(View.VISIBLE);
+                        binding.textViewTutoritzacioRegistrada.setVisibility(View.GONE);
                     }
                 });
+    }
 
-            }
-        }
+    private void updateRelativeUsuariIdentificador(String newUsuariIdentificador) {
+        // Aquí necesitas obtener la referencia al documento del usuario en la colección 'relatives'
+        // Esto dependerá de cómo estén estructurados tus documentos en Firestore
+        // Por ejemplo, si tienes el ID del usuario, podrías hacer algo como esto:
+        String relativeUserId = preferenceManager.getString(Constants.KEY_USER_ID);
+        DocumentReference relativeUserRef = db.collection(Constants.KEY_COLLECTION_RELATIVES).document(relativeUserId);
+
+        // Actualiza el usuari_identificador del usuario en la colección 'relatives'
+        relativeUserRef.update(Constants.KEY_USER_IDENTIFIER, newUsuariIdentificador)
+                .addOnSuccessListener(aVoid -> Log.d("Firebase", "DocumentSnapshot in 'relatives' successfully updated!"))
+                .addOnFailureListener(e -> Log.w("Firebase", "Error updating document in 'relatives'", e));
+    }
+
+
 
     public void TornaBotoTutor(View view) {
         Intent intent = new Intent(TutoritzarNouUsuari.this, MainActivityTutor.class);
