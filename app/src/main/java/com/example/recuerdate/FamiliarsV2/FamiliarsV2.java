@@ -17,9 +17,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.recuerdate.MainActivity;
+import com.example.recuerdate.MainActivityTutor;
 import com.example.recuerdate.R;
 import com.example.recuerdate.SessionManagment;
 import com.example.recuerdate.Settings;
+import com.example.recuerdate.activities.TokenActivity;
+import com.example.recuerdate.utilities.Constants;
+import com.example.recuerdate.utilities.PreferenceManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -52,6 +57,14 @@ public class FamiliarsV2 extends Fragment {
     private List<Item> itemList;
     private ItemAdapter itemAdapter;
     private Context context;
+
+    private PreferenceManager preferenceManager;
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+        this.preferenceManager = new PreferenceManager(context);
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -72,10 +85,13 @@ public class FamiliarsV2 extends Fragment {
                 addItem();
             }
         });
-
-        SessionManagment sessionManagment = new SessionManagment(getContext());
-        // Aquí es donde haces la llamada a la API para obtener los datos de los familiares
-        String dni = sessionManagment.getUserData().getDni(); // Reemplaza esto con el DNI del usuario
+        String role = preferenceManager.getString(Constants.KEY_ROLE);
+        String dni = preferenceManager.getString(Constants.KEY_EMAIL);
+        if (role.equals("Tutor")) {
+            dni = preferenceManager.getString(Constants.KEY_SUPERVISED_USER_DNI);
+        } else if (role.equals("Usuari")) {
+            dni = preferenceManager.getString(Constants.KEY_EMAIL);
+        }
 
         OkHttpClient client = new OkHttpClient();
 

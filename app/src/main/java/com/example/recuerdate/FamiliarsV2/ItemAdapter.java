@@ -19,9 +19,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recuerdate.MainActivity;
+import com.example.recuerdate.MainActivityTutor;
 import com.example.recuerdate.R;
 import com.example.recuerdate.SessionManagment;
 import com.example.recuerdate.Settings;
+import com.example.recuerdate.activities.TokenActivity;
+import com.example.recuerdate.utilities.Constants;
+import com.example.recuerdate.utilities.PreferenceManager;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -165,12 +170,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
     public void postFamilyToServer(List<Item> itemList) {
         // Obtener el DNI del usuario
-        SessionManagment sessionManagment = new SessionManagment(context);
-        String dniUsuario;
-        if (sessionManagment.getRol().equals("tutor")) {
-            dniUsuario = sessionManagment.getUsuariTutoritzatData().getDni();
-        } else {
-            dniUsuario = sessionManagment.getUserData().getDni();
+        PreferenceManager preferenceManager = new PreferenceManager(context);
+        String role = preferenceManager.getString(Constants.KEY_ROLE);
+        String dniUsuario = preferenceManager.getString(Constants.KEY_EMAIL);
+        if (role.equals("Tutor")) {
+            dniUsuario = preferenceManager.getString(Constants.KEY_SUPERVISED_USER_DNI);
+        } else if (role.equals("Usuari")) {
+            dniUsuario = preferenceManager.getString(Constants.KEY_EMAIL);
         }
 
         // Crear un mapa para almacenar los datos de la familia
