@@ -20,8 +20,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recuerdate.R;
+import com.example.recuerdate.SessionManagment;
+import com.example.recuerdate.Settings;
+import com.google.gson.Gson;
 
+import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
@@ -39,11 +53,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public static final int REQUEST_IMAGE = 1001;
 
     private Fragment fragment;
+    private OkHttpClient client;
+    private Gson gson;
 
     ItemAdapter(Context context, List<Item> itemList, Fragment fragment) {
         this.context = context;
         this.itemList = itemList;
         this.fragment = fragment;
+        // Inicializa las variables aquí
+        this.client = new OkHttpClient();
+        this.gson = new Gson();
     }
 
     @NonNull
@@ -62,6 +81,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             @Override
             public void onClick(View v) {
                 showAddSubItemDialog(itemViewHolder.getAdapterPosition());
+                postFamilyToServer(itemList);
             }
         });
 
@@ -117,6 +137,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 fragment.startActivityForResult(intent, REQUEST_IMAGE);
+                postFamilyToServer(itemList);
             }
         });
 
@@ -129,18 +150,59 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
 
                 if (!subItemTitle.isEmpty() && !subItemDescription.isEmpty()) {
-                    SubItem newSubItem = new SubItem(subItemTitle, subItemDescription, etImagen);
+                    SubItem newSubItem = new SubItem(subItemTitle, subItemDescription, etImagen, context);
                     itemList.get(position).getSubItemList().add(newSubItem);
                     notifyDataSetChanged(); // Refresh the RecyclerView
                     alertDialog.dismiss(); // Dismiss the dialog
                     editTextSubItemTitle.setText("");
                     editTextSubItemDescription.setText("");
                 }
+                postFamilyToServer(itemList);
             }
         });
 
         alertDialog.show();
     }
+    public void postFamilyToServer(List<Item> itemList) {
+        // Obtener el DNI del usuario
+        SessionManagment sessionManagment = new SessionManagment(context);
+        String dniUsuario;
+        if (sessionManagment.getRol().equals("tutor")) {
+            dniUsuario = sessionManagment.getUsuariTutoritzatData().getDni();
+        } else {
+            dniUsuario = sessionManagment.getUserData().getDni();
+        }
+
+        // Crear un mapa para almacenar los datos de la familia
+        Map<String, Object> familyMap = new LinkedHashMap<>();
+        familyMap.put("dni", dniUsuario);
+        familyMap.put("items", itemList);
+
+        String json = gson.toJson(familyMap);
+
+        RequestBody body = RequestBody.create(json, MediaType.parse("application/json; charset=utf-8"));
+        Request request = new Request.Builder()
+                .url(Settings.SERVER+ ":" + Settings.PORT + "/family")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    // Haz algo con la respuesta
+                }
+            }
+        });
+    }
+
 
     public void setSelectedImageUri(Uri selectedImageUri) {
         this.selectedImageUri = selectedImageUri;
