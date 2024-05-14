@@ -1,0 +1,142 @@
+package com.example.recuerdate.stats;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.util.Base64;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.recuerdate.FamiliarsV2.FamiliarsV2;
+import com.example.recuerdate.JocsFragment;
+import com.example.recuerdate.MainActivity;
+import com.example.recuerdate.R;
+
+import com.example.recuerdate.Settings;
+import com.example.recuerdate.activities.TokenActivity;
+import com.example.recuerdate.dashboard.Dashboard;
+import com.example.recuerdate.utilities.Constants;
+import com.example.recuerdate.utilities.PreferenceManager;
+
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+
+public class statsFragment extends Fragment {
+
+    private MainActivity mainActivity;
+    Context context;
+
+    private PreferenceManager preferenceManager;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_stats, container, false);
+
+        String dniUsuario = preferenceManager.getString(Constants.KEY_EMAIL);
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(Settings.SERVER+ ":" + Settings.PORT + "/getStatsUsuari?dni=" + dniUsuario)
+                .build();
+
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    final String myResponse = response.body().string();
+
+                    // Aquí puedes procesar la respuesta. Por ejemplo, puedes convertir 'myResponse' a un objeto JSON y obtener los datos que necesitas.
+                    try {
+                        JSONArray jsonArray = new JSONArray(myResponse);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject json = jsonArray.getJSONObject(i);
+                            String imageBase64 = json.getString("imagen");
+                            byte[] decodedString = Base64.decode(imageBase64, Base64.DEFAULT);
+                            final Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+                            // Asegúrate de que estás en el hilo principal cuando actualices la interfaz de usuario
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ImageView imageView = (ImageView) getView().findViewById(R.id.ImageViewProgres);
+                                    imageView.setImageBitmap(decodedByte);
+                                }
+                            });
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // Si no recibes datos, puedes mostrar el texto y el botón aquí
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            TextView textView = (TextView) getView().findViewById(R.id.textViewProgres);
+                            textView.setVisibility(View.VISIBLE);
+                            Button button = (Button) getView().findViewById(R.id.buttonObrirJoc);
+                            button.setVisibility(View.VISIBLE);
+                        }
+                    });
+                }
+            }
+        });
+
+
+        Button button = (Button) rootView.findViewById(R.id.buttonObrirJoc);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.replaceFragment(new JocsFragment());
+            }
+        });
+
+        return rootView;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity) {
+            mainActivity = (MainActivity) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement MainActivity");
+        }
+        this.context = context;
+        this.preferenceManager = new PreferenceManager(context);
+    }
+}
