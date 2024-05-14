@@ -45,7 +45,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-
 public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
     private ArrayList<CardModel> mData;
     private ArrayList<EasyFlipView> flipCards;
