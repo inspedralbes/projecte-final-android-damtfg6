@@ -20,6 +20,8 @@ import com.example.recuerdate.jocMemoria.game.ScoreAnimation;
 import com.example.recuerdate.jocMemoria.model.CardModel;
 import com.example.recuerdate.jocMemoria.model.GameModel;
 import com.example.recuerdate.jocMemoria.play.CongratsScreen;
+import com.example.recuerdate.utilities.Constants;
+import com.example.recuerdate.utilities.PreferenceManager;
 import com.google.gson.Gson;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
 
@@ -65,6 +67,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
     int fallades;
     private okhttp3.OkHttpClient client;
     private Gson gson;
+
+    private PreferenceManager preferenceManager;
     public CardAdapter(ArrayList<CardModel> mData, Context context, GameModel gameModel, TextView gameScore, TextView animScore, int totalCard, FragmentManager fragment, String fragment_round_num){
         this.mData = mData;
         this.context = context;
@@ -79,6 +83,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
         scoreAnimation = new ScoreAnimation();
         this.gson = new Gson();
         this.client = new OkHttpClient();
+        this.preferenceManager = new PreferenceManager(context);
     }
     @NonNull
     @Override
@@ -163,13 +168,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
                                 fragment.beginTransaction().replace(R.id.fragment_container, new CongratsScreen(gameModel, "Round 2")).commit();
 
                                 // Obtener el DNI del usuario
-                                SessionManagment sessionManagment = new SessionManagment(context);
-                                String dniUsuario;
-                                if (sessionManagment.getRol().equals("tutor")) {
-                                    dniUsuario = sessionManagment.getUsuariTutoritzatData().getDni();
-                                } else {
-                                    dniUsuario = sessionManagment.getUserData().getDni();
-                                }
+                                String dniUsuario = preferenceManager.getString(Constants.KEY_EMAIL);
+
                                 // Datos de la segunda ronda
                                 gameModel.setNomRonda2("Nivell 2");
                                 gameModel.setAcertadesRnd2(acertades);
