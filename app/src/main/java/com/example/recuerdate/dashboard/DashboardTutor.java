@@ -17,6 +17,7 @@ import com.example.recuerdate.ChatFamFragment;
 import com.example.recuerdate.FamiliarsV2.FamiliarsV2;
 import com.example.recuerdate.LocalitzacioFragment;
 import com.example.recuerdate.MainActivityTutor;
+import com.example.recuerdate.Maps;
 import com.example.recuerdate.PerfilActivity;
 import com.example.recuerdate.PerfilTutorActivity;
 import com.example.recuerdate.activities.TokenActivity;
@@ -89,7 +90,8 @@ public class DashboardTutor extends Fragment {
     }
 
     public void AlertesClick(View view) {
-        mainActivityTutor.replaceFragment(new LocalitzacioFragment());
+        Intent intent = new Intent(getActivity(), Maps.class);
+        startActivity(intent);
     }
 
     public void ProgresClick(View view) {

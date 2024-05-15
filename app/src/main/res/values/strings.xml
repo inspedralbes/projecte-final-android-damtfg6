@@ -32,6 +32,9 @@
     <string name="select_user">Selecciona els usuaris</string>
     <string name="type_a_message">Escriu un Missatge</string>
     <string name="online">Online</string>
+    <string name="enter_your_location">Enter your location</string>
+    <string name="enter_your_destination">Enter your destination</string>
+    <string name="get_direction">Get Direction</string>
     <string-array name="role_array">
         <item>Usuari</item>
         <item>Tutor</item>

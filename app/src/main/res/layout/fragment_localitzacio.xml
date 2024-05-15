@@ -17,23 +17,22 @@
         android:gravity="start"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="48dp">
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_48sdp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Acercar"
-            android:textSize="16sp"
+            android:textSize="@dimen/_16sdp"
             android:layout_marginStart="0dp"/>
 
         <ImageButton
             android:id="@+id/btnZoomIn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
             android:src="@drawable/mas"
             android:contentDescription="@string/zoom_in_button_description"
-            android:onClick="zoomIn"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true" />
 
@@ -41,16 +40,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Alejar"
-            android:textSize="16sp"
+            android:textSize="@dimen/_16sdp"
             android:layout_marginStart="0dp"/>
 
         <ImageButton
             android:id="@+id/btnZoomOut"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
             android:src="@drawable/menos"
             android:contentDescription="@string/zoom_out_button_description"
-            android:onClick="zoomOut"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true" />
 
@@ -58,17 +56,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mi Ubicación"
-            android:textSize="16sp"
+            android:textSize="@dimen/_16sdp"
             android:layout_marginStart="0dp"/>
 
         <ImageButton
             android:id="@+id/btnCenterOnMyLocation"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
             android:src="@drawable/miubicacion"
             android:contentDescription="@string/center_on_my_location_button_description"
-            android:onClick="centerOnMyLocation"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true" />
+        <TextView
+            android:id="@+id/tvShowLocationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_16sdp"
+            android:text="Casa"
+            android:layout_marginStart="0dp"/>
+        <Button
+            android:id="@+id/btnShowLocationName"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_48sdp"
+            android:text="Pandy" />
+        <Button
+            android:id="@+id/btnSetLocationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Establecer ubicación"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@id/btnShowLocationName"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_16sdp" />
+
     </LinearLayout>
 </RelativeLayout>
