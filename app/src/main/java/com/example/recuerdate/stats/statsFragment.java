@@ -79,7 +79,6 @@ public class statsFragment extends Fragment {
                 if (response.isSuccessful()) {
                     final String myResponse = response.body().string();
 
-                    // Aquí puedes procesar la respuesta. Por ejemplo, puedes convertir 'myResponse' a un objeto JSON y obtener los datos que necesitas.
                     try {
                         JSONArray jsonArray = new JSONArray(myResponse);
                         for (int i = 0; i < jsonArray.length(); i++) {
@@ -89,11 +88,24 @@ public class statsFragment extends Fragment {
                             final Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
                             // Asegúrate de que estás en el hilo principal cuando actualices la interfaz de usuario
+                            int finalI = i;
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    ImageView imageView = (ImageView) getView().findViewById(R.id.ImageViewProgres);
-                                    imageView.setImageBitmap(decodedByte);
+                                    if (finalI == 0) {
+                                        ImageView imageView = (ImageView) getView().findViewById(R.id.ImageViewProgres);
+                                        imageView.setImageBitmap(decodedByte);
+                                    } else if (finalI == 1) {
+                                        ImageView imageView2 = (ImageView) getView().findViewById(R.id.ImageViewRonda1);
+                                        imageView2.setImageBitmap(decodedByte);
+                                    } else if (finalI == 2) {
+                                        ImageView imageView3 = (ImageView) getView().findViewById(R.id.ImageViewRonda2);
+                                        imageView3.setImageBitmap(decodedByte);
+                                    }
+                                    TextView textView = (TextView) getView().findViewById(R.id.textViewProgres);
+                                    textView.setVisibility(View.GONE);
+                                    Button button = (Button) getView().findViewById(R.id.buttonObrirJoc);
+                                    button.setVisibility(View.GONE);
                                 }
                             });
                         }
