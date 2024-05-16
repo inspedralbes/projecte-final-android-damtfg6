@@ -59,7 +59,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imageViewPerfil"
                     android:layout_width="159dp"
                     android:layout_height="150dp"
@@ -67,7 +67,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/persona" />
+                    app:srcCompat="@drawable/persona"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="#807474"/>
 
                 <TextView
                     android:id="@+id/textViewNomPerfil"

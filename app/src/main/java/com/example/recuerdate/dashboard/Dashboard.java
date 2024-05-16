@@ -23,6 +23,7 @@ import com.example.recuerdate.R;
 import com.example.recuerdate.activities.TokenActivity;
 import com.example.recuerdate.calendari.RecordatoriFragment;
 import com.example.recuerdate.databinding.FragmentDashboardBinding;
+import com.example.recuerdate.jocMemoria.WelcomeScreen;
 import com.example.recuerdate.stats.statsFragment;
 import com.example.recuerdate.utilities.Constants;
 import com.example.recuerdate.utilities.PreferenceManager;
@@ -90,7 +91,8 @@ public class Dashboard extends Fragment {
     }
 
     public void JocsClick(View view) {
-        mainActivity.replaceFragment(new JocsFragment());
+        Intent intent = new Intent(getContext(), WelcomeScreen.class);
+        startActivity(intent);
     }
 
     public void ProgresClick(View view) {

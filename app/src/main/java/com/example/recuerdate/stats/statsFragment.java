@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.recuerdate.FamiliarsV2.FamiliarsV2;
 import com.example.recuerdate.JocsFragment;
 import com.example.recuerdate.MainActivity;
+import com.example.recuerdate.MainActivityTutor;
 import com.example.recuerdate.R;
 
 import com.example.recuerdate.Settings;
@@ -46,7 +47,10 @@ import okhttp3.Response;
 public class statsFragment extends Fragment {
 
     private MainActivity mainActivity;
+    private MainActivityTutor mainActivityTutor;
     Context context;
+
+    View rootView;
 
     private PreferenceManager preferenceManager;
 
@@ -58,13 +62,27 @@ public class statsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_stats, container, false);
 
-        String dniUsuario = preferenceManager.getString(Constants.KEY_EMAIL);
+        String role = preferenceManager.getString(Constants.KEY_ROLE);
+        String dni = preferenceManager.getString(Constants.KEY_EMAIL);
+
+
+        if (role.equals("Tutor")) {
+            rootView = inflater.inflate(R.layout.layout_stats_tutor, container, false);
+        } else if (role.equals("Usuari")) {
+            rootView = inflater.inflate(R.layout.fragment_stats, container, false);
+        }
+
+
+        if (role.equals("Tutor")) {
+            dni = preferenceManager.getString(Constants.KEY_SUPERVISED_USER_DNI);
+        } else if (role.equals("Usuari")) {
+            dni = preferenceManager.getString(Constants.KEY_EMAIL);
+        }
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(Settings.SERVER+ ":" + Settings.PORT + "/getStatsUsuari?dni=" + dniUsuario)
+                .url(Settings.SERVER+ ":" + Settings.PORT + "/getStatsUsuari?dni=" + dni)
                 .build();
 
 
@@ -104,8 +122,13 @@ public class statsFragment extends Fragment {
                                     }
                                     TextView textView = (TextView) getView().findViewById(R.id.textViewProgres);
                                     textView.setVisibility(View.GONE);
-                                    Button button = (Button) getView().findViewById(R.id.buttonObrirJoc);
-                                    button.setVisibility(View.GONE);
+
+                                    if (role.equals("Tutor")) {
+                                    } else if (role.equals("Usuari")) {
+                                        Button button = (Button) getView().findViewById(R.id.buttonObrirJoc);
+                                        button.setVisibility(View.GONE);
+                                    }
+
                                 }
                             });
                         }
@@ -129,12 +152,17 @@ public class statsFragment extends Fragment {
 
 
         Button button = (Button) rootView.findViewById(R.id.buttonObrirJoc);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mainActivity.replaceFragment(new JocsFragment());
-            }
-        });
+
+
+        if (role.equals("Tutor")) {
+        } else if (role.equals("Usuari")) {
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mainActivity.replaceFragment(new JocsFragment());
+                }
+            });
+        }
 
         return rootView;
     }
@@ -145,8 +173,7 @@ public class statsFragment extends Fragment {
         if (context instanceof MainActivity) {
             mainActivity = (MainActivity) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement MainActivity");
+            mainActivityTutor = (MainActivityTutor) context;
         }
         this.context = context;
         this.preferenceManager = new PreferenceManager(context);
