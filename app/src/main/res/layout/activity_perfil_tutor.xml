@@ -39,9 +39,9 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="650dp"
-                        android:background="@drawable/top_profile_background"
+                        android:layout_width="416dp"
+                        android:layout_height="734dp"
+                        android:background="@drawable/top_background_gradient_dashboard"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
@@ -52,14 +52,14 @@
                             android:layout_height="31dp"
                             android:layout_marginStart="24dp"
                             android:layout_marginTop="16dp"
-                            android:onClick="TornaBotoTutor"
                             android:background="?selectableItemBackgroundBorderless"
+                            android:onClick="TornaBotoTutor"
                             android:src="@drawable/baseline_keyboard_backspace_24"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imageViewPerfilTutor"
                         android:layout_width="159dp"
                         android:layout_height="150dp"
@@ -67,7 +67,9 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/persona" />
+                        app:srcCompat="@drawable/persona"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="#807474"/>
 
                     <TextView
                         android:id="@+id/textViewNomPerfilTutor"
@@ -97,7 +99,7 @@
                         android:layout_width="361dp"
                         android:layout_height="346dp"
                         android:layout_marginStart="24dp"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginEnd="24dp"
                         android:layout_marginBottom="24dp"
                         android:background="@drawable/white_backgrund_profile"
@@ -329,17 +331,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="24dp"
-                android:background="@drawable/background_button_profile"
-                android:text="Editar perfil"
-                android:textColor="#ffffff"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textAllCaps="false"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
