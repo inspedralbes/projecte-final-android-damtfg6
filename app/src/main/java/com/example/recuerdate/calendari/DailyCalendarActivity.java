@@ -3,6 +3,7 @@ package com.example.recuerdate.calendari;
 import static com.example.recuerdate.calendari.CalendarUtils.selectedDate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +31,14 @@ public class DailyCalendarActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_calendar);
         initWidgets();
+        AppCompatImageView signOutImage = findViewById(R.id.imageSignOut);
+        signOutImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Cambiar a la actividad que desees aquí
+                finish(); // Por ejemplo, cerrar la actividad actual
+            }
+        });
     }
 
     private void initWidgets()

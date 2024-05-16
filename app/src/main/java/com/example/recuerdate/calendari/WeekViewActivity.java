@@ -4,6 +4,7 @@ import static com.example.recuerdate.calendari.CalendarUtils.daysInWeekArray;
 import static com.example.recuerdate.calendari.CalendarUtils.monthYearFromDate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -64,6 +65,15 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
 
         // Obtener los eventos del servidor
         getEventsFromServer(dniUsuario);
+        // Inicializar el AppCompatImageView y establecer el listener
+        AppCompatImageView signOutImage = findViewById(R.id.imageSignOut);
+        signOutImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Cambiar a la actividad que desees aquí
+                finish(); // Por ejemplo, cerrar la actividad actual
+            }
+        });
     }
 
     public void getEventsFromServer(String dniUsuario) {
