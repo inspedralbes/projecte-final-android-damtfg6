@@ -2,9 +2,14 @@ package com.example.recuerdate;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,6 +51,14 @@ public class MainActivityTutor extends BaseActivity {
         binding = ActivityMainTutor2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
+        NavigationView navigationView = findViewById(R.id.nav_viewTutor);
+        View headerView = navigationView.getHeaderView(0);
+        TextView texViewNomHeader = headerView.findViewById(R.id.texViewNomHeader);
+
+        String userName = preferenceManager.getString(Constants.KEY_NAME);
+        texViewNomHeader.setText(userName);
+
+        loadUserDetails();
 
         // Configuración del ActionBarDrawerToggle
         drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayoutTutor, R.string.open, R.string.close);
@@ -92,6 +105,14 @@ public class MainActivityTutor extends BaseActivity {
         // Asegúrate de que el InfoFragment esté abierto al inicio
         replaceFragment(new DashboardTutor());
         binding.bottomNavigationViewTutor.setVisibility(View.GONE);
+    }
+    private void loadUserDetails() {
+        byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        NavigationView navigationView = findViewById(R.id.nav_viewTutor);
+        View headerView = navigationView.getHeaderView(0);
+        ImageView imageLogoHeader = headerView.findViewById(R.id.imageLogoHeader);
+        imageLogoHeader.setImageBitmap(bitmap);
     }
 
     public void logout() {

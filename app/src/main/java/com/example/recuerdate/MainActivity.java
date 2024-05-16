@@ -2,9 +2,14 @@ package com.example.recuerdate;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.recuerdate.activities.BaseActivity;
 import com.example.recuerdate.activities.SignInActivity;
+import com.example.recuerdate.activities.TokenActivity;
 import com.example.recuerdate.dashboard.Dashboard;
 import com.example.recuerdate.dashboard.DashboardTutor;
 import com.example.recuerdate.databinding.ActivityMainBinding;
@@ -43,6 +49,14 @@ public class MainActivity extends BaseActivity {
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView texViewNomHeader = headerView.findViewById(R.id.texViewNomHeader);
+
+        String userName = preferenceManager.getString(Constants.KEY_NAME);
+        texViewNomHeader.setText(userName);
+
+        loadUserDetails();
         // Configuración del ActionBarDrawerToggle
         drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close);
         navigationView = findViewById(R.id.nav_view);
@@ -71,9 +85,8 @@ public class MainActivity extends BaseActivity {
                     binding.bottomNavigationView.setVisibility(View.GONE); // Oculta el BottomNavigationView
                     break;
                 case R.id.chat:
-                    replaceFragment(new ChatFamFragment());
-                    // Intent intent = new Intent(this, VoiceChat.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(MainActivity.this, TokenActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.mapa:
                     replaceFragment(new LocalitzacioFragment());
@@ -85,6 +98,14 @@ public class MainActivity extends BaseActivity {
         // Asegúrate de que el InfoFragment esté abierto al inicio
         replaceFragment(new Dashboard());
         binding.bottomNavigationView.setVisibility(View.GONE);
+    }
+    private void loadUserDetails() {
+        byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        ImageView imageLogoHeader = headerView.findViewById(R.id.imageLogoHeader);
+        imageLogoHeader.setImageBitmap(bitmap);
     }
     public void logout() {
         // Muestra un diálogo de confirmación antes de cerrar la sesión
