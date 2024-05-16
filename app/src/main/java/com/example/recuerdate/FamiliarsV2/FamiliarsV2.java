@@ -136,7 +136,7 @@ public class FamiliarsV2 extends Fragment {
 
     private void addItem() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Titol dels familiars");
+        builder.setTitle("Nom del grup de familiars: ");
 
         // Set up the input
         final EditText input = new EditText(getContext());

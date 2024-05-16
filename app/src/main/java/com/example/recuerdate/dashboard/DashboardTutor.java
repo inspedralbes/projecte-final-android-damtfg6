@@ -23,6 +23,7 @@ import com.example.recuerdate.PerfilTutorActivity;
 import com.example.recuerdate.activities.TokenActivity;
 import com.example.recuerdate.calendari.RecordatoriFragment;
 import com.example.recuerdate.databinding.FragmentDashboardTutorBinding;
+import com.example.recuerdate.stats.statsFragment;
 import com.example.recuerdate.utilities.Constants;
 import com.example.recuerdate.utilities.PreferenceManager;
 
@@ -96,7 +97,7 @@ public class DashboardTutor extends Fragment {
 
     public void ProgresClick(View view) {
         System.out.println("Click a progres");
-        //mainActivity.replaceFragment(new ProgresFragment());
+        mainActivityTutor.replaceFragment(new statsFragment());
     }
 
     @Override

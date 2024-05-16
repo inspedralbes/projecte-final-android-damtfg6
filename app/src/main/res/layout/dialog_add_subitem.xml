@@ -1,30 +1,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center">
 
     <EditText
         android:id="@+id/edit_text_subitem_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Sub Item Title"/>
+        android:hint="Nom Familiar"/>
 
     <EditText
         android:id="@+id/edit_text_subitem_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Sub Item Description"/>
+        android:hint="Descripció"/>
 
     <ImageView
         android:id="@+id/image_view_sub_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@drawable/baseline_help_24"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/darker_gray"
         android:clickable="true"
         android:focusable="true" />
 
@@ -32,7 +32,7 @@
         android:id="@+id/button_select_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Seleccionar Imagen"
+        android:text="Seleccionar imatge"
         android:textColor="@android:color/white"
         android:padding="5dp"
         android:layout_marginTop="5dp"
@@ -42,6 +42,6 @@
         android:id="@+id/button_add_subitem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Sub Item"/>
+        android:text="Afegir"/>
 
 </LinearLayout>
