@@ -1,5 +1,7 @@
 package com.example.recuerdate.FamiliarsV2;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import java.util.List;
 public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemViewHolder> {
 
     private List<SubItem> subItemList;
+    private Context context;
 
     SubItemAdapter(List<SubItem> subItemList) {
         this.subItemList = subItemList;
@@ -33,7 +36,10 @@ public class SubItemAdapter extends RecyclerView.Adapter<SubItemAdapter.SubItemV
         SubItem subItem = subItemList.get(i);
         subItemViewHolder.tvSubItemTitle.setText(subItem.getSubItemTitle());
         subItemViewHolder.tvSubItemDescription.setText(subItem.getSubItemDesc());
-        subItemViewHolder.ivSubItemImage.setImageDrawable(subItem.getSubItemImage().getDrawable());
+        Bitmap bitmap = subItem.getSubItemImage(context);
+        if (bitmap != null) {
+            subItemViewHolder.ivSubItemImage.setImageBitmap(bitmap);
+        }
     }
 
     @Override

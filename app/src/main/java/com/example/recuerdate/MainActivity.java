@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.recuerdate.activities.BaseActivity;
 import com.example.recuerdate.activities.SignInActivity;
+import com.example.recuerdate.activities.TokenActivity;
 import com.example.recuerdate.dashboard.Dashboard;
 import com.example.recuerdate.dashboard.DashboardTutor;
 import com.example.recuerdate.databinding.ActivityMainBinding;
@@ -71,9 +72,8 @@ public class MainActivity extends BaseActivity {
                     binding.bottomNavigationView.setVisibility(View.GONE); // Oculta el BottomNavigationView
                     break;
                 case R.id.chat:
-                    replaceFragment(new ChatFamFragment());
-                    // Intent intent = new Intent(this, VoiceChat.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(MainActivity.this, TokenActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.mapa:
                     replaceFragment(new LocalitzacioFragment());

@@ -87,15 +87,6 @@
             android:name=".LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".calendari.WeekViewActivity"
-            android:exported="false" />
-        <activity
-            android:name=".calendari.DailyCalendarActivity"
-            android:exported="false" />
-        <activity
-            android:name=".calendari.EventEditActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

@@ -9,14 +9,15 @@
     tools:context=".calendari.RecordatoriFragment">
 
     <Button
+        android:layout_marginTop="@dimen/_5sdp"
         android:id="@+id/weeklyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="#00FFFFFF"
+        android:background="@color/black"
         android:onClick="weeklyAction"
         android:text="@string/Semana"
-        android:textColor="@color/primary"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         android:shadowColor="#000000"
