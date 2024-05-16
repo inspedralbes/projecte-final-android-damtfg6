@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -26,6 +27,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.recuerdate.databinding.FragmentLocalitzacioBinding;
 import com.example.recuerdate.utilities.Constants;
+import com.example.recuerdate.utilities.PreferenceManager;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -40,6 +42,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
@@ -56,7 +59,8 @@ public class LocalitzacioFragment extends Fragment implements OnMapReadyCallback
     private GoogleMap gmap;
     private FusedLocationProviderClient fusedLocationClient;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
-    private String predefinedLocation = "Av. d'Esplugues, 40, Les Corts, 08034 Barcelona";
+    private PreferenceManager preferenceManager;
+    private String predefinedLocation;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,6 +70,8 @@ public class LocalitzacioFragment extends Fragment implements OnMapReadyCallback
         binding.mapView.getMapAsync(this);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
+        preferenceManager = new PreferenceManager(getActivity());
+        loadUserLocation();
 
         return binding.getRoot();
     }
@@ -224,36 +230,33 @@ public class LocalitzacioFragment extends Fragment implements OnMapReadyCallback
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                currentLocationName = input.getText().toString();
+                predefinedLocation = input.getText().toString();
 
-                // Guarda currentLocationName en Firestore
+                // Crear una instancia de FirebaseFirestore
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+                // Crear un nuevo documento con los datos
                 Map<String, Object> data = new HashMap<>();
-                data.put("ubicacion", currentLocationName);
+                data.put("streetName", predefinedLocation);
 
-// Usa el ID del usuario para guardar la ubicación en el documento correcto
-                String userId = Constants.KEY_USER_ID; // Asegúrate de que este es el ID del usuario con el que has iniciado sesión
+                // Obtener el DNI del usuario
+                String dni = preferenceManager.getString(Constants.KEY_EMAIL);
 
-// Decide en qué colección guardar la ubicación en función del tipo de usuario
-                String collectionName = /* Aquí debes determinar si usar KEY_COLLECTION_USERS o KEY_COLLECTION_RELATIVES en función del tipo de usuario */;
-
-                db.collection(collectionName)
-                        .document(userId)
+                // Guardar el documento en Firestore
+                db.collection(Constants.KEY_COLLECTION_STREETS).document(dni)
                         .set(data, SetOptions.merge())
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Log.d("Firestore", "Ubicación guardada con éxito");
+                                Log.d("FIREBASE", "DocumentSnapshot successfully written!");
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.w("Firestore", "Error al guardar la ubicación", e);
+                                Log.w("FIREBASE", "Error writing document", e);
                             }
                         });
-
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -264,6 +267,39 @@ public class LocalitzacioFragment extends Fragment implements OnMapReadyCallback
         });
 
         builder.show();
+    }
+
+    private void loadUserLocation() {
+        // Obtener el DNI del usuario
+        String dni = preferenceManager.getString(Constants.KEY_EMAIL);
+
+        // Crear una instancia de FirebaseFirestore
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Obtener el documento del usuario de Firestore
+        db.collection(Constants.KEY_COLLECTION_STREETS).document(dni)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            // Obtener el valor del campo "streetName" y asignarlo a "currentLocationName"
+                            predefinedLocation = documentSnapshot.getString("streetName");
+
+                            // Imprimir el valor recuperado en los registros de la aplicación
+                            Log.d("FIREBASE", "Street name loaded: " + predefinedLocation);
+
+                            // Mostrar un Toast con el valor recuperado
+                            Toast.makeText(getActivity(), "Street name loaded: " + predefinedLocation, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("FIREBASE", "Error getting document", e);
+                    }
+                });
     }
 
 

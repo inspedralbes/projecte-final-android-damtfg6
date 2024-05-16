@@ -74,15 +74,15 @@
             android:textSize="@dimen/_16sdp"
             android:text="Casa"
             android:layout_marginStart="0dp"/>
-        <Button
+        <ImageButton
             android:id="@+id/btnShowLocationName"
             android:layout_width="@dimen/_48sdp"
             android:layout_height="@dimen/_48sdp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_house"
             android:layout_marginEnd="@dimen/_16sdp"
-            android:layout_marginBottom="@dimen/_48sdp"
-            android:text="Pandy" />
+            android:layout_marginBottom="@dimen/_48sdp" />
         <Button
             android:id="@+id/btnSetLocationName"
             android:layout_width="wrap_content"
