@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class Constants {
     public static final String  KEY_COLLECTION_USERS ="users";
+    public static final String KEY_COLLECTION_STREETS = "streets";
     public static final String  KEY_NAME ="name";
     public static final String KEY_USER_IDENTIFIER = "usuari_identificador";
     public static final String KEY_SUPERVISED_USER_DNI = "supervised_user_dni";
