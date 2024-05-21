@@ -61,6 +61,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     private OkHttpClient client;
     private Gson gson;
 
+    private PreferenceManager preferenceManager;
+
     ItemAdapter(Context context, List<Item> itemList, Fragment fragment) {
         this.context = context;
         this.itemList = itemList;
@@ -68,6 +70,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         // Inicializa las variables aquí
         this.client = new OkHttpClient();
         this.gson = new Gson();
+        this.preferenceManager = new PreferenceManager(context);
     }
 
     @NonNull
@@ -90,6 +93,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             }
         });
 
+        itemViewHolder.btnDeleteSubItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Obtenemos el ítem actual
+                Item itemToDelete = itemList.get(itemViewHolder.getAdapterPosition());
+
+                // Llamamos al método deleteItem
+                deleteItem(itemToDelete);
+            }
+        });
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(
                 itemViewHolder.rvSubItem.getContext(),
                 LinearLayoutManager.VERTICAL,
@@ -97,7 +111,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         );
         layoutManager.setInitialPrefetchItemCount(item.getSubItemList().size());
 
-        SubItemAdapter subItemAdapter = new SubItemAdapter(item.getSubItemList());
+        SubItemAdapter subItemAdapter = new SubItemAdapter(item.getSubItemList(), this, context);
 
         itemViewHolder.rvSubItem.setLayoutManager(layoutManager);
         itemViewHolder.rvSubItem.setAdapter(subItemAdapter);
@@ -113,6 +127,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView tvItemTitle;
         private ImageButton btnAddSubItem;
+
+        private ImageButton btnDeleteSubItem;
         private RecyclerView rvSubItem;
 
         ItemViewHolder(View itemView) {
@@ -120,6 +136,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             tvItemTitle = itemView.findViewById(R.id.tv_item_title);
             btnAddSubItem = itemView.findViewById(R.id.btn_item);
             rvSubItem = itemView.findViewById(R.id.rv_sub_item);
+            btnDeleteSubItem = itemView.findViewById(R.id.btn_delete_item);
         }
     }
 
@@ -170,7 +187,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
     public void postFamilyToServer(List<Item> itemList) {
         // Obtener el DNI del usuario
-        PreferenceManager preferenceManager = new PreferenceManager(context);
         String role = preferenceManager.getString(Constants.KEY_ROLE);
         String dniUsuario = preferenceManager.getString(Constants.KEY_EMAIL);
         if (role.equals("Tutor")) {
@@ -208,6 +224,54 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             }
         });
     }
+
+    private void deleteItem(Item item)  {
+        OkHttpClient client = new OkHttpClient();
+
+        String role = preferenceManager.getString(Constants.KEY_ROLE);
+        String dni = preferenceManager.getString(Constants.KEY_EMAIL);
+        if (role.equals("Tutor")) {
+            dni = preferenceManager.getString(Constants.KEY_SUPERVISED_USER_DNI);
+        } else if (role.equals("Usuari")) {
+            dni = preferenceManager.getString(Constants.KEY_EMAIL);
+        }
+
+        String itemTitle = item.getItemTitle();
+
+
+        // Crear el JSON para la solicitud
+        String json = "{ \"dni\": \"" + dni + "\", \"itemTitle\": \"" + itemTitle + "\" }";
+
+        RequestBody body = RequestBody.create(json, MediaType.parse("application/json; charset=utf-8"));
+        Request request = new Request.Builder()
+                .url(Settings.SERVER + ":" + Settings.PORT + "/deleteItem")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    // Maneja la respuesta si es necesario
+                    ((Activity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            itemList.remove(item);
+                            notifyDataSetChanged();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
 
 
     public void setSelectedImageUri(Uri selectedImageUri) {

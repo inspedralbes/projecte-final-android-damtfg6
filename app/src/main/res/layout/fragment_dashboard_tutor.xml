@@ -377,6 +377,8 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/linear_layout_appInfoTutor"
+                            android:onClick="appInfoTutor"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="25dp"

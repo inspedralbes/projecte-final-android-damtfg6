@@ -23,6 +23,7 @@ import com.example.recuerdate.PerfilTutorActivity;
 import com.example.recuerdate.activities.TokenActivity;
 import com.example.recuerdate.calendari.RecordatoriFragment;
 import com.example.recuerdate.databinding.FragmentDashboardTutorBinding;
+import com.example.recuerdate.infoApp.infoAppFragment;
 import com.example.recuerdate.stats.statsFragment;
 import com.example.recuerdate.utilities.Constants;
 import com.example.recuerdate.utilities.PreferenceManager;
@@ -55,6 +56,7 @@ public class DashboardTutor extends Fragment {
         binding.linearLayoutCalendariTutor.setOnClickListener(v -> CalendariClick(v));
         binding.linearLayoutAlertesTutor.setOnClickListener(v -> AlertesClick(v));
         binding.linearLayoutProgresTutor.setOnClickListener(v -> ProgresClick(v));
+        binding.linearLayoutAppInfoTutor.setOnClickListener(v -> appInfoTutor(v));
         binding.textView30.setText(nameTutor);
 
 
@@ -99,6 +101,12 @@ public class DashboardTutor extends Fragment {
         System.out.println("Click a progres");
         mainActivityTutor.replaceFragment(new statsFragment());
     }
+
+    public void appInfoTutor(View view) {
+        System.out.println("Click a appInfo");
+        mainActivityTutor.replaceFragment(new infoAppFragment());
+    }
+
 
     @Override
     public void onAttach(Context context) {

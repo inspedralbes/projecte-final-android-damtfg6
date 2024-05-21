@@ -23,6 +23,7 @@ import com.example.recuerdate.R;
 import com.example.recuerdate.activities.TokenActivity;
 import com.example.recuerdate.calendari.RecordatoriFragment;
 import com.example.recuerdate.databinding.FragmentDashboardBinding;
+import com.example.recuerdate.infoApp.infoAppFragment;
 import com.example.recuerdate.jocMemoria.WelcomeScreen;
 import com.example.recuerdate.stats.statsFragment;
 import com.example.recuerdate.utilities.Constants;
@@ -54,6 +55,7 @@ public class Dashboard extends Fragment {
         binding.linearLayoutAlertes.setOnClickListener(v -> AlertesClick(v));
         binding.linearLayoutJocs.setOnClickListener(v -> JocsClick(v));
         binding.linearLayoutProgres.setOnClickListener(v -> ProgresClick(v));
+        binding.linearLayoutAppInfo.setOnClickListener(v -> appInfoClick(v));
         binding.textView3.setText(nameTutor);
         loadUserDetails();
         return binding.getRoot();
@@ -98,6 +100,11 @@ public class Dashboard extends Fragment {
     public void ProgresClick(View view) {
         System.out.println("Click a progres");
         mainActivity.replaceFragment(new statsFragment());
+    }
+
+    public void appInfoClick(View view) {
+        System.out.println("Click a progres");
+        mainActivity.replaceFragment(new infoAppFragment());
     }
 
     @Override
