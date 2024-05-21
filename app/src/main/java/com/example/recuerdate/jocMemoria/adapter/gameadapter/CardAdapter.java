@@ -225,6 +225,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
                                 ronda2.put("fallades", gameModel.getFalladesRnd2());
                                 dataMap.put("ronda2", ronda2);
 
+                                dataMap.put("totalScore", gameModel.getTotalScore());
                                 // Enviar datos a /stats
                                 enviarDatos("/stats", dataMap);
 
