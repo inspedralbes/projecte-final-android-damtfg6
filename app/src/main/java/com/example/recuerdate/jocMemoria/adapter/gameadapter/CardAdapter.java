@@ -104,6 +104,32 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
     public int getItemCount() {
         return mData.size();
     }
+    private void enviarDatos(String endpoint, Map<String, Object> dataMap) {
+        String json = gson.toJson(dataMap);
+        RequestBody body = RequestBody.create(json, MediaType.parse("application/json; charset=utf-8"));
+        Request request = new Request.Builder()
+                .url(Settings.SERVER + ":" + Settings.PORT + endpoint)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    // Aquí puedes manejar la respuesta del servidor
+                    System.out.println("Respuesta recibida del servidor para el endpoint " + endpoint + ": " + response.body().string());
+                }
+            }
+        });
+    }
+
     public void gameLogic(EasyFlipView flipView, Handler handler, CardModel model, ScoreAnimation scoreAnimation){
         flipView.setOnFlipListener(new EasyFlipView.OnFlipAnimationListener() {
             @Override
@@ -180,36 +206,45 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
                                 Map<String, Object> dataMap = new LinkedHashMap<>();
                                 dataMap.put("dni", dniUsuario);
 
-// Agregar la marca de tiempo
+                                // Agregar la marca de tiempo
                                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                                 Date date = new Date();
                                 dataMap.put("fecha", dateFormat.format(date));
 
-// Datos de la ronda 1
+                                // Datos de la ronda 1
                                 Map<String, Object> ronda1 = new LinkedHashMap<>();
                                 ronda1.put("nomRonda", gameModel.getNomRonda1());
                                 ronda1.put("acertades", gameModel.getAcertadesRnd1());
                                 ronda1.put("fallades", gameModel.getFalladesRnd1());
                                 dataMap.put("ronda1", ronda1);
 
-// Datos de la ronda 2
+                                // Datos de la ronda 2
                                 Map<String, Object> ronda2 = new LinkedHashMap<>();
                                 ronda2.put("nomRonda", gameModel.getNomRonda2());
                                 ronda2.put("acertades", gameModel.getAcertadesRnd2());
                                 ronda2.put("fallades", gameModel.getFalladesRnd2());
                                 dataMap.put("ronda2", ronda2);
 
-                                dataMap.put("totalScore", gameModel.getTotalScore());
+                                // Enviar datos a /stats
+                                enviarDatos("/stats", dataMap);
 
-                                String json = gson.toJson(dataMap);
+                                // Preparar datos para enviar a /ranking
+                                Map<String, Object> rankingDataMap = new LinkedHashMap<>();
+                                rankingDataMap.put("dni", dniUsuario);
+                                rankingDataMap.put("totalScore", gameModel.getTotalScore());
+                                String rankingJson = gson.toJson(rankingDataMap);
 
-// Crear el cuerpo de la petición
-                                RequestBody body = RequestBody.create(json, MediaType.parse("application/json; charset=utf-8"));
-                                Request request = new Request.Builder()
-                                        .url(Settings.SERVER+ ":" + Settings.PORT + "/stats")
-                                        .post(body)
+                                // Crear el cuerpo de la petición para /ranking
+                                RequestBody rankingBody = RequestBody.create(rankingJson, MediaType.parse("application/json; charset=utf-8"));
+
+                                // Construir la petición POST para /ranking
+                                Request rankingRequest = new Request.Builder()
+                                        .url(Settings.SERVER + ":" + Settings.PORT + "/ranking")
+                                        .post(rankingBody)
                                         .build();
-                                client.newCall(request).enqueue(new Callback() {
+
+                                // Enviar la petición a /ranking
+                                client.newCall(rankingRequest).enqueue(new Callback() {
                                     @Override
                                     public void onFailure(Call call, IOException e) {
                                         e.printStackTrace();
@@ -220,7 +255,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
                                         if (!response.isSuccessful()) {
                                             throw new IOException("Unexpected code " + response);
                                         } else {
-                                            System.out.println("Coroné, en el aquaPark");
+                                            // Aquí puedes manejar la respuesta del servidor
+                                            System.out.println("Datos enviados a /ranking: " + response.body().string());
                                         }
                                     }
                                 });
