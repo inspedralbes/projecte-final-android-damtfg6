@@ -32,7 +32,7 @@ public class HighScoreScreen extends AppCompatActivity {
     RecyclerView score_view;
     InfoBox infoBox;
     ScoreAdapter scoreAdapter;
-    private Socket socket;
+    private Socket mSocket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +40,7 @@ public class HighScoreScreen extends AppCompatActivity {
         setContentView(R.layout.activity_high_score_screen);
         init();
         clickBackInfo();
-        try {
-            connectToSocketServer();
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+        connectToSocket();
     }
 
     public void init(){
@@ -67,17 +63,37 @@ public class HighScoreScreen extends AppCompatActivity {
         });
     }
 
-    private void connectToSocketServer() throws URISyntaxException {
-        socket = IO.socket(Settings.SERVER + ":" + Settings.PORT);
-        socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                System.out.println("Conectado al servidor de Socket.IO");
-            }
-        });
-
-        // Conectar al servidor
-        socket.connect();
+    private void connectToSocket() {
+        try {
+            mSocket = IO.socket(Settings.SERVER + ":" + Settings.PORT);
+            mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    // Conectado al servidor
+                    mSocket.emit("solicitarRanking");
+                }
+            }).on("actualizarRanking", new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ArrayList<ScoreModel> ranking = parseRanking(args[0]);
+                            updateRanking(ranking);
+                            System.out.println(ranking);
+                        }
+                    });
+                }
+            }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    // Desconectado del servidor
+                }
+            });
+            mSocket.connect();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     private ArrayList<ScoreModel> parseRanking(Object data) {
