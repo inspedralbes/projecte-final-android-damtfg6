@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.example.recuerdate.R;
 import com.example.recuerdate.jocMemoria.model.ScoreModel;
 
@@ -32,11 +31,18 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
         ScoreModel scoreModel = scoreModels.get(position);
         holder.getName().setText(scoreModel.getName());
         holder.getScore().setText(String.valueOf(scoreModel.getScore()));
-        holder.getRank().setText(String.valueOf(position + 2));
+        holder.getRank().setText(String.valueOf(position + 1)); // Cambiado de +2 a +1
     }
 
     @Override
     public int getItemCount() {
         return scoreModels.size();
+    }
+
+    // Método para actualizar los datos del adaptador
+    public void updateScores(ArrayList<ScoreModel> newScores) {
+        scoreModels.clear();
+        scoreModels.addAll(newScores);
+        notifyDataSetChanged();
     }
 }
