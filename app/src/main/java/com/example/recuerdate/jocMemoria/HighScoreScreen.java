@@ -102,10 +102,13 @@ public class HighScoreScreen extends AppCompatActivity {
             JSONArray jsonArray = (JSONArray) data;
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+                // Obtener los valores de las claves "dni" y "nom"
                 String dni = jsonObject.getString("dni");
+                String nombre = jsonObject.getString("nom"); // Cambiado de "nombre" a "nom"
                 int score = jsonObject.getInt("totalScore");
                 HashMap<String, Object> map = new HashMap<>();
-                map.put("dni", dni);
+                // Utilizar "nombre" como clave en lugar de "dni"
+                map.put("nombre", nombre);
                 map.put("totalScore", score);
                 ranking.add(map);
             }
@@ -114,12 +117,11 @@ public class HighScoreScreen extends AppCompatActivity {
         }
         return ranking;
     }
-
     private void updateRanking(ArrayList<HashMap<String, Object>> ranking) {
         if (!ranking.isEmpty()) {
             HashMap<String, Object> highestScore = ranking.get(0);
             highest_score_txt.setText(String.valueOf(highestScore.get("totalScore")));
-            highest_score_name_txt.setText(String.valueOf(highestScore.get("dni")));
+            highest_score_name_txt.setText(String.valueOf(highestScore.get("nombre"))); // Cambia "dni" por "nombre"
             scoreAdapter.updateScores(ranking);
         }
     }

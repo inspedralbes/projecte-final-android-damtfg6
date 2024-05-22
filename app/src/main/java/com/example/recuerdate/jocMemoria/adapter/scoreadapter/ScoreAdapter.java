@@ -29,7 +29,7 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
     @Override
     public void onBindViewHolder(@NonNull ScoreHolder holder, int position) {
         HashMap<String, Object> scoreData = scoreList.get(position);
-        holder.getName().setText(String.valueOf(scoreData.get("dni")));
+        holder.getName().setText(String.valueOf(scoreData.get("nombre")));
         holder.getScore().setText(String.valueOf(scoreData.get("totalScore")));
         holder.getRank().setText(String.valueOf(position + 1));
     }
