@@ -52,7 +52,6 @@ public class Dashboard extends Fragment {
         binding.linearLayoutUbi.setOnClickListener(v -> UbiClick(v));
         binding.linearLayoutFamiliars.setOnClickListener(v -> FamiliarsClick(v));
         binding.linearLayoutCalendari.setOnClickListener(v -> CalendariClick(v));
-        binding.linearLayoutAlertes.setOnClickListener(v -> AlertesClick(v));
         binding.linearLayoutJocs.setOnClickListener(v -> JocsClick(v));
         binding.linearLayoutProgres.setOnClickListener(v -> ProgresClick(v));
         binding.linearLayoutAppInfo.setOnClickListener(v -> appInfoClick(v));

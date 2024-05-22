@@ -175,14 +175,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
                                 android:layout_margin="10dp"
-                                android:src="@drawable/alarma" />
+                                android:src="@drawable/gpsblack" />
 
                             <TextView
                                 android:id="@+id/textView4"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
-                                android:text="Alertes"
+                                android:text="Ubicació"
                                 android:textAlignment="center"
                                 android:textColor="#2e3d6d"
                                 android:textSize="18sp"
@@ -289,8 +289,8 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/linear_layout_alertes"
-                            android:onClick="AlertesClick"
+                            android:id="@+id/linear_layout_jocs"
+                            android:onClick="JocsClick"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="25dp"
@@ -310,7 +310,7 @@
                                     android:layout_marginTop="16dp"
                                     android:layout_marginEnd="16dp"
                                     android:layout_marginBottom="16dp"
-                                    android:src="@drawable/pin"
+                                    android:src="@drawable/gaming"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -322,7 +322,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Ubicació"
+                                android:text="Joc"
                                 android:textAlignment="center"
                                 android:textColor="#2e3d6d"
                                 android:textSize="16sp"
@@ -336,8 +336,8 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:id="@+id/linear_layout_jocs"
-                            android:onClick="JocsClick"
+                            android:id="@+id/linear_layout_progres"
+                            android:onClick="ProgresClick"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="25dp"
@@ -357,7 +357,7 @@
                                     android:layout_marginTop="16dp"
                                     android:layout_marginEnd="16dp"
                                     android:layout_marginBottom="16dp"
-                                    android:src="@drawable/gaming"
+                                    android:src="@drawable/graphic"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -369,7 +369,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Jocs"
+                                android:text="Progrés"
                                 android:textAlignment="center"
                                 android:textColor="#2e3d6d"
                                 android:textSize="16sp"
@@ -377,8 +377,8 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/linear_layout_progres"
-                            android:onClick="ProgresClick"
+                            android:id="@+id/linear_layout_AppInfo"
+                            android:onClick="appInfoClick"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="25dp"
@@ -398,7 +398,7 @@
                                     android:layout_marginTop="16dp"
                                     android:layout_marginEnd="16dp"
                                     android:layout_marginBottom="16dp"
-                                    android:src="@drawable/graphic"
+                                    android:src="@drawable/question"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -410,53 +410,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Progrés"
-                                android:textAlignment="center"
-                                android:textColor="#2e3d6d"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/linear_layout_appInfo"
-                            android:onClick="appInfoClick"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="25dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/white_top_button">
-
-                                <ImageView
-                                    android:id="@+id/imageView23"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:layout_marginBottom="16dp"
-                                    android:src="@drawable/question"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <TextView
-                                android:id="@+id/textView12"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
                                 android:text="Info"
                                 android:textAlignment="center"
                                 android:textColor="#2e3d6d"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>

@@ -19,11 +19,11 @@
     <string name="Enrere">Enrere</string>
     <string name="Endavant">Endavant</string>
     <string name="Semana">Veure Setmana</string>
-    <string name="welcome_back">Benvingut!</string>
-    <string name="login_to_continue">Fes el Login</string>
+    <string name="welcome_back">Benvingut de nou!</string>
+    <string name="login_to_continue">Siusplau inicia sessió al teu compte</string>
     <string name="email">Dni</string>
     <string name="password">Contrasenya</string>
-    <string name="sign_in">Iniciar sessió</string>
+    <string name="sign_in">Accedir</string>
     <string name="create_new_account">Crea un nou compte</string>
     <string name="add_image">Fica una imatge</string>
     <string name="name">Nom i Cognoms</string>

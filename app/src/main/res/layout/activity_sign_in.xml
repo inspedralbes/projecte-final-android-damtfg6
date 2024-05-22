@@ -19,14 +19,20 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_40sdp"
-        android:text="@string/welcome_back"
-        android:textColor="@color/primary_text"
-        android:textSize="@dimen/_18ssp"
-        android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="259dp"
+            android:layout_height="153dp"
+            app:srcCompat="@drawable/ic_logo_bg_actual_foreground" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_back"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,10 +47,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_40sdp"
+            android:drawableLeft="@drawable/baseline_person_24"
             android:background="@drawable/background_input"
             android:hint="@string/email"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
+            android:drawablePadding="8dp"
             android:inputType="text"
             android:paddingStart="@dimen/_16sdp"
             android:paddingEnd="@dimen/_16sdp"
@@ -58,6 +66,8 @@
             android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:background="@drawable/background_input"
+            android:drawableLeft="@drawable/baseline_lock_person_24"
+            android:drawablePadding="8dp"
             android:hint="@string/password"
             android:imeOptions="actionDone"
             android:importantForAutofill="no"
@@ -101,8 +111,6 @@
             android:textColor="@color/primary"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"/>
-        
-
 
 
     </LinearLayout>

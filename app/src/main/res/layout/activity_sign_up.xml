@@ -43,9 +43,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/add_image"
+                android:text="Imatge"
+
+                android:textStyle="bold"
                 android:textColor="@color/secondary_text"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="15sp" />
 
 
         </FrameLayout>
@@ -56,6 +58,8 @@
             android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/background_input"
+            android:drawableLeft="@drawable/baseline_person_24"
+            android:drawablePadding="8dp"
             android:hint="@string/name"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
@@ -71,6 +75,8 @@
             android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:background="@drawable/background_input"
+            android:drawableLeft="@drawable/baseline_wallet_24"
+            android:drawablePadding="8dp"
             android:hint="@string/email"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
@@ -87,6 +93,8 @@
             android:layout_marginTop="@dimen/_16sdp"
             android:background="@drawable/background_input"
             android:hint="@string/password"
+            android:drawableLeft="@drawable/baseline_lock_person_24"
+            android:drawablePadding="8dp"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
             android:inputType="textPassword"
@@ -101,6 +109,8 @@
             android:layout_marginTop="@dimen/_16sdp"
             android:background="@drawable/background_input"
             android:hint="@string/confirm_password"
+            android:drawableLeft="@drawable/baseline_local_phone_24"
+            android:drawablePadding="8dp"
             android:imeOptions="actionDone"
             android:importantForAutofill="no"
             android:inputType="phone"
@@ -126,7 +136,6 @@
                 android:id="@+id/buttonSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
-                android:layout_marginTop="@dimen/_20sdp"
                 android:text="@string/sign_up"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp"
