@@ -195,7 +195,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
 
                                 // Obtener el DNI del usuario
                                 String dniUsuario = preferenceManager.getString(Constants.KEY_EMAIL);
-                                String nombre = preferenceManager.getString(Constants.KEY_NAME);
+                                String nom = preferenceManager.getString(Constants.KEY_NAME);
                                 // Datos de la segunda ronda
                                 gameModel.setNomRonda2("Nivell 2");
                                 gameModel.setAcertadesRnd2(acertades);
@@ -232,7 +232,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
                                 // Preparar datos para enviar a /ranking
                                 Map<String, Object> rankingDataMap = new LinkedHashMap<>();
                                 rankingDataMap.put("dni", dniUsuario);
-                                rankingDataMap.put("nom", nombre);
+                                rankingDataMap.put("nom", nom);
                                 rankingDataMap.put("totalScore", gameModel.getTotalScore());
                                 String rankingJson = gson.toJson(rankingDataMap);
 
