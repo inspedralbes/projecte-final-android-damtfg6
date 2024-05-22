@@ -7,17 +7,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.example.recuerdate.R;
-import com.example.recuerdate.jocMemoria.model.ScoreModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
-    private ArrayList<ScoreModel> scoreModels;
+    private ArrayList<HashMap<String, Object>> scoreList;
 
-    public ScoreAdapter(ArrayList<ScoreModel> scoreModels){
-        this.scoreModels = scoreModels;
+    public ScoreAdapter(ArrayList<HashMap<String, Object>> scoreList) {
+        this.scoreList = scoreList;
     }
 
     @NonNull
@@ -29,14 +28,21 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ScoreHolder holder, int position) {
-        ScoreModel scoreModel = scoreModels.get(position);
-        holder.getName().setText(scoreModel.getName());
-        holder.getScore().setText(String.valueOf(scoreModel.getScore()));
-        holder.getRank().setText(String.valueOf(position + 2));
+        HashMap<String, Object> scoreData = scoreList.get(position);
+        holder.getName().setText(String.valueOf(scoreData.get("nombre")));
+        holder.getScore().setText(String.valueOf(scoreData.get("totalScore")));
+        holder.getRank().setText(String.valueOf(position + 1));
     }
 
     @Override
     public int getItemCount() {
-        return scoreModels.size();
+        return scoreList.size();
+    }
+
+    // Método para actualizar los datos del adaptador
+    public void updateScores(ArrayList<HashMap<String, Object>> newScores) {
+        scoreList.clear();
+        scoreList.addAll(newScores);
+        notifyDataSetChanged();
     }
 }
