@@ -21,7 +21,6 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
         return rank;
     }
 
-
     public TextView getName() {
         return name;
     }
@@ -29,5 +28,4 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
     public TextView getScore() {
         return score;
     }
-
 }

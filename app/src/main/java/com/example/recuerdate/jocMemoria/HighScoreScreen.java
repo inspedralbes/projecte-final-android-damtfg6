@@ -13,7 +13,6 @@ import com.example.recuerdate.R;
 import com.example.recuerdate.Settings;
 import com.example.recuerdate.jocMemoria.adapter.scoreadapter.ScoreAdapter;
 import com.example.recuerdate.jocMemoria.game.InfoBox;
-import com.example.recuerdate.jocMemoria.model.ScoreModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +20,7 @@ import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -43,7 +43,7 @@ public class HighScoreScreen extends AppCompatActivity {
         connectToSocket();
     }
 
-    public void init(){
+    public void init() {
         backBtn = findViewById(R.id.back_btn);
         infoBox = new InfoBox();
         highest_score_txt = findViewById(R.id.highest_score_txt);
@@ -54,7 +54,7 @@ public class HighScoreScreen extends AppCompatActivity {
         score_view.setAdapter(scoreAdapter);
     }
 
-    public void clickBackInfo(){
+    public void clickBackInfo() {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +78,7 @@ public class HighScoreScreen extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ArrayList<ScoreModel> ranking = parseRanking(args[0]);
+                            ArrayList<HashMap<String, Object>> ranking = parseRanking(args[0]);
                             updateRanking(ranking);
                             System.out.println(ranking);
                         }
@@ -96,15 +96,18 @@ public class HighScoreScreen extends AppCompatActivity {
         }
     }
 
-    private ArrayList<ScoreModel> parseRanking(Object data) {
-        ArrayList<ScoreModel> ranking = new ArrayList<>();
+    private ArrayList<HashMap<String, Object>> parseRanking(Object data) {
+        ArrayList<HashMap<String, Object>> ranking = new ArrayList<>();
         try {
             JSONArray jsonArray = (JSONArray) data;
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String name = jsonObject.getString("name");
-                int score = jsonObject.getInt("score");
-                ranking.add(new ScoreModel(score, name));
+                String dni = jsonObject.getString("dni");
+                int score = jsonObject.getInt("totalScore");
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("dni", dni);
+                map.put("totalScore", score);
+                ranking.add(map);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -112,11 +115,11 @@ public class HighScoreScreen extends AppCompatActivity {
         return ranking;
     }
 
-    private void updateRanking(ArrayList<ScoreModel> ranking) {
+    private void updateRanking(ArrayList<HashMap<String, Object>> ranking) {
         if (!ranking.isEmpty()) {
-            ScoreModel highestScore = ranking.get(0);
-            highest_score_txt.setText(String.valueOf(highestScore.getScore()));
-            highest_score_name_txt.setText(highestScore.getName());
+            HashMap<String, Object> highestScore = ranking.get(0);
+            highest_score_txt.setText(String.valueOf(highestScore.get("totalScore")));
+            highest_score_name_txt.setText(String.valueOf(highestScore.get("dni")));
             scoreAdapter.updateScores(ranking);
         }
     }
