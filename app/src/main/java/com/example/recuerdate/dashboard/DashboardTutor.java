@@ -54,7 +54,6 @@ public class DashboardTutor extends Fragment {
         binding.linearLayoutUbiTutor.setOnClickListener(v -> UbiClick(v));
         binding.linearLayoutFamiliarsTutor.setOnClickListener(v -> FamiliarsClick(v));
         binding.linearLayoutCalendariTutor.setOnClickListener(v -> CalendariClick(v));
-        binding.linearLayoutAlertesTutor.setOnClickListener(v -> AlertesClick(v));
         binding.linearLayoutProgresTutor.setOnClickListener(v -> ProgresClick(v));
         binding.linearLayoutAppInfoTutor.setOnClickListener(v -> appInfoTutor(v));
         binding.textView30.setText(nameTutor);
@@ -90,11 +89,6 @@ public class DashboardTutor extends Fragment {
 
     public void CalendariClick(View view) {
         mainActivityTutor.replaceFragment(new RecordatoriFragment());
-    }
-
-    public void AlertesClick(View view) {
-        Intent intent = new Intent(getActivity(), Maps.class);
-        startActivity(intent);
     }
 
     public void ProgresClick(View view) {

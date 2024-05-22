@@ -62,6 +62,7 @@
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
+
                 app:headerLayout="@layout/header"
                 app:menu="@menu/menu_main" />
 
@@ -74,9 +75,9 @@
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_menu_24"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="15dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginLeft="30dp"
             android:onClick="openDrawer"
-            android:layout_marginTop="15dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true" />
 
