@@ -96,42 +96,55 @@ public class statsFragment extends Fragment {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     final String myResponse = response.body().string();
-
+                    Bitmap decodedByte = null, decodedByte2 = null, decodedByte3 = null;
                     try {
                         JSONArray jsonArray = new JSONArray(myResponse);
+                        JSONObject json;
                         for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject json = jsonArray.getJSONObject(i);
-                            String imageBase64 = json.getString("imagen");
+                            json = jsonArray.getJSONObject(i);
+                            String imageBase64 = json.getString("imagen_mejor_resultado");
+                            String imageBase642 = json.getString("imagen_falladas_ronda1");
+                            String imageBase643 = json.getString("imagen_falladas_ronda2");
                             byte[] decodedString = Base64.decode(imageBase64, Base64.DEFAULT);
-                            final Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                            byte[] decodedString2 = Base64.decode(imageBase642, Base64.DEFAULT);
+                            byte[] decodedString3 = Base64.decode(imageBase643, Base64.DEFAULT);
+                            decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                            decodedByte2 = BitmapFactory.decodeByteArray(decodedString2, 0, decodedString2.length);
+                            decodedByte3 = BitmapFactory.decodeByteArray(decodedString3, 0, decodedString3.length);
 
-                            // Asegúrate de que estás en el hilo principal cuando actualices la interfaz de usuario
-                            int finalI = i;
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (finalI == 0) {
-                                        ImageView imageView = (ImageView) getView().findViewById(R.id.ImageViewProgres);
-                                        imageView.setImageBitmap(decodedByte);
-                                    } else if (finalI == 1) {
-                                        ImageView imageView2 = (ImageView) getView().findViewById(R.id.ImageViewRonda1);
-                                        imageView2.setImageBitmap(decodedByte);
-                                    } else if (finalI == 2) {
-                                        ImageView imageView3 = (ImageView) getView().findViewById(R.id.ImageViewRonda2);
-                                        imageView3.setImageBitmap(decodedByte);
-                                    }
-                                    TextView textView = (TextView) getView().findViewById(R.id.textViewProgres);
-                                    textView.setVisibility(View.GONE);
-
-                                    if (role.equals("Tutor")) {
-                                    } else if (role.equals("Usuari")) {
-                                        Button button = (Button) getView().findViewById(R.id.buttonObrirJoc);
-                                        button.setVisibility(View.GONE);
-                                    }
-
-                                }
-                            });
+                            // Aquí no actualizamos las vistas, solo decodificamos las imágenes
                         }
+
+                        // Actualizamos las vistas fuera del bucle for
+                        Bitmap finalDecodedByte = decodedByte;
+                        Bitmap finalDecodedByte1 = decodedByte2;
+                        Bitmap finalDecodedByte2 = decodedByte3;
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ImageView imageView = getView().findViewById(R.id.ImageViewProgres);
+                                if (finalDecodedByte != null) {
+                                    imageView.setImageBitmap(finalDecodedByte);
+                                }
+                                ImageView imageView2 = getView().findViewById(R.id.ImageViewRonda1);
+                                if (finalDecodedByte1 != null) {
+                                    imageView2.setImageBitmap(finalDecodedByte1);
+                                }
+                                ImageView imageView3 = getView().findViewById(R.id.ImageViewRonda2);
+                                if (finalDecodedByte2 != null) {
+                                    imageView3.setImageBitmap(finalDecodedByte2);
+                                }
+                                TextView textView = getView().findViewById(R.id.textViewProgres);
+                                textView.setVisibility(View.GONE);
+                                if (role.equals("Tutor")) {
+                                    // Código para el rol de Tutor
+                                } else if (role.equals("Usuari")) {
+                                    Button button = getView().findViewById(R.id.buttonObrirJoc);
+                                    button.setVisibility(View.GONE);
+                                }
+                            }
+                        });
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -140,14 +153,15 @@ public class statsFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            TextView textView = (TextView) getView().findViewById(R.id.textViewProgres);
+                            TextView textView = getView().findViewById(R.id.textViewProgres);
                             textView.setVisibility(View.VISIBLE);
-                            Button button = (Button) getView().findViewById(R.id.buttonObrirJoc);
+                            Button button = getView().findViewById(R.id.buttonObrirJoc);
                             button.setVisibility(View.VISIBLE);
                         }
                     });
                 }
             }
+
         });
 
 
