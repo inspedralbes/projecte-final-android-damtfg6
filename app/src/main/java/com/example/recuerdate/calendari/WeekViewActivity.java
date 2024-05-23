@@ -61,7 +61,13 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         setWeekView();
 
         PreferenceManager preferenceManager = new PreferenceManager(this);
+        String role = preferenceManager.getString(Constants.KEY_ROLE);
         String dniUsuario = preferenceManager.getString(Constants.KEY_EMAIL);
+        if (role.equals("Tutor")) {
+            dniUsuario = preferenceManager.getString(Constants.KEY_SUPERVISED_USER_DNI);
+        } else if (role.equals("Usuari")) {
+            dniUsuario = preferenceManager.getString(Constants.KEY_EMAIL);
+        }
 
         // Obtener los eventos del servidor
         getEventsFromServer(dniUsuario);

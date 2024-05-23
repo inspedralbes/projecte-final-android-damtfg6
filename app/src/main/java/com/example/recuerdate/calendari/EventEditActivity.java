@@ -88,8 +88,7 @@ public class EventEditActivity extends AppCompatActivity {
     public void postEventToServer(Event event) {
         PreferenceManager preferenceManager = new PreferenceManager(this);
         String role = preferenceManager.getString(Constants.KEY_ROLE);
-        String dniUsuario = preferenceManager.getString(Constants.KEY_SUPERVISED_USER_DNI);
-        // Obtener el DNI del usuario
+        String dniUsuario = preferenceManager.getString(Constants.KEY_EMAIL);
         if (role.equals("Tutor")) {
             dniUsuario = preferenceManager.getString(Constants.KEY_SUPERVISED_USER_DNI);
         } else if (role.equals("Usuari")) {
