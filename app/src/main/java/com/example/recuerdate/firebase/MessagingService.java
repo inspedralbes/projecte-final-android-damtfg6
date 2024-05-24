@@ -41,6 +41,7 @@ public class MessagingService extends FirebaseMessagingService {
         user.id = remoteMessage.getData().get(Constants.KEY_USER_ID);
         user.name = remoteMessage.getData().get(Constants.KEY_NAME);
         user.token = remoteMessage.getData().get(Constants.KEY_FCM_TOKEN);
+        user.image = remoteMessage.getData().get(Constants.KEY_IMAGE);
 
         int notificationId = new Random().nextInt();
         String channelId = "chat_message";
