@@ -102,7 +102,12 @@ public class SignInActivity extends AppCompatActivity {
             // Si el usuario es un tutor, busca a través del usuari_identificador del usuario al que supervisa
             String usuari_identificador = documentSnapshot.getString(Constants.KEY_USER_IDENTIFIER);
             FirebaseFirestore database = FirebaseFirestore.getInstance();
-            database.collection(Constants.KEY_COLLECTION_RELATIVES)
+            /*CANVI REALITZAT-
+            -
+                    -
+                            -
+                                    -*/
+            database.collection(Constants.KEY_COLLECTION_USERS)
                     .whereEqualTo(Constants.KEY_USER_IDENTIFIER, usuari_identificador)
                     .get()
                     .addOnCompleteListener(task -> {
