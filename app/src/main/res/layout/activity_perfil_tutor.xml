@@ -1,336 +1,303 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F5F5F5"
-        tools:context=".PerfilActivity">
+        android:fillViewport="true"> <!-- Este atributo asegura que el contenido se extienda hasta el borde -->
 
-        <ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/top_background_gradient_dashboard"
+            tools:context=".PerfilActivity">
+
+            <ImageButton
+                android:id="@+id/button5"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:onClick="TornaBotoTutor"
+                android:src="@drawable/baseline_keyboard_backspace_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageViewPerfilTutor"
+                android:layout_width="159dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/persona"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#807474"/>
+
+            <TextView
+                android:id="@+id/textViewNomPerfilTutor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Nom i Cognoms"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewPerfilTutor"
+                app:layout_constraintStart_toStartOf="@+id/imageViewPerfilTutor"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewPerfilTutor" />
+
+            <TextView
+                android:id="@+id/textViewCorreuPerfilTutor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correu Electronic"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/textViewNomPerfilTutor"
+                app:layout_constraintStart_toStartOf="@+id/textViewNomPerfilTutor"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNomPerfilTutor" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/white_backgrund_profile"
+                android:elevation="12dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewCorreuPerfilTutor">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintEnd_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="416dp"
-                        android:layout_height="734dp"
-                        android:background="@drawable/top_background_gradient_dashboard"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageButton
-                            android:id="@+id/button5"
-                            android:layout_width="31dp"
-                            android:layout_height="31dp"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginTop="16dp"
-                            android:background="?selectableItemBackgroundBorderless"
-                            android:onClick="TornaBotoTutor"
-                            android:src="@drawable/baseline_keyboard_backspace_24"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/imageViewPerfilTutor"
-                        android:layout_width="159dp"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="32dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/persona"
-                        app:civ_border_width="1dp"
-                        app:civ_border_color="#807474"/>
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textViewNomPerfilTutor"
+                        android:id="@+id/textViewContrasenyaPerfilTutor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Nom i Cognoms"
-                        android:textColor="#ffffff"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/imageViewPerfilTutor"
-                        app:layout_constraintStart_toStartOf="@+id/imageViewPerfilTutor"
-                        app:layout_constraintTop_toBottomOf="@+id/imageViewPerfilTutor" />
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1"
+                        android:text="Contrasenya:"
+                        android:textColor="#1B1C22"
+                        android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/textViewCorreuPerfilTutor"
+                        android:id="@+id/textViewModificarPerfilTutor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Correu Electronic"
-                        android:textColor="#ffffff"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="@+id/textViewNomPerfilTutor"
-                        app:layout_constraintStart_toStartOf="@+id/textViewNomPerfilTutor"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewNomPerfilTutor" />
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1"
+                        android:text="Modificar"
+                        android:textAlignment="viewEnd"
+                        android:textColor="#5B5B5B"
+                        android:textSize="18sp" />
 
-                    <LinearLayout
-                        android:layout_width="361dp"
-                        android:layout_height="346dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="24dp"
-                        android:layout_marginBottom="24dp"
-                        android:background="@drawable/white_backgrund_profile"
-                        android:elevation="12dp"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewCorreuPerfilTutor">
+                </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                <View
+                    android:id="@+id/view2Tutor"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="#D9D9D9" />
 
-                            <TextView
-                                android:id="@+id/textViewContrasenyaPerfilTutor"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
-                                android:layout_weight="1"
-                                android:text="Contrasenya:"
-                                android:textColor="#1B1C22"
-                                android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/textViewModificarPerfilTutor"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
-                                android:layout_weight="1"
-                                android:text="Modificar"
-                                android:textAlignment="viewEnd"
-                                android:textColor="#5B5B5B"
-                                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/textViewTelefonPerfilTutor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Teléfon:"
+                        android:textColor="#1B1C22"
+                        android:textSize="18sp" />
 
-                        </LinearLayout>
+                    <TextView
+                        android:id="@+id/textViewTelefonPerfilTutor2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="657693259"
+                        android:textAlignment="viewEnd"
+                        android:textColor="#5B5B5B"
+                        android:textSize="18sp" />
 
-                        <View
-                            android:id="@+id/view2Tutor"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="6dp"
-                            android:background="#D9D9D9" />
+                </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                <View
+                    android:id="@+id/view3Tutor"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="#D9D9D9" />
 
-                            <TextView
-                                android:id="@+id/textViewTelefonPerfilTutor"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Teléfon:"
-                                android:textColor="#1B1C22"
-                                android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/textViewTelefonPerfilTutor2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="657693259"
-                                android:textAlignment="viewEnd"
-                                android:textColor="#5B5B5B"
-                                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/textViewDniPerfilTutor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Dni"
+                        android:textColor="#1B1C22"
+                        android:textSize="18sp" />
 
-                        </LinearLayout>
+                    <TextView
+                        android:id="@+id/textViewDniPerfilTutor2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="4875463H"
+                        android:textAlignment="viewEnd"
+                        android:textColor="#5B5B5B"
+                        android:textSize="18sp" />
 
-                        <View
-                            android:id="@+id/view3Tutor"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="6dp"
-                            android:background="#D9D9D9" />
+                </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                <View
+                    android:id="@+id/view4Tutor"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="#D9D9D9" />
 
-                            <TextView
-                                android:id="@+id/textViewDniPerfilTutor"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Dni"
-                                android:textColor="#1B1C22"
-                                android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/textViewDniPerfilTutor2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="4875463H"
-                                android:textAlignment="viewEnd"
-                                android:textColor="#5B5B5B"
-                                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/textViewAdreçaPerfilTutor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Rol:"
+                        android:textColor="#1B1C22"
+                        android:textSize="18sp" />
 
-                        </LinearLayout>
+                    <TextView
+                        android:id="@+id/textViewAdreçaPerfil2Tutor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Carrer Barcelona 25"
+                        android:textAlignment="viewEnd"
+                        android:textColor="#5B5B5B"
+                        android:textSize="18sp" />
 
-                        <View
-                            android:id="@+id/view4Tutor"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="6dp"
-                            android:background="#D9D9D9" />
+                </LinearLayout>
 
+                <View
+                    android:id="@+id/view5Tutor"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="#D9D9D9" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/textViewAdreçaPerfilTutor"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Rol:"
-                                android:textColor="#1B1C22"
-                                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/textViewNomCognomsPerfilTutor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Tutor de:"
+                        android:textColor="#1B1C22"
+                        android:textSize="18sp" />
 
-                            <TextView
-                                android:id="@+id/textViewAdreçaPerfil2Tutor"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Carrer Barcelona 25"
-                                android:textAlignment="viewEnd"
-                                android:textColor="#5B5B5B"
-                                android:textSize="18sp" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:id="@+id/view5Tutor"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="2dp"
-                            android:background="#D9D9D9" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/textViewNomCognomsPerfilTutor"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Tutor de:"
-                                android:textColor="#1B1C22"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:id="@+id/textViewNomCognomsPerfilTutor2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="23425"
-                                android:textAlignment="viewEnd"
-                                android:textColor="#5B5B5B"
-                                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/textViewNomCognomsPerfilTutor2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="23425"
+                        android:textAlignment="viewEnd"
+                        android:textColor="#5B5B5B"
+                        android:textSize="18sp" />
 
 
-                        </LinearLayout>
+                </LinearLayout>
 
-                        <View
-                            android:id="@+id/view6Tutor"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="6dp"
-                            android:background="#D9D9D9" />
+                <View
+                    android:id="@+id/view6Tutor"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="#D9D9D9" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/textViewIdentificadorPerfilTutor"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Identificador:"
-                                android:textColor="#1B1C22"
-                                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/textViewIdentificadorPerfilTutor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Identificador:"
+                        android:textColor="#1B1C22"
+                        android:textSize="18sp" />
 
-                            <TextView
-                                android:id="@+id/textViewIdentificadorPerfilTutor2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="23425"
-                                android:textAlignment="viewEnd"
-                                android:textColor="#5B5B5B"
-                                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/textViewIdentificadorPerfilTutor2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="23425"
+                        android:textAlignment="viewEnd"
+                        android:textColor="#5B5B5B"
+                        android:textSize="18sp" />
 
-                        </LinearLayout>
+                </LinearLayout>
 
-                    </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</RelativeLayout>

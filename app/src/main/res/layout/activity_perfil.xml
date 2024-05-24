@@ -1,65 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F5F5F5"
-    tools:context=".PerfilActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:fillViewport="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:background="@drawable/top_background_gradient_dashboard"
+                android:padding="16dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="396dp"
-                    android:layout_height="683dp"
-                    android:background="@drawable/top_background_gradient_dashboard"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                <ImageButton
+                    android:id="@+id/button4"
+                    android:layout_width="31dp"
+                    android:layout_height="31dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:onClick="TornaBoto"
+                    android:src="@drawable/baseline_keyboard_backspace_24"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageButton
-                        android:id="@+id/button4"
-                        android:layout_width="31dp"
-                        android:layout_height="31dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="16dp"
-                        android:background="?selectableItemBackgroundBorderless"
-                        android:onClick="TornaBoto"
-                        android:src="@drawable/baseline_keyboard_backspace_24"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imageViewPerfil"
@@ -99,7 +71,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="340dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="24dp"
@@ -225,7 +197,6 @@
                         android:layout_marginBottom="6dp"
                         android:background="#D9D9D9" />
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -291,11 +262,11 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
-
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+</RelativeLayout>
