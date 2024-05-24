@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_menu_24"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:layout_marginTop="38dp"
+            android:layout_marginTop="60dp"
             android:layout_marginLeft="30dp"
             android:onClick="openDrawer"
             android:layout_alignParentStart="true"

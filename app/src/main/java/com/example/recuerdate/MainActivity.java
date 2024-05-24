@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,6 +78,37 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        // Dentro del método onCreate()
+        // Dentro del método onCreate()
+        // Dentro del método onCreate()
+        drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close) {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+                ImageButton openDrawerButton = findViewById(R.id.open_drawer_button);
+                if (slideOffset > 0) {
+                    openDrawerButton.setVisibility(View.GONE); // Hace que el botón desaparezca mientras se desliza el cajón
+                } else {
+                    openDrawerButton.setVisibility(View.VISIBLE); // Hace que el botón vuelva a aparecer cuando el cajón está completamente cerrado
+                }
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                ImageButton openDrawerButton = findViewById(R.id.open_drawer_button);
+                openDrawerButton.setVisibility(View.GONE); // Hace que el botón desaparezca cuando se abre el cajón
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                ImageButton openDrawerButton = findViewById(R.id.open_drawer_button);
+                openDrawerButton.setVisibility(View.VISIBLE); // Hace que el botón vuelva a aparecer cuando se cierra el cajón
+            }
+        };
+        binding.drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
         // Configuración del BottomNavigationView
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -184,6 +216,7 @@ public class MainActivity extends BaseActivity {
     public void openDrawer(View view) {
         binding.drawerLayout.openDrawer(GravityCompat.START);
     }
+
     @Override
     public void onBackPressed() {
         PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
