@@ -100,7 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         });
 
                                         loading(false);
-                                        preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
+                                        preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, false);
                                         preferenceManager.putString(Constants.KEY_USER_ID, documentReference.getId());
                                         preferenceManager.putString(Constants.KEY_NAME, binding.inputName.getText().toString());
                                         preferenceManager.putString(Constants.KEY_IMAGE, encodedImage);
@@ -108,7 +108,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         preferenceManager.putString(Constants.KEY_PHONE, binding.inputConfirmPassword.getText().toString());
                                         preferenceManager.putString(Constants.KEY_ROLE, role);
                                         preferenceManager.putString(Constants.KEY_PASSWORD, binding.inputPassword.getText().toString());
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
                                     })
